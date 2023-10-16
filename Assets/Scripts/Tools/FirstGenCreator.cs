@@ -7,12 +7,7 @@ using Unity.VisualScripting;
 
 public class FirstGenCreator : MonoBehaviour
 {
-    [Header("SpeciesConfig")]
-    public string SpeciesName;
-    public TypeOfReproduction TypeOfReproduction;
-    public int HaploidNumber;
-
-    [Header("OrganismConfig")]
+    public SpeciesSO Species;
     public List<LocusSO> LocusList;
 
 }
