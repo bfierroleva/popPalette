@@ -28,10 +28,17 @@ public class GenomeManager
     public void SexualBasicReproduction(Genotype child, Genotype p1, Genotype p2) // No Recombination
     {
         int i = 0;
-        foreach (List<Chromosome> chromosomePair in child.Karyotype)
+        int j = 0;
+        foreach (ChromosomePair chromosomePair in child.Karyotype)
         {
-            child.Karyotype[i][0] = p1.Karyotype[i][Random.Range(0, 2)];
-            child.Karyotype[i][1] = p2.Karyotype[i][Random.Range(0, 2)];
+            j = 0;
+            foreach (Locus locus in chromosomePair.LocusList)
+            {
+                child.Karyotype[i].LocusList[j].AlleleValues.x = p1.Karyotype[i].LocusList[j].AlleleValues[Random.Range(0, 2)];
+                child.Karyotype[i].LocusList[j].AlleleValues.y = p2.Karyotype[i].LocusList[j].AlleleValues[Random.Range(0, 2)];
+                j++;
+            }
+            
             i++;
         }
     }
@@ -54,20 +61,21 @@ public class Identity
 public class Genotype
 {
     public int HaploidNumber;
-    public List<List<Chromosome>> Karyotype;
+    public List<ChromosomePair> Karyotype = new List<ChromosomePair>();
 }
 
-public class Chromosome
+public class ChromosomePair
 {
     public int Index;
-    public List<Gene> GeneList;
+    public List<Locus> LocusList = new List<Locus>();
 }
 
-public class Gene
+public class Locus
 {
-    public string Name;
-    public float AleleValue;
+    public string Key;
+    public Vector2 AlleleValues;
 }
+
 
 public enum TypeOfReproduction
 {

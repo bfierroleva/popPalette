@@ -22,24 +22,42 @@ public class Organism : MonoBehaviour
     {
         _identityManager = FindObjectOfType<IdentitiesManager>();
 
-        if (!_isFirstGen) { Destroy(transform.GetComponent<FirstGenCreator>()); return; }
+        if (!_isFirstGen) { Destroy(transform.GetComponent<FirstGenCreator>()); }
+        else WhenFirstGen();
+        foreach (ChromosomePair pair in ThisIdentity.ThisGenotype.Karyotype)
+        {
+            foreach (Locus locus in pair.LocusList)
+            {
+                Debug.Log(locus.Key);
+                Debug.Log("x : " + locus.AlleleValues.x);
+                Debug.Log("y : " + locus.AlleleValues.y);
+            }            
+        }    
+    }
+
+    private void WhenFirstGen()
+    {
+        _firstGenAttributes = transform.GetComponent<FirstGenCreator>();
         _typeOfReproduction = _firstGenAttributes.TypeOfReproduction;
         ThisIdentity = _identityManager.CreateNewIdentity();
         ThisIdentity.ThisGenotype = new Genotype();
         ThisIdentity.ThisGenotype.HaploidNumber = _firstGenAttributes.HaploidNumber;
-        ThisIdentity.ThisGenotype.Karyotype = new List<List<Chromosome>>();
+        ThisIdentity.ThisGenotype.Karyotype = new List<ChromosomePair>();
         int i = 0;
-        while (i < ThisIdentity.ThisGenotype.HaploidNumber) { ThisIdentity.ThisGenotype.Karyotype.Add(new List<Chromosome>()); i++; }
+        while (i < ThisIdentity.ThisGenotype.HaploidNumber) { ThisIdentity.ThisGenotype.Karyotype.Add(new ChromosomePair()); i++; }
         int j = 0;
-        foreach (List<Chromosome> chromosomePair in ThisIdentity.ThisGenotype.Karyotype)
-        {
-            Chromosome c1 = new Chromosome();
-            Chromosome c2 = new Chromosome();
-            c1.GeneList.AddRange(_firstGenAttributes.ChromosomePairList[j][0]);
-            c2.GeneList.AddRange(_firstGenAttributes.ChromosomePairList[j][1]);
-
-            ThisIdentity.ThisGenotype.Karyotype[j][0] = c1;
-            ThisIdentity.ThisGenotype.Karyotype[j][1] = c2;
+        foreach (ChromosomePair chromosomePair in ThisIdentity.ThisGenotype.Karyotype)
+        {            
+            foreach (LocusSO locus in _firstGenAttributes.LocusList)
+            {               
+                if (locus.ChromosomeIndex == j) 
+                {
+                    Locus newLocus = new Locus();
+                    newLocus.Key = locus.Key;
+                    newLocus.AlleleValues = locus.AlleleValues;
+                    chromosomePair.LocusList.Add(newLocus); 
+                }
+            }
             j++;
         }
     }

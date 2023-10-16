@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c9e1b1d47179ca4684eff581ed1f4c7, type: 3}
-  m_Name: FirstGen1
+  m_Script: {fileID: 11500000, guid: e6bc4fe56e05d9949929367d6f5d5be8, type: 3}
+  m_Name: marker2H.garrotus
   m_EditorClassIdentifier: 
-  SpeciesName: one
-  TypeOfReproduction: 1
-  HaploidNumber: 2
+  ChromosomeIndex: 1
+  Key: marker2
+  AlleleValues: {x: 0.97, y: 0.689}
