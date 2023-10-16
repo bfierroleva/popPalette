@@ -5,7 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newSpecies", menuName = "Species")]
 public class SpeciesSO : ScriptableObject
 {
+    
     public string SpeciesName;
+    public GameObject Prefab;
     public int ReprductionCycleInSeconds;
     public float LookForMateViewDistance;
     public int LifespanInSeconds;

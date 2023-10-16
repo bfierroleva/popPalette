@@ -20,12 +20,12 @@ public class GenomeManager
         }
     }
 
-    public void MergeReproduction(Genotype child, Genotype p1, Genotype p2) // No Atomic reproduction
+    public Genotype MergeReproduction(Genotype child, Genotype p1, Genotype p2) // No Atomic reproduction
     {
-
+        return child;
     }
 
-    public void SexualBasicReproduction(Genotype child, Genotype p1, Genotype p2) // No Recombination
+    public Genotype SexualBasicReproduction(Genotype child, Genotype p1, Genotype p2) // No Recombination
     {
         int i = 0;
         int j = 0;
@@ -41,11 +41,12 @@ public class GenomeManager
             
             i++;
         }
+        return child;
     }
 
-    public void SexualWithRecombinationReproduction(Genotype child, Genotype p1, Genotype p2) 
+    public Genotype SexualWithRecombinationReproduction(Genotype child, Genotype p1, Genotype p2) 
     {
-
+        return child;
     }
 
 }

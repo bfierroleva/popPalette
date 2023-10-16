@@ -8,14 +8,17 @@ public class Organism : MonoBehaviour
 {
     [SerializeField] private FirstGenCreator _firstGenAttributes;
     [SerializeField] private bool _isFirstGen;
+    public bool IsFemale;
+
+    private IdentitiesManager _identityManager;
+    private MatingManager _matingManager;
 
     public SpeciesSO SpeciesAttributes;
-
     public Identity ThisIdentity;
-    private IdentitiesManager _identityManager;
-    private Identity mateIdentity;
+    private Organism _mate;
 
-    private Vector3 targetPosition;
+    private Vector3 _targetPosition;
+    private bool _isMovingToMate = false;
 
     private void Awake()
     {
@@ -25,7 +28,8 @@ public class Organism : MonoBehaviour
 
     private void Start()
     {
-        _identityManager = FindObjectOfType<IdentitiesManager>();     
+        _identityManager = FindObjectOfType<IdentitiesManager>(); 
+        _matingManager = _identityManager.gameObject.GetComponent<MatingManager>();
 
         if (!_isFirstGen) { Destroy(transform.GetComponent<FirstGenCreator>()); }
         else WhenFirstGen();
@@ -40,14 +44,15 @@ public class Organism : MonoBehaviour
     }
 
     void Update()
-    {
-        RandomMove();
+    {    
+        if (_isMovingToMate) MoveToMate();
+        else RandomMove();
     }
 
     void RandomMove()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, SpeciesAttributes.Speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, targetPosition) < 0.01f) SetNewRandomDestination();
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, SpeciesAttributes.Speed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, _targetPosition) < 0.01f) SetNewRandomDestination();
     }
     void SetNewRandomDestination()
     {
@@ -56,7 +61,7 @@ public class Organism : MonoBehaviour
         float angleInRadians = angle * Mathf.Deg2Rad;
         float x = Mathf.Cos(angleInRadians);
         float y = Mathf.Sin(angleInRadians);
-        targetPosition = new Vector2(transform.position.x + x * distance, transform.position.y + y * distance);
+        _targetPosition = new Vector2(transform.position.x + x * distance, transform.position.y + y * distance);
     }
     private void WhenFirstGen()
     {
@@ -83,37 +88,47 @@ public class Organism : MonoBehaviour
         }
     }
 
+    void MoveToMate()
+    {
+        Vector3 direction = (_mate.transform.position - transform.position).normalized;
+        transform.position += direction * SpeciesAttributes.Speed * Time.deltaTime;
+        if (Vector3.Distance(transform.position, _mate.transform.position) < 0.05f) { CreateChild(); _isMovingToMate = false; }
+    }
+
     public void Reproduce(Organism mate)
     {
-        if (mate.ThisIdentity.ID != ThisIdentity.ID) mateIdentity = mate.ThisIdentity; 
+        if (mate.ThisIdentity.ID != ThisIdentity.ID) _mate = mate;
         else Debug.Log("TRIED TO MATE WITH ITSELF (WTF)");
-        CreateChild();
+        _isMovingToMate = true;
     }
 
     void CreateChild()
     {
+        //Debug.Log("child created");
+        
         Identity childIdentity = _identityManager.CreateNewIdentity();
         childIdentity.Parent1ID = ThisIdentity.ID;
-        childIdentity.Parent2ID = mateIdentity.ID;
+        childIdentity.Parent2ID = _mate.ThisIdentity.ID;
+        childIdentity.ThisGenotype = new Genotype();
         switch (SpeciesAttributes.TypeOfReproduction)
         {
             case TypeOfReproduction.Merge:
-                GenomeManager.Instance.MergeReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, mateIdentity.ThisGenotype);
+                childIdentity.ThisGenotype = GenomeManager.Instance.MergeReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
                 break;
 
             case TypeOfReproduction.SexualBasic:
-                GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, mateIdentity.ThisGenotype);
+                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
                 break;
 
             case TypeOfReproduction.SexualWithRecombination:
-                GenomeManager.Instance.SexualWithRecombinationReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, mateIdentity.ThisGenotype);
+                childIdentity.ThisGenotype = GenomeManager.Instance.SexualWithRecombinationReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
                 break;
 
             default:
-                GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, mateIdentity.ThisGenotype);
+                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
                 break;
         }
-        
+        GameObject child = Instantiate(SpeciesAttributes.Prefab, transform.position, Quaternion.identity, _identityManager.gameObject.transform);
     }
 
 }
