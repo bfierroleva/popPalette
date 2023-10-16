@@ -78,7 +78,7 @@ public class MatingManager : MonoBehaviour
         if (closestPossibleMale == -1) { matedFemales[indexOfFemaleLooking] = true; return new Vector2(-1, -1); }
 
         //Debug.Log(females[indexOfFemaleLooking].transform.gameObject.name + " mated with " + males[closestPossibleMale].transform.gameObject.name);
-        matedMales[indexOfFemaleLooking] = true;
+        matedFemales[indexOfFemaleLooking] = true;
         matedMales[closestPossibleMale] = true;
         return new Vector2(indexOfFemaleLooking, closestPossibleMale);
     }

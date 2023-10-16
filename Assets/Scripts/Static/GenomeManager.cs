@@ -74,7 +74,9 @@ public class ChromosomePair
 public class Locus
 {
     public string Key;
-    public Vector2 AlleleValues;
+    public bool IsFunctional;
+    public Vector2Int AlleleValues;
+    public Vector2Int AlleleValuesRange;
 }
 
 

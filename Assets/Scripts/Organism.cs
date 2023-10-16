@@ -32,8 +32,19 @@ public class Organism : MonoBehaviour
         _matingManager = _identityManager.gameObject.GetComponent<MatingManager>();
 
         if (!_isFirstGen) { Destroy(transform.GetComponent<FirstGenCreator>()); }
-        else WhenFirstGen();
-        
+        else 
+        { 
+            WhenFirstGen();
+            GetComponent<Phenotype>().SetPhenotype(ThisIdentity);
+            SetNewRandomDestination();
+            StartCoroutine(Death());
+        }       
+    }
+
+    public void OnBirth()
+    {
+        IsFemale = Random.Range(0, 2) == 0;
+        GetComponent<Phenotype>().SetPhenotype(ThisIdentity);
         SetNewRandomDestination();
         StartCoroutine(Death());
     }
@@ -41,6 +52,7 @@ public class Organism : MonoBehaviour
     IEnumerator Death()
     {
         yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds);
+        Destroy(gameObject);
     }
 
     void Update()
@@ -80,6 +92,8 @@ public class Organism : MonoBehaviour
                 {
                     Locus newLocus = new Locus();
                     newLocus.Key = locus.Key;
+                    newLocus.IsFunctional = locus.IsFunctional;
+                    newLocus.AlleleValuesRange = locus.AlleleValuesRange;
                     newLocus.AlleleValues = locus.AlleleValues;
                     chromosomePair.LocusList.Add(newLocus); 
                 }
@@ -90,6 +104,7 @@ public class Organism : MonoBehaviour
 
     void MoveToMate()
     {
+        if (_mate == null) { _isMovingToMate = false; return; }
         Vector3 direction = (_mate.transform.position - transform.position).normalized;
         transform.position += direction * SpeciesAttributes.Speed * Time.deltaTime;
         if (Vector3.Distance(transform.position, _mate.transform.position) < 0.05f) { CreateChild(); _isMovingToMate = false; }
@@ -97,6 +112,7 @@ public class Organism : MonoBehaviour
 
     public void Reproduce(Organism mate)
     {
+        if (mate == null) return;
         if (mate.ThisIdentity.ID != ThisIdentity.ID) _mate = mate;
         else Debug.Log("TRIED TO MATE WITH ITSELF (WTF)");
         _isMovingToMate = true;
@@ -104,12 +120,12 @@ public class Organism : MonoBehaviour
 
     void CreateChild()
     {
-        //Debug.Log("child created");
-        
+        GameObject child = Instantiate(SpeciesAttributes.Prefab, transform.position, Quaternion.identity, _identityManager.gameObject.transform);
         Identity childIdentity = _identityManager.CreateNewIdentity();
         childIdentity.Parent1ID = ThisIdentity.ID;
         childIdentity.Parent2ID = _mate.ThisIdentity.ID;
         childIdentity.ThisGenotype = new Genotype();
+        childIdentity.ThisGenotype.Karyotype.AddRange(ThisIdentity.ThisGenotype.Karyotype);
         switch (SpeciesAttributes.TypeOfReproduction)
         {
             case TypeOfReproduction.Merge:
@@ -128,7 +144,9 @@ public class Organism : MonoBehaviour
                 childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
                 break;
         }
-        GameObject child = Instantiate(SpeciesAttributes.Prefab, transform.position, Quaternion.identity, _identityManager.gameObject.transform);
+        Debug.Log(childIdentity.ThisGenotype.Karyotype.Count);
+        child.GetComponent<Organism>().ThisIdentity = childIdentity;
+        child.GetComponent<Organism>().OnBirth();
     }
 
 }

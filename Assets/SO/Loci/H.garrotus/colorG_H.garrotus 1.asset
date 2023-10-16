@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6bc4fe56e05d9949929367d6f5d5be8, type: 3}
-  m_Name: colorH.garrotus
+  m_Name: colorG_H.garrotus 1
   m_EditorClassIdentifier: 
   ChromosomeIndex: 0
-  Key: color
-  AlleleValues: {x: 0.34, y: -0.76}
+  Key: colorG
+  IsFunctional: 1
+  AlleleValues: {x: 20, y: 140}
+  AlleleValuesRange: {x: 1, y: 256}

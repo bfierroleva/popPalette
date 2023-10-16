@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeciesName: Hamas garrotus
   Prefab: {fileID: 6511733004687586805, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
-  ReprductionCycleInSeconds: 5
+  ReprductionCycleInSeconds: 10
   LookForMateViewDistance: 60
-  LifespanInSeconds: 60
+  LifespanInSeconds: 30
   TypeOfReproduction: 1
-  HaploidNumber: 2
+  HaploidNumber: 3
   DistanceRange: {x: 5, y: 50}
   Speed: 5
   LocusList: []

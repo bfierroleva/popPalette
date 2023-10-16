@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6bc4fe56e05d9949929367d6f5d5be8, type: 3}
-  m_Name: marker2H.garrotus
+  m_Name: markerH.garrotus
   m_EditorClassIdentifier: 
-  ChromosomeIndex: 1
-  Key: marker2
-  AlleleValues: {x: 0.97, y: 0.689}
+  ChromosomeIndex: 0
+  Key: marker
+  IsFunctional: 0
+  AlleleValues: {x: 54, y: 76}
+  AlleleValuesRange: {x: 1, y: 100}
