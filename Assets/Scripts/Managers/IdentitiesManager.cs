@@ -5,7 +5,6 @@ using UnityEngine;
 public class IdentitiesManager : MonoBehaviour
 {
     public List<Identity> AllIdentities = new List<Identity>();
-    public List<Organism> LivingOrganisms = new List<Organism>();
     public IdentitiesManager Instance { get; private set; }
 
     private void Awake()

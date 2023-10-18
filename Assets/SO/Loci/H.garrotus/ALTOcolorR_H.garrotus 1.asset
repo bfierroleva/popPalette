@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bc4fe56e05d9949929367d6f5d5be8, type: 3}
+  m_Name: ALTOcolorR_H.garrotus 1
+  m_EditorClassIdentifier: 
+  ChromosomeIndex: 2
+  Key: colorR
+  IsFunctional: 1
+  MutationMaxRange: 10
+  AlleleValues: {x: 200, y: 200}
+  AlleleValuesRange: {x: 1, y: 256}

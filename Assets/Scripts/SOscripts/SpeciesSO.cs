@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newSpecies", menuName = "Species")]
 public class SpeciesSO : ScriptableObject
 {
-    
+    public string SpeciesKey;
     public string SpeciesName;
+    [Range(0, 1)] public float MutationChance;
+    public int MaxPopulation;
     public GameObject Prefab;
     public int ReprductionCycleInSeconds;
     public float LookForMateViewDistance;

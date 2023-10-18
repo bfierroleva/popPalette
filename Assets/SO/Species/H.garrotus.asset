@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f4ff1b90a7af64f80bfb67bf8817c5, type: 3}
   m_Name: H.garrotus
   m_EditorClassIdentifier: 
+  SpeciesKey: H.garrotus
   SpeciesName: Hamas garrotus
+  MutationChance: 0.08
+  MaxPopulation: 200
   Prefab: {fileID: 6511733004687586805, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
-  ReprductionCycleInSeconds: 10
-  LookForMateViewDistance: 60
-  LifespanInSeconds: 30
+  ReprductionCycleInSeconds: 3
+  LookForMateViewDistance: 15
+  LifespanInSeconds: 15
   TypeOfReproduction: 1
   HaploidNumber: 3
-  DistanceRange: {x: 5, y: 50}
-  Speed: 5
+  DistanceRange: {x: 1, y: 5}
+  Speed: 2
   LocusList: []

@@ -5,10 +5,14 @@ using UnityEngine;
 public class Phenotype : MonoBehaviour
 {
     private new SpriteRenderer renderer;
+
+    public Color PhenotypeColor;
+
     public void SetPhenotype(Identity identity)
     {
         renderer = GetComponent<SpriteRenderer>();
-        renderer.color = Color.white;
+        renderer.color = Color.black;
+        PhenotypeColor = Color.black;
         foreach (ChromosomePair ChromosomePair in identity.ThisGenotype.Karyotype)
         {
             foreach (Locus locus in ChromosomePair.LocusList)
@@ -29,5 +33,6 @@ public class Phenotype : MonoBehaviour
                 }
             }
         }
+        PhenotypeColor = renderer.color;
     }
 }

@@ -10,11 +10,13 @@ public class Organism : MonoBehaviour
     [SerializeField] private bool _isFirstGen;
     public bool IsFemale;
 
+    private GameObject _manager;
     private IdentitiesManager _identityManager;
     private MatingManager _matingManager;
 
     public SpeciesSO SpeciesAttributes;
     public Identity ThisIdentity;
+    private Population _population;
     private Organism _mate;
 
     private Vector3 _targetPosition;
@@ -28,23 +30,21 @@ public class Organism : MonoBehaviour
 
     private void Start()
     {
-        _identityManager = FindObjectOfType<IdentitiesManager>(); 
-        _matingManager = _identityManager.gameObject.GetComponent<MatingManager>();
+        _manager = FindObjectOfType<IdentitiesManager>().gameObject;
+        _identityManager = _manager.GetComponent<IdentitiesManager>(); 
+        _matingManager = _manager.GetComponent<MatingManager>();
 
         if (!_isFirstGen) { Destroy(transform.GetComponent<FirstGenCreator>()); }
-        else 
-        { 
-            WhenFirstGen();
-            GetComponent<Phenotype>().SetPhenotype(ThisIdentity);
-            SetNewRandomDestination();
-            StartCoroutine(Death());
-        }       
+        else WhenFirstGen();
+
+        OnBirth();
     }
 
     public void OnBirth()
     {
         IsFemale = Random.Range(0, 2) == 0;
         GetComponent<Phenotype>().SetPhenotype(ThisIdentity);
+        _population = _manager.GetComponent<PopulationManager>().AddOrganism(this, SpeciesAttributes.SpeciesKey);
         SetNewRandomDestination();
         StartCoroutine(Death());
     }
@@ -52,6 +52,7 @@ public class Organism : MonoBehaviour
     IEnumerator Death()
     {
         yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds);
+        _population.PopulationList.Remove(this);
         Destroy(gameObject);
     }
 
@@ -95,6 +96,7 @@ public class Organism : MonoBehaviour
                     newLocus.IsFunctional = locus.IsFunctional;
                     newLocus.AlleleValuesRange = locus.AlleleValuesRange;
                     newLocus.AlleleValues = locus.AlleleValues;
+                    newLocus.MutationMaxRange = locus.MutationMaxRange;
                     chromosomePair.LocusList.Add(newLocus); 
                 }
             }
@@ -107,15 +109,32 @@ public class Organism : MonoBehaviour
         if (_mate == null) { _isMovingToMate = false; return; }
         Vector3 direction = (_mate.transform.position - transform.position).normalized;
         transform.position += direction * SpeciesAttributes.Speed * Time.deltaTime;
-        if (Vector3.Distance(transform.position, _mate.transform.position) < 0.05f) { CreateChild(); _isMovingToMate = false; }
+        if (Vector3.Distance(transform.position, _mate.transform.position) < 0.05f) 
+        { 
+            if (CanReproduce()) CreateChild(); 
+            _isMovingToMate = false; 
+        }
     }
 
-    public void Reproduce(Organism mate)
+    public void SetMate(Organism mate)
     {
         if (mate == null) return;
         if (mate.ThisIdentity.ID != ThisIdentity.ID) _mate = mate;
         else Debug.Log("TRIED TO MATE WITH ITSELF (WTF)");
+
+
         _isMovingToMate = true;
+    }
+
+    bool CanReproduce()
+    {
+        float reproductionChance = 0;
+        float meanFitnessOfParents = (_manager.GetComponent<SelectivePreassure>().CalculateFitness(GetComponent<Phenotype>().PhenotypeColor) + _manager.GetComponent<SelectivePreassure>().CalculateFitness(_mate.gameObject.GetComponent<Phenotype>().PhenotypeColor)) / 2;
+        //Debug.Log(" meanFitnessOfParents: " + meanFitnessOfParents);
+        // alomejor cambiar  _population.PopulationList.Count por la suma de todas las poblaciones
+        reproductionChance = meanFitnessOfParents * (1 - (_population.PopulationList.Count / (float)SpeciesAttributes.MaxPopulation));
+        //Debug.Log(meanFitnessOfParents + " => " + reproductionChance);
+        return Random.value <= reproductionChance;
     }
 
     void CreateChild()
@@ -133,7 +152,7 @@ public class Organism : MonoBehaviour
                 break;
 
             case TypeOfReproduction.SexualBasic:
-                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
+                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype, SpeciesAttributes.MutationChance);
                 break;
 
             case TypeOfReproduction.SexualWithRecombination:
@@ -141,12 +160,10 @@ public class Organism : MonoBehaviour
                 break;
 
             default:
-                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
+                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype, SpeciesAttributes.MutationChance);
                 break;
         }
-        Debug.Log(childIdentity.ThisGenotype.Karyotype.Count);
         child.GetComponent<Organism>().ThisIdentity = childIdentity;
-        child.GetComponent<Organism>().OnBirth();
     }
 
 }

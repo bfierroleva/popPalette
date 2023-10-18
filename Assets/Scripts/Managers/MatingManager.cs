@@ -34,7 +34,7 @@ public class MatingManager : MonoBehaviour
         Organism[] allOrganisims = FindObjectsOfType<Organism>();
         foreach (Organism o in allOrganisims)
         {
-            if (o.SpeciesAttributes.SpeciesName == _speciesList[speciesIndex].SpeciesName) 
+            if (o.SpeciesAttributes.SpeciesKey == _speciesList[speciesIndex].SpeciesKey) 
             {
                 if (o.IsFemale) { females.Add(o); matedFemales.Add(false); }
                 else { males.Add(o); matedMales.Add(false); }
@@ -87,8 +87,8 @@ public class MatingManager : MonoBehaviour
     {
         foreach (Vector2 pair in pairs)
         {
-            females[(int)pair.x].Reproduce(males[(int)pair.y]);
-            males[(int)pair.y].Reproduce(females[(int)pair.x]);
+            females[(int)pair.x].SetMate(males[(int)pair.y]);
+            males[(int)pair.y].SetMate(females[(int)pair.x]);
         }
     }
 
