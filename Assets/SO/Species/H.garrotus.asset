@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeciesKey: H.garrotus
   SpeciesName: Hamas garrotus
-  MutationChance: 0.08
-  MaxPopulation: 200
+  MutationChance: 0
+  MaxPopulation: 20
+  PopulationPressure: 1
   Prefab: {fileID: 6511733004687586805, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
-  ReprductionCycleInSeconds: 3
+  ReprductionCycleInSeconds: 5
   LookForMateViewDistance: 15
-  LifespanInSeconds: 15
+  LifespanInSeconds: 30
   TypeOfReproduction: 1
   HaploidNumber: 3
-  DistanceRange: {x: 1, y: 5}
-  Speed: 2
+  DistanceRange: {x: 1, y: 4}
+  StartingSpeed: 2
+  MaxSpeed: 5
+  IncreaseSpeedRate: 1
   LocusList: []

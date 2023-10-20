@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6bc4fe56e05d9949929367d6f5d5be8, type: 3}
-  m_Name: BAJOcolorR_H.garrotus
+  m_Name: colorR_H.garrotus 2
   m_EditorClassIdentifier: 
   ChromosomeIndex: 2
   Key: colorR
   IsFunctional: 1
-  MutationMaxRange: 10
-  AlleleValues: {x: 50, y: 50}
+  MutationMaxRange: 2
+  AlleleValues: {x: 65, y: 190}
   AlleleValuesRange: {x: 1, y: 256}

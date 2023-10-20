@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Organism : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Organism : MonoBehaviour
     private IdentitiesManager _identityManager;
     private MatingManager _matingManager;
 
+    public Phenotype Phenotype;
     public SpeciesSO SpeciesAttributes;
     public Identity ThisIdentity;
     private Population _population;
@@ -22,9 +24,12 @@ public class Organism : MonoBehaviour
     private Vector3 _targetPosition;
     private bool _isMovingToMate = false;
 
+    private float _speed;
+
     private void Awake()
     {
         _firstGenAttributes = transform.GetComponent<FirstGenCreator>();
+        Phenotype = GetComponent<Phenotype>();
         SpeciesAttributes = _firstGenAttributes.Species;
     }
 
@@ -41,18 +46,32 @@ public class Organism : MonoBehaviour
     }
 
     public void OnBirth()
-    {
-        IsFemale = Random.Range(0, 2) == 0;
+    {       
         GetComponent<Phenotype>().SetPhenotype(ThisIdentity);
         _population = _manager.GetComponent<PopulationManager>().AddOrganism(this, SpeciesAttributes.SpeciesKey);
+        if (!CanSurviveBirth() && !_isFirstGen) StartCoroutine(OnDeath(0));
+        _speed = SpeciesAttributes.StartingSpeed;
         SetNewRandomDestination();
-        StartCoroutine(Death());
+        StartCoroutine(LookForMate());
+        StartCoroutine(OnDeath(SpeciesAttributes.LifespanInSeconds));
+        
     }
 
-    IEnumerator Death()
+    bool CanSurviveBirth()
     {
-        yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds);
-        _population.PopulationList.Remove(this);
+        float survivalChance = 0;
+        float fitness = _manager.GetComponent<SelectivePreassure>().CalculateFitness(Phenotype.PhenotypeColor);
+        //Debug.Log(" meanFitnessOfParents: " + meanFitnessOfParents);
+        // alomejor cambiar  _population.PopulationList.Count por la suma de todas las poblaciones
+        survivalChance = fitness * Mathf.Pow(1 - (_population.OrganismList.Count / (float)SpeciesAttributes.MaxPopulation), SpeciesAttributes.PopulationPressure);
+        //Debug.Log(fitness + " => " + survivalChance);
+        return Random.value <= survivalChance;
+    }
+
+    IEnumerator OnDeath(float time)
+    {
+        yield return new WaitForSeconds(time);
+        _population.RemoveOrganism(this);
         Destroy(gameObject);
     }
 
@@ -64,7 +83,7 @@ public class Organism : MonoBehaviour
 
     void RandomMove()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, SpeciesAttributes.Speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, SpeciesAttributes.StartingSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, _targetPosition) < 0.01f) SetNewRandomDestination();
     }
     void SetNewRandomDestination()
@@ -104,38 +123,54 @@ public class Organism : MonoBehaviour
         }
     }
 
+    IEnumerator LookForMate()
+    {
+        yield return new WaitForSeconds(SpeciesAttributes.ReprductionCycleInSeconds);
+
+
+
+        int closestPossibleMate = -1;
+        float closestDistance = SpeciesAttributes.LookForMateViewDistance;
+
+        for (int i = 0; i < _population.OrganismList.Count; i++)
+        {
+            //bool shouldIgnore = false;
+            //foreach (int i in ignore) if (i == j) shouldIgnore = true;
+
+            float distance = Vector3.Distance(transform.position, _population.OrganismList[i].transform.position);
+            if (_population.OrganismList[i].ThisIdentity.ID == ThisIdentity.ID) continue;
+            else if (distance < closestDistance)
+            {
+                //Debug.Log("new closest: " + males[j].transform.gameObject.name);
+                closestDistance = distance;
+                closestPossibleMate = i;
+            }
+        }
+        if (closestPossibleMate >= 0) 
+        {
+            if (_population.OrganismList[closestPossibleMate].ThisIdentity.ID != ThisIdentity.ID) _mate = _population.OrganismList[closestPossibleMate];
+            else Debug.Log("TRIED TO MATE WITH ITSELF (WTF)");
+
+            _isMovingToMate = true;
+        }       
+    }
+
     void MoveToMate()
     {
         if (_mate == null) { _isMovingToMate = false; return; }
         Vector3 direction = (_mate.transform.position - transform.position).normalized;
-        transform.position += direction * SpeciesAttributes.Speed * Time.deltaTime;
-        if (Vector3.Distance(transform.position, _mate.transform.position) < 0.05f) 
+        transform.position += direction * _speed * Time.deltaTime;
+
+        _speed = Mathf.Lerp(_speed, SpeciesAttributes.MaxSpeed, Time.deltaTime * SpeciesAttributes.IncreaseSpeedRate);
+
+        if (Vector3.Distance(transform.position, _mate.transform.position) < (transform.GetComponent<Renderer>().bounds.size.x / 2)) 
         { 
-            if (CanReproduce()) CreateChild(); 
-            _isMovingToMate = false; 
+            CreateChild(); 
+            _isMovingToMate = false;
+            StartCoroutine(LookForMate());
+            _speed = SpeciesAttributes.StartingSpeed;
         }
-    }
-
-    public void SetMate(Organism mate)
-    {
-        if (mate == null) return;
-        if (mate.ThisIdentity.ID != ThisIdentity.ID) _mate = mate;
-        else Debug.Log("TRIED TO MATE WITH ITSELF (WTF)");
-
-
-        _isMovingToMate = true;
-    }
-
-    bool CanReproduce()
-    {
-        float reproductionChance = 0;
-        float meanFitnessOfParents = (_manager.GetComponent<SelectivePreassure>().CalculateFitness(GetComponent<Phenotype>().PhenotypeColor) + _manager.GetComponent<SelectivePreassure>().CalculateFitness(_mate.gameObject.GetComponent<Phenotype>().PhenotypeColor)) / 2;
-        //Debug.Log(" meanFitnessOfParents: " + meanFitnessOfParents);
-        // alomejor cambiar  _population.PopulationList.Count por la suma de todas las poblaciones
-        reproductionChance = meanFitnessOfParents * (1 - (_population.PopulationList.Count / (float)SpeciesAttributes.MaxPopulation));
-        //Debug.Log(meanFitnessOfParents + " => " + reproductionChance);
-        return Random.value <= reproductionChance;
-    }
+    }   
 
     void CreateChild()
     {

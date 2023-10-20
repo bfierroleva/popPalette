@@ -15,6 +15,6 @@ MonoBehaviour:
   ChromosomeIndex: 0
   Key: marker
   IsFunctional: 0
-  MutationMaxRange: 5
+  MutationMaxRange: 2
   AlleleValues: {x: 54, y: 76}
   AlleleValuesRange: {x: 1, y: 100}

@@ -7,8 +7,9 @@ public class SelectivePreassure : MonoBehaviour
 {
     public float CostOfColor;
     public Color TestColor;
-    public bool isColorSelected;
-    public int isColorRedSelected;
+    public bool IsColorSelected;
+    public float SelectivePressure;
+    public int IsColorRedSelected;  
     [Range(0, 255)] public int SelectedColorR;
     public int isColorGreenSelected;
     [Range(0, 255)] public int SelectedColorG;
@@ -17,18 +18,20 @@ public class SelectivePreassure : MonoBehaviour
 
     public float CalculateFitness(Color color)
     {
-        float closeToR = (1 - Mathf.Abs((SelectedColorR / 255) - color.r));
-        float closeToG = (1 - Mathf.Abs((SelectedColorR / 255) - color.g));
-        float closeToB = (1 - Mathf.Abs((SelectedColorR / 255) - color.b));
-
+        float closeToR = Mathf.Pow(1 - Mathf.Abs(((float)SelectedColorR / 255.0f) - color.r), SelectivePressure);
+        float closeToG = Mathf.Pow(1 - Mathf.Abs(((float)SelectedColorG / 255.0f) - color.g), SelectivePressure);
+        float closeToB = Mathf.Pow(1 - Mathf.Abs(((float)SelectedColorB / 255.0f) - color.b), SelectivePressure);
+        //Debug.Log("closeToR: " + closeToR + " = " + " 1 - | " + ((float)SelectedColorR / 255.0f) + " - " + color.r + " |");
+        //Debug.Log("closeToG: " + closeToG + " = " + " 1 - | " + ((float)SelectedColorG / 255.0f) + " - " + color.g + " |");
+        //Debug.Log("closeToB: " + closeToB + " = " + " 1 - | " + ((float)SelectedColorB / 255.0f) + " - " + color.b + " |");
         float fitnessBeforeCost = 1;       
-        if (isColorRedSelected == 1) fitnessBeforeCost += closeToR;
+        if (IsColorRedSelected == 1) fitnessBeforeCost += closeToR;
         if (isColorGreenSelected == 1) fitnessBeforeCost += closeToG;
         if (isColorBlueSelected == 1) fitnessBeforeCost += closeToB;
-        if (isColorSelected)
+        if (IsColorSelected)
         {
             fitnessBeforeCost -= 1;
-            fitnessBeforeCost = fitnessBeforeCost / (isColorRedSelected + isColorGreenSelected + isColorBlueSelected);
+            fitnessBeforeCost = fitnessBeforeCost / (IsColorRedSelected + isColorGreenSelected + isColorBlueSelected);
         }
         
 

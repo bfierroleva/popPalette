@@ -15,6 +15,6 @@ MonoBehaviour:
   ChromosomeIndex: 0
   Key: colorG
   IsFunctional: 1
-  MutationMaxRange: 25
-  AlleleValues: {x: 0, y: 0}
+  MutationMaxRange: 6
+  AlleleValues: {x: 100, y: 150}
   AlleleValuesRange: {x: 1, y: 256}

@@ -9,6 +9,7 @@ public class SpeciesSO : ScriptableObject
     public string SpeciesName;
     [Range(0, 1)] public float MutationChance;
     public int MaxPopulation;
+    public float PopulationPressure;
     public GameObject Prefab;
     public int ReprductionCycleInSeconds;
     public float LookForMateViewDistance;
@@ -16,6 +17,8 @@ public class SpeciesSO : ScriptableObject
     public TypeOfReproduction TypeOfReproduction;
     public int HaploidNumber;
     public Vector2 DistanceRange;
-    public float Speed;
+    public float StartingSpeed;
+    public float MaxSpeed;
+    public float IncreaseSpeedRate;
     public List<LocusSO> LocusList;
 }

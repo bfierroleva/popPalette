@@ -5,6 +5,7 @@ using UnityEngine.SocialPlatforms;
 
 public class MatingManager : MonoBehaviour
 {
+    /*
     [SerializeField] List<SpeciesSO> _speciesList;
 
     private void Start()
@@ -12,7 +13,7 @@ public class MatingManager : MonoBehaviour
         int i = 0;
         foreach (SpeciesSO species in _speciesList) 
         {
-            StartCoroutine(ReproductionCycle(i));
+            //StartCoroutine(ReproductionCycle(i));
             i++;
         }
     }
@@ -87,9 +88,9 @@ public class MatingManager : MonoBehaviour
     {
         foreach (Vector2 pair in pairs)
         {
-            females[(int)pair.x].SetMate(males[(int)pair.y]);
-            males[(int)pair.y].SetMate(females[(int)pair.x]);
+            females[(int)pair.x].LookForMate(males[(int)pair.y]);
+            males[(int)pair.y].LookForMate(females[(int)pair.x]);
         }
     }
-
+    */
 }

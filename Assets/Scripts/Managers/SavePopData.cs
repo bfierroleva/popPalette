@@ -15,8 +15,17 @@ public class SavePopData : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            // Call your method here
             Debug.Log(CollectPopData());
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            if (Time.timeScale < 10) Time.timeScale += 1;
+            else Time.timeScale = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (Time.timeScale > 1) Time.timeScale -= 1;
+            else Time.timeScale = 10;
         }
     }
 

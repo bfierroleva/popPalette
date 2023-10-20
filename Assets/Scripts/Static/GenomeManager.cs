@@ -25,7 +25,9 @@ public class GenomeManager
         
         if(Random.value <= MutationChance)
         {
+            Debug.LogWarning("antes: " + locus.AlleleValues.x);
             locus.AlleleValues.x = Mathf.Clamp(locus.AlleleValues.x + Random.Range(-locus.MutationMaxRange, locus.MutationMaxRange + 1), locus.AlleleValuesRange.x, locus.AlleleValuesRange.y + 1);
+            Debug.LogWarning("despues: " + locus.AlleleValues.x);
         }
         if (Random.value <= MutationChance)
         {
@@ -51,11 +53,11 @@ public class GenomeManager
             {
                 child.Karyotype[i].LocusList[j].AlleleValues.x = p1.Karyotype[i].LocusList[j].AlleleValues[Random.Range(0, 2)];
                 child.Karyotype[i].LocusList[j].AlleleValues.y = p2.Karyotype[i].LocusList[j].AlleleValues[Random.Range(0, 2)];
-
+                
                 Locus mutatedLocus = MutateAlleles(child.Karyotype[i].LocusList[j], MutationChance);
                 child.Karyotype[i].LocusList[j].AlleleValues.x = mutatedLocus.AlleleValues.x;
                 child.Karyotype[i].LocusList[j].AlleleValues.y = mutatedLocus.AlleleValues.y;
-
+                
                 j++;
             }
             
