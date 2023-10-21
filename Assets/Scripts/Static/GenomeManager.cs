@@ -20,14 +20,25 @@ public class GenomeManager
         }
     }
 
+    public void OnStart()
+    {
+        _numOfMutations = 0;
+        _sumOfMutations = 0;
+    }
+
+    private int _numOfMutations;
+    private int _sumOfMutations;
+
     public Locus MutateAlleles(Locus locus, float MutationChance)
     {
         
         if(Random.value <= MutationChance)
         {
-            Debug.LogWarning("antes: " + locus.AlleleValues.x);
+            int i = locus.AlleleValues.x;
             locus.AlleleValues.x = Mathf.Clamp(locus.AlleleValues.x + Random.Range(-locus.MutationMaxRange, locus.MutationMaxRange + 1), locus.AlleleValuesRange.x, locus.AlleleValuesRange.y + 1);
-            Debug.LogWarning("despues: " + locus.AlleleValues.x);
+            _sumOfMutations += -1 * (i - locus.AlleleValues.x);
+            _numOfMutations++;
+            Debug.LogWarning(_sumOfMutations / _numOfMutations);
         }
         if (Random.value <= MutationChance)
         {
@@ -42,7 +53,7 @@ public class GenomeManager
         return child;
     }
 
-    public Genotype SexualBasicReproduction(Genotype child, Genotype p1, Genotype p2, float MutationChance) // No Recombination
+    public Genotype SexualBasicReproduction(Genotype child, Genotype p1, Genotype p2) // No Recombination
     {
         int i = 0;
         int j = 0;
@@ -54,7 +65,7 @@ public class GenomeManager
                 child.Karyotype[i].LocusList[j].AlleleValues.x = p1.Karyotype[i].LocusList[j].AlleleValues[Random.Range(0, 2)];
                 child.Karyotype[i].LocusList[j].AlleleValues.y = p2.Karyotype[i].LocusList[j].AlleleValues[Random.Range(0, 2)];
                 
-                Locus mutatedLocus = MutateAlleles(child.Karyotype[i].LocusList[j], MutationChance);
+                Locus mutatedLocus = MutateAlleles(child.Karyotype[i].LocusList[j], child.Karyotype[i].LocusList[j].MutationChance);
                 child.Karyotype[i].LocusList[j].AlleleValues.x = mutatedLocus.AlleleValues.x;
                 child.Karyotype[i].LocusList[j].AlleleValues.y = mutatedLocus.AlleleValues.y;
                 
@@ -97,15 +108,10 @@ public class Locus
 {
     public string Key;
     public bool IsFunctional;
+    public float MutationChance;
     public int MutationMaxRange;
+    public int ChromosomeIndex;
     public Vector2Int AlleleValues;
     public Vector2Int AlleleValuesRange;
 }
 
-
-public enum TypeOfReproduction
-{
-    Merge,
-    SexualBasic,
-    SexualWithRecombination,
-}

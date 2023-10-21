@@ -24,21 +24,20 @@ public class SelectivePreassure : MonoBehaviour
         //Debug.Log("closeToR: " + closeToR + " = " + " 1 - | " + ((float)SelectedColorR / 255.0f) + " - " + color.r + " |");
         //Debug.Log("closeToG: " + closeToG + " = " + " 1 - | " + ((float)SelectedColorG / 255.0f) + " - " + color.g + " |");
         //Debug.Log("closeToB: " + closeToB + " = " + " 1 - | " + ((float)SelectedColorB / 255.0f) + " - " + color.b + " |");
-        float fitnessBeforeCost = 1;       
-        if (IsColorRedSelected == 1) fitnessBeforeCost += closeToR;
-        if (isColorGreenSelected == 1) fitnessBeforeCost += closeToG;
-        if (isColorBlueSelected == 1) fitnessBeforeCost += closeToB;
+        float fitness = 1;       
+        if (IsColorRedSelected == 1) fitness += closeToR;
+        if (isColorGreenSelected == 1) fitness += closeToG;
+        if (isColorBlueSelected == 1) fitness += closeToB;
         if (IsColorSelected)
         {
-            fitnessBeforeCost -= 1;
-            fitnessBeforeCost = fitnessBeforeCost / (IsColorRedSelected + isColorGreenSelected + isColorBlueSelected);
+            fitness -= 1;
+            fitness = fitness / (IsColorRedSelected + isColorGreenSelected + isColorBlueSelected);
         }
         
 
-        //Debug.Log("fitnessBeforeCost: " + fitnessBeforeCost);
         //Debug.Log("color: " + (color.r + color.g + color.b));
 
-        float fitness = fitnessBeforeCost / Mathf.Clamp((Mathf.Pow((color.r + color.g + color.b + 0.0001f), CostOfColor)),1 , Mathf.Infinity);
+        fitness = fitness / Mathf.Clamp((Mathf.Pow((color.r + color.g + color.b + 0.0001f), CostOfColor)),1 , Mathf.Infinity);
 
         return fitness;
     }

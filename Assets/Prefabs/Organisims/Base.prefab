@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5047537679095467100}
   - component: {fileID: 1383651298224152554}
+  - component: {fileID: 1877749431302453215}
   - component: {fileID: 2318971965981112419}
   - component: {fileID: -911869723147086461}
   - component: {fileID: 8603909391122584480}
   m_Layer: 0
-  m_Name: H.garrotus
+  m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1383651298224152554
 SpriteRenderer:
@@ -87,6 +88,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1877749431302453215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6511733004687586805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c8022e090e1f842a886e97a00d8c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeciesKey: P.testis
+  SpeciesName: Primus testis
+  MutationChance: 0
+  MaxPopulation: 500
+  PopulationPressure: 1
+  Prefab: {fileID: 6511733004687586805}
+  NumberOfMatingsForLifetime: 5
+  LookForMateViewDistance: 100
+  LifespanInSeconds: 50
+  TypeOfReproduction: 1
+  TypeOfMating: 1
+  HaploidNumber: 3
+  DistanceRange: {x: 2, y: 5}
+  StartingSpeed: 2
+  MaxSpeed: 7.5
+  IncreaseSpeedRate: 1
+  LocusList:
+  - {fileID: 11400000, guid: 8e6f1d4effcfc41469c69e6ce689ae0b, type: 2}
+  - {fileID: 11400000, guid: 8f8ca9051186f5745a0f182b3e075f8f, type: 2}
+  - {fileID: 11400000, guid: 18d4ff94b394b7149816780bead795ad, type: 2}
 --- !u!114 &2318971965981112419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +135,7 @@ MonoBehaviour:
   _firstGenAttributes: {fileID: 11400000, guid: 74595a67939ab104fa2c8145ccf71952, type: 2}
   _isFirstGen: 0
   IsFemale: 1
+  Phenotype: {fileID: 0}
   SpeciesAttributes: {fileID: 0}
 --- !u!114 &-911869723147086461
 MonoBehaviour:
@@ -115,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f675391c038d3f45aba118f3380d31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PhenotypeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &8603909391122584480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,10 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6daea5b81c1e32f4f8ade5a9bcf14194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Species: {fileID: 11400000, guid: a75127c07ba3a0c4c8be73643d594a9f, type: 2}
   LocusList:
-  - {fileID: 11400000, guid: 1040921b66f0b914db98cde411b08474, type: 2}
-  - {fileID: 11400000, guid: 5c33d4679b8bcce47b0b3eb2205a4d9f, type: 2}
-  - {fileID: 11400000, guid: a5d1635d152f9e34cb5a0040fff0772c, type: 2}
-  - {fileID: 11400000, guid: 5a71519cd71f19b4cb850dc7a556ab04, type: 2}
-  - {fileID: 11400000, guid: 2cdb30f0b0ab93649a8eabf894376eb2, type: 2}
+  - {fileID: 11400000, guid: 8e6f1d4effcfc41469c69e6ce689ae0b, type: 2}
+  - {fileID: 11400000, guid: 8f8ca9051186f5745a0f182b3e075f8f, type: 2}
+  - {fileID: 11400000, guid: 18d4ff94b394b7149816780bead795ad, type: 2}

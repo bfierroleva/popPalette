@@ -7,30 +7,30 @@ using UnityEngine.SocialPlatforms;
 
 public class Organism : MonoBehaviour
 {
-    [SerializeField] private FirstGenCreator _firstGenAttributes;
-    [SerializeField] private bool _isFirstGen;
-    public bool IsFemale;
+    public FirstGenCreator FirstGenAttributes;
+    public bool _isFirstGen;
 
     private GameObject _manager;
     private IdentitiesManager _identityManager;
     private MatingManager _matingManager;
 
     public Phenotype Phenotype;
-    public SpeciesSO SpeciesAttributes;
+    public SpeciesAttributes SpeciesAttributes;
     public Identity ThisIdentity;
     private Population _population;
     private Organism _mate;
 
     private Vector3 _targetPosition;
     private bool _isMovingToMate = false;
+    private int _timesMated;
 
     private float _speed;
 
     private void Awake()
     {
-        _firstGenAttributes = transform.GetComponent<FirstGenCreator>();
+        //_firstGenAttributes = transform.GetComponent<FirstGenCreator>();
         Phenotype = GetComponent<Phenotype>();
-        SpeciesAttributes = _firstGenAttributes.Species;
+        SpeciesAttributes = GetComponent<SpeciesAttributes>();
     }
 
     private void Start()
@@ -45,32 +45,57 @@ public class Organism : MonoBehaviour
         OnBirth();
     }
 
+    private void WhenFirstGen()
+    {
+        SpeciesAttributes.Prefab.GetComponent<Organism>()._isFirstGen = false;
+        ThisIdentity = _identityManager.CreateNewIdentity();
+        ThisIdentity.ThisGenotype = new Genotype();
+        ThisIdentity.ThisGenotype.HaploidNumber = SpeciesAttributes.HaploidNumber;
+        ThisIdentity.ThisGenotype.Karyotype = new List<ChromosomePair>();
+        int i = 0;
+        while (i < ThisIdentity.ThisGenotype.HaploidNumber) { ThisIdentity.ThisGenotype.Karyotype.Add(new ChromosomePair()); i++; }
+        int j = 0;
+        foreach (ChromosomePair chromosomePair in ThisIdentity.ThisGenotype.Karyotype)
+        {
+            foreach (Locus locus in FirstGenAttributes.LocusList)
+            {
+                if (locus.ChromosomeIndex == j)
+                {
+                    chromosomePair.LocusList.Add(locus);
+                }
+            }
+            j++;
+        }
+    }
+
     public void OnBirth()
     {       
         GetComponent<Phenotype>().SetPhenotype(ThisIdentity);
         _population = _manager.GetComponent<PopulationManager>().AddOrganism(this, SpeciesAttributes.SpeciesKey);
-        if (!CanSurviveBirth() && !_isFirstGen) StartCoroutine(OnDeath(0));
+        if (!CanSurviveBirth() && !_isFirstGen) OnDeath();
         _speed = SpeciesAttributes.StartingSpeed;
         SetNewRandomDestination();
-        StartCoroutine(LookForMate());
-        StartCoroutine(OnDeath(SpeciesAttributes.LifespanInSeconds));
+        StartCoroutine(LifeCycle());
         
+    }
+    IEnumerator LifeCycle()
+    {
+        yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds / SpeciesAttributes.NumberOfMatingsForLifetime);
+        if (_timesMated < SpeciesAttributes.NumberOfMatingsForLifetime) { LookForAMate(); StartCoroutine(LifeCycle()); _timesMated++; }
+        else OnDeath();
     }
 
     bool CanSurviveBirth()
     {
         float survivalChance = 0;
         float fitness = _manager.GetComponent<SelectivePreassure>().CalculateFitness(Phenotype.PhenotypeColor);
-        //Debug.Log(" meanFitnessOfParents: " + meanFitnessOfParents);
         // alomejor cambiar  _population.PopulationList.Count por la suma de todas las poblaciones
         survivalChance = fitness * Mathf.Pow(1 - (_population.OrganismList.Count / (float)SpeciesAttributes.MaxPopulation), SpeciesAttributes.PopulationPressure);
-        //Debug.Log(fitness + " => " + survivalChance);
         return Random.value <= survivalChance;
     }
 
-    IEnumerator OnDeath(float time)
+    void OnDeath()
     {
-        yield return new WaitForSeconds(time);
         _population.RemoveOrganism(this);
         Destroy(gameObject);
     }
@@ -95,42 +120,38 @@ public class Organism : MonoBehaviour
         float y = Mathf.Sin(angleInRadians);
         _targetPosition = new Vector2(transform.position.x + x * distance, transform.position.y + y * distance);
     }
-    private void WhenFirstGen()
+
+    void LookForAMate()
     {
-        ThisIdentity = _identityManager.CreateNewIdentity();
-        ThisIdentity.ThisGenotype = new Genotype();
-        ThisIdentity.ThisGenotype.HaploidNumber = _firstGenAttributes.Species.HaploidNumber;
-        ThisIdentity.ThisGenotype.Karyotype = new List<ChromosomePair>();
-        int i = 0;
-        while (i < ThisIdentity.ThisGenotype.HaploidNumber) { ThisIdentity.ThisGenotype.Karyotype.Add(new ChromosomePair()); i++; }
-        int j = 0;
-        foreach (ChromosomePair chromosomePair in ThisIdentity.ThisGenotype.Karyotype)
-        {            
-            foreach (LocusSO locus in _firstGenAttributes.LocusList)
-            {               
-                if (locus.ChromosomeIndex == j) 
-                {
-                    Locus newLocus = new Locus();
-                    newLocus.Key = locus.Key;
-                    newLocus.IsFunctional = locus.IsFunctional;
-                    newLocus.AlleleValuesRange = locus.AlleleValuesRange;
-                    newLocus.AlleleValues = locus.AlleleValues;
-                    newLocus.MutationMaxRange = locus.MutationMaxRange;
-                    chromosomePair.LocusList.Add(newLocus); 
-                }
-            }
-            j++;
+        switch (SpeciesAttributes.TypeOfMating)
+        {
+            case TypeOfMating.Random:
+                LookForAMateRandom();
+                break;
+
+            case TypeOfMating.Closest:
+                LookForAMateClosest();
+                break;
+
+            case TypeOfMating.Affinity:
+                LookForAMateAffinity();
+                break;
+
+            default:
+                LookForAMateRandom();
+                break;
         }
     }
 
-    IEnumerator LookForMate()
+    void LookForAMateRandom()
     {
-        yield return new WaitForSeconds(SpeciesAttributes.ReprductionCycleInSeconds);
+        _mate = _population.OrganismList[Random.Range(0, _population.OrganismList.Count)];
+        _isMovingToMate = true;
+    }
 
-
-
-        int closestPossibleMate = -1;
-        float closestDistance = SpeciesAttributes.LookForMateViewDistance;
+    void LookForAMateClosest()
+    {
+        List<int> possibleMates = new List<int>();
 
         for (int i = 0; i < _population.OrganismList.Count; i++)
         {
@@ -139,25 +160,26 @@ public class Organism : MonoBehaviour
 
             float distance = Vector3.Distance(transform.position, _population.OrganismList[i].transform.position);
             if (_population.OrganismList[i].ThisIdentity.ID == ThisIdentity.ID) continue;
-            else if (distance < closestDistance)
+            else if (distance < SpeciesAttributes.LookForMateViewDistance)
             {
                 //Debug.Log("new closest: " + males[j].transform.gameObject.name);
-                closestDistance = distance;
-                closestPossibleMate = i;
+                possibleMates.Add(i);
             }
         }
-        if (closestPossibleMate >= 0) 
+        if (possibleMates.Count > 0)
         {
-            if (_population.OrganismList[closestPossibleMate].ThisIdentity.ID != ThisIdentity.ID) _mate = _population.OrganismList[closestPossibleMate];
-            else Debug.Log("TRIED TO MATE WITH ITSELF (WTF)");
-
+            _mate = _population.OrganismList[Random.Range(0, possibleMates.Count)];
             _isMovingToMate = true;
-        }       
+        }
+    }
+    void LookForAMateAffinity()
+    {
+
     }
 
     void MoveToMate()
     {
-        if (_mate == null) { _isMovingToMate = false; return; }
+        if (_mate == null) { LookForAMate(); return; }
         Vector3 direction = (_mate.transform.position - transform.position).normalized;
         transform.position += direction * _speed * Time.deltaTime;
 
@@ -167,7 +189,7 @@ public class Organism : MonoBehaviour
         { 
             CreateChild(); 
             _isMovingToMate = false;
-            StartCoroutine(LookForMate());
+            StartCoroutine(LifeCycle());
             _speed = SpeciesAttributes.StartingSpeed;
         }
     }   
@@ -187,7 +209,7 @@ public class Organism : MonoBehaviour
                 break;
 
             case TypeOfReproduction.SexualBasic:
-                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype, SpeciesAttributes.MutationChance);
+                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
                 break;
 
             case TypeOfReproduction.SexualWithRecombination:
@@ -195,7 +217,7 @@ public class Organism : MonoBehaviour
                 break;
 
             default:
-                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype, SpeciesAttributes.MutationChance);
+                childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
                 break;
         }
         child.GetComponent<Organism>().ThisIdentity = childIdentity;

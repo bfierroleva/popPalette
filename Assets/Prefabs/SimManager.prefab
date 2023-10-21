@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6131827054244213809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 913344319486209967}
+  - component: {fileID: 7427751347522534276}
+  - component: {fileID: 1902332073116185211}
+  - component: {fileID: 8100356854028001275}
+  - component: {fileID: 8470173380312791202}
+  - component: {fileID: 8213804780496938531}
+  - component: {fileID: 8108326091823722418}
+  m_Layer: 0
+  m_Name: SimManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &913344319486209967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131827054244213809}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7427751347522534276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131827054244213809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225a6e9b662d5d240b0cb869f6fb7c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1902332073116185211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131827054244213809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc85b2964c5a51145b0b2d45eead7fa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8100356854028001275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131827054244213809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c72242e33b40a03499f24ae431b7d3dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speciesToSave: {fileID: 11400000, guid: a75127c07ba3a0c4c8be73643d594a9f, type: 2}
+--- !u!114 &8470173380312791202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131827054244213809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750ee566b89937245b27394e4a84c317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CostOfColor: 0
+  TestColor: {r: 1, g: 0, b: 1, a: 0}
+  IsColorSelected: 0
+  SelectivePressure: 1
+  IsColorRedSelected: 1
+  SelectedColorR: 255
+  isColorGreenSelected: 0
+  SelectedColorG: 0
+  isColorBlueSelected: 0
+  SelectedColorB: 255
+--- !u!114 &8213804780496938531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131827054244213809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc8880001ef93c3408cb9d0b35d8563c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 0}
+  AveragePhenotype: {fileID: 0}
+  PopText: {fileID: 0}
+  SurvChanceText: {fileID: 0}
+  HighRed: {fileID: 0}
+  MedRed: {fileID: 0}
+  LowRed: {fileID: 0}
+  highRedFrequency: 0
+  medRedFrequency: 0
+  lowRedFrequency: 0
+--- !u!114 &8108326091823722418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131827054244213809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd035a7435426c4eb7a16f521f5ea9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _intervalTimeInSimSeconds: 30

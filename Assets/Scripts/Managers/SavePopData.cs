@@ -2,20 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 
 
 //refactorizar para varias poblaciones:
 public class SavePopData : MonoBehaviour
 {
-    [SerializeField] SpeciesSO _speciesToSave;
+    [SerializeField] string _speciesToSave;
+
+    private void Start()
+    {
+        Time.timeScale = 2;
+        GenomeManager.Instance.OnStart();
+    }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log(CollectPopData());
+            GUIUtility.systemCopyBuffer = CollectPopData();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -27,6 +35,10 @@ public class SavePopData : MonoBehaviour
             if (Time.timeScale > 1) Time.timeScale -= 1;
             else Time.timeScale = 10;
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     string CollectPopData()
@@ -37,7 +49,7 @@ public class SavePopData : MonoBehaviour
         int i = 0;
         foreach (Organism o in FindObjectsOfType<Organism>()) 
         {
-            if (o.SpeciesAttributes.SpeciesKey != _speciesToSave.SpeciesKey) continue;
+            if (o.SpeciesAttributes.SpeciesKey != _speciesToSave) continue;
             List<string> locusValueList = new List<string>();
             if (!createdHeaders) popDataMatrix.Add(new List<string> { o.SpeciesAttributes.SpeciesKey });
             foreach (ChromosomePair chromosome in o.ThisIdentity.ThisGenotype.Karyotype)
@@ -66,11 +78,11 @@ public class SavePopData : MonoBehaviour
         StringBuilder genepopText = new StringBuilder();
 
         // Extract species name and loci names
-        string speciesName = populationData[0][0];
+        string speciesKey = populationData[0][0];
         List<string> lociNames = populationData[0].GetRange(1, populationData[0].Count - 1);
 
         // Append species name
-        genepopText.AppendLine(speciesName);
+        genepopText.AppendLine(speciesKey);
 
         // Append loci names
         foreach (string locusName in lociNames)
