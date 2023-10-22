@@ -18,21 +18,30 @@ public class FirstGenManager : MonoBehaviour
             FirstGenCreator FCG = pop.GetComponent<FirstGenCreator>();
             SpeciesAttributes speciesAttributes = pop.GetComponent<SpeciesAttributes>();
 
+            o.FirstGenAttributes = FCG;
+
             List<Vector3> newAlleleList = new List<Vector3>(); //x=locusIndex y=absoluteFrequency z=value
-            List<int> newAlleleListNumOfOrganisms = new List<int>(); //lsita que guarda cuantos organismos tienen cada alelo
+            List<int> newAlleleListNumOfAllelesOnPop = new List<int>(); //lsita que guarda cuantos alelos hay ya en la poblacion
             foreach (Vector3 allele in FCG.AlleleList)
             {
-                Vector3 newVector = new Vector3(allele.x, Mathf.RoundToInt(allele.y * speciesAttributes.InitialPopulation), allele.z);
+                Vector3 newVector = new Vector3(allele.x, Mathf.RoundToInt(allele.y * speciesAttributes.InitialPopulation * 2), allele.z);
+                Debug.Log(newVector.y);
                 newAlleleList.Add(newVector);
-                newAlleleListNumOfOrganisms.Add(0);
+                newAlleleListNumOfAllelesOnPop.Add(0);
             }
             
             for (int k = 0; k < speciesAttributes.InitialPopulation; k++)
             {
-                
-                o._isFirstGen = true;
-                o.FirstGenAttributes = o.GetComponent<FirstGenCreator>();
+                GameObject newOrganisimObject = Instantiate(pop, speciesAttributes.InitialPosition, Quaternion.identity, transform);
+                newOrganisimObject.name = (k + 1).ToString();
+                Organism newOrganisim = newOrganisimObject.GetComponent<Organism>();
+                FirstGenCreator newFCG = newOrganisimObject.GetComponent<FirstGenCreator>();
 
+                newOrganisim._isFirstGen = true;
+                newOrganisim.FirstGenAttributes = newFCG;
+                
+
+                int t = 0;
                 foreach (LocusSO locusSO in FCG.LocusSOList)
                 {
                     Locus newLocus = new Locus();
@@ -44,32 +53,42 @@ public class FirstGenManager : MonoBehaviour
                     newLocus.ChromosomeIndex = locusSO.ChromosomeIndex;
 
                     int l = -1;
-                    int r = 0;
                     Vector2Int newAlleleValues = new Vector2Int();
                     foreach (Vector3 allele in newAlleleList)
                     {
                         l++;
-                        if (allele.y <= newAlleleListNumOfOrganisms[l]) continue;
+                        if (allele.x != t) continue;
+                        if (allele.y < newAlleleListNumOfAllelesOnPop[l]) continue;
 
-                        if (r == 0) newAlleleValues.x = Mathf.RoundToInt(allele.z);
-                        if (r == 1) newAlleleValues.y = Mathf.RoundToInt(allele.z);
-                        newAlleleListNumOfOrganisms[l]++;
+                        newAlleleValues.x = (int)allele.z;
 
-                        r++;
-                        if(r >= 2) break;
+                        newAlleleListNumOfAllelesOnPop[l]++;
+                        break;
+                    }
+                    l = -1;
+                    foreach (Vector3 allele in newAlleleList)
+                    {
+                        l++;
+                        if (allele.x != t) continue;
+                        if (allele.y < newAlleleListNumOfAllelesOnPop[l]) continue;
+
+                        newAlleleValues.y = (int)allele.z;
+
+                        newAlleleListNumOfAllelesOnPop[l]++;
+                        break;
                     }
 
                     newLocus.AlleleValues = newAlleleValues;
-                    FCG.LocusList.Add(newLocus);
+                    newFCG.LocusList.Add(newLocus);
+                    t++;
                 }
-
-                foreach (Locus locus in FCG.LocusList)
-                {
-                    Debug.Log(locus.ChromosomeIndex);
-                }
-               Instantiate(pop, speciesAttributes.InitialPosition, Quaternion.identity, transform);
+                newOrganisim.OnStart();
+                
             }
             i++;
+            
         }
+
     }
+
 }

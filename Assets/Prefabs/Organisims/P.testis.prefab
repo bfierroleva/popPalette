@@ -110,7 +110,7 @@ MonoBehaviour:
   LookForMateViewDistance: 100
   LifespanInSeconds: 50
   TypeOfReproduction: 1
-  TypeOfMating: 1
+  TypeOfMating: 0
   HaploidNumber: 3
   DistanceRange: {x: 2, y: 5}
   StartingSpeed: 2
@@ -160,14 +160,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocusSOList:
-  - {fileID: 11400000, guid: 8e6f1d4effcfc41469c69e6ce689ae0b, type: 2}
-  - {fileID: 11400000, guid: 8f8ca9051186f5745a0f182b3e075f8f, type: 2}
   - {fileID: 11400000, guid: 18d4ff94b394b7149816780bead795ad, type: 2}
+  - {fileID: 11400000, guid: 8f8ca9051186f5745a0f182b3e075f8f, type: 2}
+  - {fileID: 11400000, guid: 8e6f1d4effcfc41469c69e6ce689ae0b, type: 2}
   AlleleList:
-  - {x: 0, y: 0.1, z: 10}
-  - {x: 0, y: 0.1, z: 15}
-  - {x: 0, y: 0.1, z: 20}
-  - {x: 0, y: 0.1, z: 30}
-  - {x: 0, y: 0.6, z: 180}
-  - {x: 1, y: 1, z: 200}
-  - {x: 2, y: 1, z: 20}
+  - {x: 0, y: 0.4, z: 1}
+  - {x: 0, y: 0.4, z: 5}
+  - {x: 0, y: 0.2, z: 200}
+  - {x: 1, y: 0.75, z: 20}
+  - {x: 1, y: 0.15, z: 100}
+  - {x: 1, y: 0.1, z: 235}
+  - {x: 2, y: 0.5, z: 20}
+  - {x: 2, y: 0.5, z: 200}

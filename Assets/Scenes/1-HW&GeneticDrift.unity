@@ -275,11 +275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b01ce0a05c31c7468cbbd3bef3f182b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _organisimPrefabList:
+  _populationPrefabList:
   - {fileID: 6511733004687586805, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
-  _initialPopulation: 96000000
-  _initialPosition:
-  - {x: 0, y: 0}
 --- !u!1 &251300403
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +467,10 @@ PrefabInstance:
     - target: {fileID: 6131827054244213809, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: m_Name
       value: SimManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8100356854028001275, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: _speciesToSave
+      value: P.testis
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

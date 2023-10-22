@@ -26,17 +26,14 @@ public class Organism : MonoBehaviour
 
     private float _speed;
 
-    private void Awake()
+    public void OnStart()
     {
-        //_firstGenAttributes = transform.GetComponent<FirstGenCreator>();
+        FirstGenAttributes = transform.GetComponent<FirstGenCreator>();
         Phenotype = GetComponent<Phenotype>();
         SpeciesAttributes = GetComponent<SpeciesAttributes>();
-    }
 
-    private void Start()
-    {
         _manager = FindObjectOfType<IdentitiesManager>().gameObject;
-        _identityManager = _manager.GetComponent<IdentitiesManager>(); 
+        _identityManager = _manager.GetComponent<IdentitiesManager>();
         _matingManager = _manager.GetComponent<MatingManager>();
 
         if (!_isFirstGen) { Destroy(transform.GetComponent<FirstGenCreator>()); }
@@ -47,7 +44,6 @@ public class Organism : MonoBehaviour
 
     private void WhenFirstGen()
     {
-        SpeciesAttributes.Prefab.GetComponent<Organism>()._isFirstGen = false;
         ThisIdentity = _identityManager.CreateNewIdentity();
         ThisIdentity.ThisGenotype = new Genotype();
         ThisIdentity.ThisGenotype.HaploidNumber = SpeciesAttributes.HaploidNumber;
@@ -66,6 +62,7 @@ public class Organism : MonoBehaviour
             }
             j++;
         }
+        Debug.Log(transform.gameObject.name);
     }
 
     public void OnBirth()
@@ -197,7 +194,9 @@ public class Organism : MonoBehaviour
     void CreateChild()
     {
         GameObject child = Instantiate(SpeciesAttributes.Prefab, transform.position, Quaternion.identity, _identityManager.gameObject.transform);
+        Organism childO = child.GetComponent<Organism>();
         Identity childIdentity = _identityManager.CreateNewIdentity();
+
         childIdentity.Parent1ID = ThisIdentity.ID;
         childIdentity.Parent2ID = _mate.ThisIdentity.ID;
         childIdentity.ThisGenotype = new Genotype();
@@ -220,7 +219,9 @@ public class Organism : MonoBehaviour
                 childIdentity.ThisGenotype = GenomeManager.Instance.SexualBasicReproduction(childIdentity.ThisGenotype, ThisIdentity.ThisGenotype, _mate.ThisIdentity.ThisGenotype);
                 break;
         }
-        child.GetComponent<Organism>().ThisIdentity = childIdentity;
+        childO.ThisIdentity = childIdentity;
+        childO._isFirstGen = false;
+        childO.OnStart();
     }
 
 }

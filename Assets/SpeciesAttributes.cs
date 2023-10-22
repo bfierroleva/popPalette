@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class SpeciesAttributes : MonoBehaviour
 {
-    
+    [Header("Species Config:")]
     public string SpeciesKey;
     public string SpeciesName;
     [Range(0, 1)] public float MutationChance;
-    public int MaxPopulation;
     public float PopulationPressure;
     public GameObject Prefab;
     public int NumberOfMatingsForLifetime;
@@ -20,10 +19,12 @@ public class SpeciesAttributes : MonoBehaviour
     public Vector2 DistanceRange;
     public float StartingSpeed;
     public float MaxSpeed;
-    public float IncreaseSpeedRate;
+    public float IncreaseSpeedRate;   
+    
+    [Header("Population Config:")]
+    public int MaxPopulation;
     public int InitialPopulation;
     public Vector2 InitialPosition;
-    //public List<LocusSO> LocusList;
 }
 public enum TypeOfReproduction
 {
