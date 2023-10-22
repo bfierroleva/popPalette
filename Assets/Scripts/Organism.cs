@@ -62,7 +62,6 @@ public class Organism : MonoBehaviour
             }
             j++;
         }
-        Debug.Log(transform.gameObject.name);
     }
 
     public void OnBirth()
@@ -106,7 +105,7 @@ public class Organism : MonoBehaviour
     void RandomMove()
     {
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, SpeciesAttributes.StartingSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, _targetPosition) < 0.01f) SetNewRandomDestination();
+        if (Vector3.Distance(transform.position, _targetPosition) < 0.5f) SetNewRandomDestination();
     }
     void SetNewRandomDestination()
     {

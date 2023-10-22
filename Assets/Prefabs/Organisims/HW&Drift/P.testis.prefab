@@ -103,7 +103,6 @@ MonoBehaviour:
   SpeciesKey: P.testis
   SpeciesName: Primus testis
   MutationChance: 0
-  MaxPopulation: 2000
   PopulationPressure: 1
   Prefab: {fileID: 6511733004687586805}
   NumberOfMatingsForLifetime: 5
@@ -112,11 +111,12 @@ MonoBehaviour:
   TypeOfReproduction: 1
   TypeOfMating: 0
   HaploidNumber: 3
-  DistanceRange: {x: 2, y: 5}
-  StartingSpeed: 2
-  MaxSpeed: 7.5
-  IncreaseSpeedRate: 1
-  InitialPopulation: 1000
+  DistanceRange: {x: 3, y: 10}
+  StartingSpeed: 3
+  MaxSpeed: 10
+  IncreaseSpeedRate: 2
+  MaxPopulation: 1500
+  InitialPopulation: 750
   InitialPosition: {x: 0, y: 0}
 --- !u!114 &2318971965981112419
 MonoBehaviour:
@@ -161,14 +161,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LocusSOList:
   - {fileID: 11400000, guid: 18d4ff94b394b7149816780bead795ad, type: 2}
-  - {fileID: 11400000, guid: 8f8ca9051186f5745a0f182b3e075f8f, type: 2}
-  - {fileID: 11400000, guid: 8e6f1d4effcfc41469c69e6ce689ae0b, type: 2}
   AlleleList:
-  - {x: 0, y: 0.4, z: 1}
-  - {x: 0, y: 0.4, z: 5}
-  - {x: 0, y: 0.2, z: 200}
-  - {x: 1, y: 0.75, z: 20}
-  - {x: 1, y: 0.15, z: 100}
-  - {x: 1, y: 0.1, z: 235}
-  - {x: 2, y: 0.5, z: 20}
-  - {x: 2, y: 0.5, z: 200}
+  - {x: 0, y: 0.5, z: 190}
+  - {x: 0, y: 0.5, z: 65}

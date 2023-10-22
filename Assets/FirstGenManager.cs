@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -8,10 +9,9 @@ public class FirstGenManager : MonoBehaviour
     [SerializeField] private List<GameObject> _populationPrefabList;
 
 
-    //refactorizar para que siga el equilibrio de HW:
     private void Start()
     {
-        int i = 0;       
+        int i = 0;
         foreach (GameObject pop in _populationPrefabList)
         {
             Organism o = pop.GetComponent<Organism>();
@@ -20,16 +20,31 @@ public class FirstGenManager : MonoBehaviour
 
             o.FirstGenAttributes = FCG;
 
-            List<Vector3> newAlleleList = new List<Vector3>(); //x=locusIndex y=absoluteFrequency z=value
-            List<int> newAlleleListNumOfAllelesOnPop = new List<int>(); //lsita que guarda cuantos alelos hay ya en la poblacion
-            foreach (Vector3 allele in FCG.AlleleList)
+            List<List<Vector3>> genotypeList = new List<List<Vector3>>();
+            List<List<int>> organismsWithGenotype = new List<List<int>>();
+
+            int f = 0;
+            foreach (LocusSO locusSO in FCG.LocusSOList)
             {
-                Vector3 newVector = new Vector3(allele.x, Mathf.RoundToInt(allele.y * speciesAttributes.InitialPopulation * 2), allele.z);
-                Debug.Log(newVector.y);
-                newAlleleList.Add(newVector);
-                newAlleleListNumOfAllelesOnPop.Add(0);
+                genotypeList.Add(new List<Vector3>());
+
+                List<Vector3> alleleListForF = new List<Vector3>();
+
+                foreach (Vector3 allele in FCG.AlleleList)
+                {
+                    if (allele.x == f) { alleleListForF.Add(allele); Debug.Log("para la lista de alelos " + f + " : " + allele.z); } 
+                }
+
+                genotypeList[f].AddRange(CalculateGenotipicFreq(alleleListForF)); // x=allele1  y=allele2  z=frequency
+                for (int d = 0; d < genotypeList[f].Count; d++)
+                {
+                    organismsWithGenotype.Add(new List<int>());
+                    organismsWithGenotype[f].Add(0);
+                }
+                f++;
             }
-            
+
+
             for (int k = 0; k < speciesAttributes.InitialPopulation; k++)
             {
                 GameObject newOrganisimObject = Instantiate(pop, speciesAttributes.InitialPosition, Quaternion.identity, transform);
@@ -39,7 +54,6 @@ public class FirstGenManager : MonoBehaviour
 
                 newOrganisim._isFirstGen = true;
                 newOrganisim.FirstGenAttributes = newFCG;
-                
 
                 int t = 0;
                 foreach (LocusSO locusSO in FCG.LocusSOList)
@@ -54,27 +68,15 @@ public class FirstGenManager : MonoBehaviour
 
                     int l = -1;
                     Vector2Int newAlleleValues = new Vector2Int();
-                    foreach (Vector3 allele in newAlleleList)
+                    foreach (Vector3 genotype in genotypeList[t])
                     {
                         l++;
-                        if (allele.x != t) continue;
-                        if (allele.y < newAlleleListNumOfAllelesOnPop[l]) continue;
+                        if ((genotype.z * speciesAttributes.InitialPopulation) <= organismsWithGenotype[t][l]) continue;
 
-                        newAlleleValues.x = (int)allele.z;
+                        newAlleleValues.x = (int)genotype.x;
+                        newAlleleValues.y = (int)genotype.y;
 
-                        newAlleleListNumOfAllelesOnPop[l]++;
-                        break;
-                    }
-                    l = -1;
-                    foreach (Vector3 allele in newAlleleList)
-                    {
-                        l++;
-                        if (allele.x != t) continue;
-                        if (allele.y < newAlleleListNumOfAllelesOnPop[l]) continue;
-
-                        newAlleleValues.y = (int)allele.z;
-
-                        newAlleleListNumOfAllelesOnPop[l]++;
+                        organismsWithGenotype[t][l]++;
                         break;
                     }
 
@@ -83,12 +85,34 @@ public class FirstGenManager : MonoBehaviour
                     t++;
                 }
                 newOrganisim.OnStart();
-                
+
             }
             i++;
-            
+
         }
 
     }
 
+    List<Vector3> CalculateGenotipicFreq(List<Vector3> alleleList)
+    {
+        List<Vector3> genotypicFrequencies = new List<Vector3>(); // x=allele1  y=allele2  z=frequency
+
+        int numAlleles = alleleList.Count;
+
+        for (int i = 0; i < numAlleles; i++)
+        {
+            for (int j = i; j < numAlleles; j++)
+            {
+                float allele1 = alleleList[i].z;
+                float allele2 = alleleList[j].z;
+
+                float frequency = alleleList[i].y * alleleList[j].y;
+                if (i != j) frequency = frequency * 2;
+
+                genotypicFrequencies.Add(new Vector3(allele1, allele2, frequency));
+            }
+        }
+
+        return genotypicFrequencies;
+    }
 }

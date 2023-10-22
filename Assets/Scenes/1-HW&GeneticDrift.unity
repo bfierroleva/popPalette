@@ -276,7 +276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _populationPrefabList:
-  - {fileID: 6511733004687586805, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+  - {fileID: 3204442255516255474, guid: f54d52f5f9005104785ccc7435e2d40e, type: 3}
+  - {fileID: 3204442255516255474, guid: a0c385cf439e6c64da6f501063adb1df, type: 3}
 --- !u!1 &251300403
 GameObject:
   m_ObjectHideFlags: 0
