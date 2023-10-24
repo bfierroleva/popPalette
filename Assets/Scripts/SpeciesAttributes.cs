@@ -6,7 +6,6 @@ public class SpeciesAttributes : MonoBehaviour
 {
     [Header("Species Config:")]
     public string SpeciesKey;
-    public string SpeciesName;
     [Range(0, 1)] public float MutationChance;
     public float PopulationPressure;
     public GameObject Prefab;
@@ -22,6 +21,7 @@ public class SpeciesAttributes : MonoBehaviour
     public float IncreaseSpeedRate;   
     
     [Header("Population Config:")]
+    public string PopulationKey;
     public int MaxPopulation;
     public int InitialPopulation;
     public Vector2 InitialPosition;

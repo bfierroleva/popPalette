@@ -9,6 +9,26 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: SpeciesKey
+      value: P.testis
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: SpeciesName
+      value: Primus testis left
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: MaxPopulation
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: PopulationKey
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: InitialPopulation
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: InitialPosition.x
       value: -50
       objectReference: {fileID: 0}
@@ -58,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511733004687586805, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: m_Name
-      value: P.testisHW
+      value: P.testisLeft
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

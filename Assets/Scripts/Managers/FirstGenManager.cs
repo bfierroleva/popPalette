@@ -32,10 +32,11 @@ public class FirstGenManager : MonoBehaviour
 
                 foreach (Vector3 allele in FCG.AlleleList)
                 {
-                    if (allele.x == f) { alleleListForF.Add(allele); Debug.Log("para la lista de alelos " + f + " : " + allele.z); } 
+                    if (allele.x == f) alleleListForF.Add(allele);
                 }
 
-                genotypeList[f].AddRange(CalculateGenotipicFreq(alleleListForF)); // x=allele1  y=allele2  z=frequency
+                genotypeList[f].AddRange(CalculateGenotipicFreqRel(alleleListForF)); // x=allele1  y=allele2  z=frequency Rel
+
                 for (int d = 0; d < genotypeList[f].Count; d++)
                 {
                     organismsWithGenotype.Add(new List<int>());
@@ -71,7 +72,7 @@ public class FirstGenManager : MonoBehaviour
                     foreach (Vector3 genotype in genotypeList[t])
                     {
                         l++;
-                        if ((genotype.z * speciesAttributes.InitialPopulation) <= organismsWithGenotype[t][l]) continue;
+                        if ((genotype.z * speciesAttributes.InitialPopulation) < organismsWithGenotype[t][l]) continue;
 
                         newAlleleValues.x = (int)genotype.x;
                         newAlleleValues.y = (int)genotype.y;
@@ -93,7 +94,7 @@ public class FirstGenManager : MonoBehaviour
 
     }
 
-    List<Vector3> CalculateGenotipicFreq(List<Vector3> alleleList)
+    List<Vector3> CalculateGenotipicFreqRel(List<Vector3> alleleList)
     {
         List<Vector3> genotypicFrequencies = new List<Vector3>(); // x=allele1  y=allele2  z=frequency
 
@@ -108,11 +109,13 @@ public class FirstGenManager : MonoBehaviour
 
                 float frequency = alleleList[i].y * alleleList[j].y;
                 if (i != j) frequency = frequency * 2;
-
+                Debug.Log("frequecy of " + alleleList[i].z + " " + alleleList[j].z + " is " + frequency);
                 genotypicFrequencies.Add(new Vector3(allele1, allele2, frequency));
             }
         }
 
         return genotypicFrequencies;
     }
+
+
 }

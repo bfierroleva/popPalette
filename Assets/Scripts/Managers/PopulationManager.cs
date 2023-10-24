@@ -59,12 +59,12 @@ public class PopulationManager : MonoBehaviour
         StartCoroutine(UpdateColor());
     }
 
-    List<Population> populationList = new List<Population>();
-    public Population AddOrganism(Organism organisim, string speciesKey)
+    public List<Population> populationList = new List<Population>();
+    public Population AddOrganism(Organism organisim, string speciesKey, string populationKey)
     {
         foreach (Population population in populationList) 
         { 
-            if (population.SpeciesKey == speciesKey) 
+            if (population.PopKey == populationKey) 
             { 
                 population.OrganismList.Add(organisim); 
                 return population; 
@@ -72,7 +72,7 @@ public class PopulationManager : MonoBehaviour
         }
         Population newPop = new Population();
         newPop.SpeciesKey = speciesKey;
-        newPop.PopKey = speciesKey + "_POP";
+        newPop.PopKey = populationKey;
         newPop.OrganismList.Add(organisim);
         populationList.Add(newPop);
         return newPop;

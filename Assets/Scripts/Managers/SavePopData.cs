@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,75 +12,54 @@ using UnityEngine.SocialPlatforms;
 //refactorizar para varias poblaciones:
 public class SavePopData : MonoBehaviour
 {
-    [SerializeField] string _speciesToSave;
+    [SerializeField] private string _speciesToSave;
 
-    private void Start()
+    public string CollectPopData()
     {
-        Time.timeScale = 2;
-        GenomeManager.Instance.OnStart();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            GUIUtility.systemCopyBuffer = CollectPopData();
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            if (Time.timeScale < 10) Time.timeScale += 1;
-            else Time.timeScale = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (Time.timeScale > 1) Time.timeScale -= 1;
-            else Time.timeScale = 10;
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
-
-    string CollectPopData()
-    {
-        List<Organism> pop = new List<Organism>();
-        List<List<string>> popDataMatrix = new List<List<string>>();
-        bool createdHeaders = false;
+        List<List<List<string>>> popDataMatrix = new List<List<List<string>>>();
         int i = 0;
-        foreach (Organism o in FindObjectsOfType<Organism>()) 
+        foreach (Population population in GetComponent<PopulationManager>().populationList)
         {
-            if (o.SpeciesAttributes.SpeciesKey != _speciesToSave) continue;
-            List<string> locusValueList = new List<string>();
-            if (!createdHeaders) popDataMatrix.Add(new List<string> { o.SpeciesAttributes.SpeciesKey });
-            foreach (ChromosomePair chromosome in o.ThisIdentity.ThisGenotype.Karyotype)
+            if (_speciesToSave != population.SpeciesKey) continue;
+            popDataMatrix.Add(new List<List<string>>());
+            bool createdHeaders = false;
+            int j = 0;
+            foreach (Organism o in population.OrganismList)
             {
-                foreach (Locus locus in chromosome.LocusList)
+                List<string> locusValueList = new List<string>();
+                if (!createdHeaders) popDataMatrix[i].Add(new List<string> { o.SpeciesAttributes.SpeciesKey });
+                foreach (ChromosomePair chromosome in o.ThisIdentity.ThisGenotype.Karyotype)
                 {
-                    if (!createdHeaders) popDataMatrix[0].Add(locus.Key);
-                    String newAllele1 = locus.AlleleValues.x.ToString();
-                    String newAllele2 = locus.AlleleValues.y.ToString();
-                    newAllele1 = CorrectDigits(newAllele1, locus.AlleleValuesRange.y.ToString());
-                    newAllele2 = CorrectDigits(newAllele2, locus.AlleleValuesRange.y.ToString());
-                    locusValueList.Add(newAllele1 + newAllele2);                   
-                }
-                
-            }
+                    foreach (Locus locus in chromosome.LocusList)
+                    {
+                        if (!createdHeaders) popDataMatrix[i][0].Add(locus.Key);
+                        String newAllele1 = locus.AlleleValues.x.ToString();
+                        String newAllele2 = locus.AlleleValues.y.ToString();
+                        newAllele1 = CorrectDigits(newAllele1, locus.AlleleValuesRange.y.ToString());
+                        newAllele2 = CorrectDigits(newAllele2, locus.AlleleValuesRange.y.ToString());
+                        locusValueList.Add(newAllele1 + newAllele2);
+                    }
 
-            popDataMatrix.Add(new List<string> { o.SpeciesAttributes.SpeciesKey + "_" + (i + 1).ToString() });
-            popDataMatrix[i + 1].AddRange(locusValueList);
-            createdHeaders = true;
+                }
+
+                popDataMatrix[i].Add(new List<string> { o.SpeciesAttributes.PopulationKey + "_" + (j + 1).ToString() });
+                popDataMatrix[i][j + 1].AddRange(locusValueList);
+                createdHeaders = true;
+                j++;
+            }
             i++;
         }
+
+        
         return FormatGenepopData(popDataMatrix);
     }
-    string FormatGenepopData(List<List<string>> populationData)
+    string FormatGenepopData(List<List<List<string>>> populationData)
     {
         StringBuilder genepopText = new StringBuilder();
 
         // Extract species name and loci names
-        string speciesKey = populationData[0][0];
-        List<string> lociNames = populationData[0].GetRange(1, populationData[0].Count - 1);
+        string speciesKey = populationData[0][0][0];
+        List<string> lociNames = populationData[0][0].GetRange(1, populationData[0][0].Count - 1);
 
         // Append species name
         genepopText.AppendLine(speciesKey);
@@ -90,25 +70,28 @@ public class SavePopData : MonoBehaviour
             genepopText.AppendLine(locusName);
         }
 
-        // Append an empty line
-        genepopText.AppendLine("POP");
-
-        int i = 0;
-        foreach (List<String> observation in populationData)
+        foreach (List<List<string>> population in populationData)
         {
-            if (i == 0) { i++; continue; }
-            genepopText.Append(observation[0] + ",\t");
+            genepopText.AppendLine("POP");
+
             int j = 0;
-            foreach (string locusValues in observation)
+            foreach (List<String> observation in population)
             {
                 if (j == 0) { j++; continue; }
-                genepopText.Append(locusValues + "\t");
+                genepopText.Append(observation[0] + ",\t");
+                int k = 0;
+                foreach (string locusValues in observation)
+                {
+                    if (k == 0) { k++; continue; }
+                    genepopText.Append(locusValues + "\t");
 
+                    k++;
+                }
+                genepopText.AppendLine();
                 j++;
             }
-            genepopText.AppendLine();
-            i++;
         }
+        
         return genepopText.ToString();
     }
 

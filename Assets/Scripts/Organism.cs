@@ -67,7 +67,7 @@ public class Organism : MonoBehaviour
     public void OnBirth()
     {       
         GetComponent<Phenotype>().SetPhenotype(ThisIdentity);
-        _population = _manager.GetComponent<PopulationManager>().AddOrganism(this, SpeciesAttributes.SpeciesKey);
+        _population = _manager.GetComponent<PopulationManager>().AddOrganism(this, SpeciesAttributes.SpeciesKey, SpeciesAttributes.PopulationKey);
         if (!CanSurviveBirth() && !_isFirstGen) OnDeath();
         _speed = SpeciesAttributes.StartingSpeed;
         SetNewRandomDestination();

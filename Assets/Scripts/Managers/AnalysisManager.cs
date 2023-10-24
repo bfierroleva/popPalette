@@ -20,7 +20,7 @@ public class AnalysisManager : MonoBehaviour
         yield return new WaitForSeconds(_intervalTimeInSimSeconds);
         _timesAnalyzed++;
         float frequencyDrift = (_populationManager.highRedFrequency + _populationManager.medRedFrequency / 2) - (_populationManager.lowRedFrequency + _populationManager.medRedFrequency / 2);
-        Debug.Log(_timesAnalyzed * _intervalTimeInSimSeconds + "s : " + frequencyDrift);
+        //Debug.Log(_timesAnalyzed * _intervalTimeInSimSeconds + "s : " + frequencyDrift);
         if(_timesAnalyzed == 10) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         StartCoroutine(AnalyzeFrequencies());
 
