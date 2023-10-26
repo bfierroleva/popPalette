@@ -24,7 +24,7 @@ public class PopulationManager : MonoBehaviour
         float numOfOrganisms = 0;
         float red = 0, green = 0, blue = 0;
         int highReds = 0, medReds = 0, lowReds = 0;
-        foreach (Population pop in populationList)
+        foreach (Population pop in PopulationList)
         {
             foreach (Organism o in pop.OrganismList)
             {
@@ -50,19 +50,19 @@ public class PopulationManager : MonoBehaviour
 
         AveragePhenotype.text = (red / numOfOrganisms).ToString();
 
-        PopText.text = populationList[0].OrganismList.Count.ToString();
+        PopText.text = PopulationList[0].OrganismList.Count.ToString();
 
-        SurvChanceText.text = ((red / numOfOrganisms) * Mathf.Pow(1 - (numOfOrganisms / populationList[0].OrganismList[0].SpeciesAttributes.MaxPopulation), populationList[0].OrganismList[0].SpeciesAttributes.PopulationPressure)).ToString();
+        SurvChanceText.text = ((red / numOfOrganisms) * Mathf.Pow(1 - (numOfOrganisms / PopulationList[0].OrganismList[0].SpeciesAttributes.MaxPopulation), PopulationList[0].OrganismList[0].SpeciesAttributes.PopulationPressure)).ToString();
 
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(UpdateColor());
     }
 
-    public List<Population> populationList = new List<Population>();
+    public List<Population> PopulationList = new List<Population>();
     public Population AddOrganism(Organism organisim, string speciesKey, string populationKey)
     {
-        foreach (Population population in populationList) 
+        foreach (Population population in PopulationList) 
         { 
             if (population.PopKey == populationKey) 
             { 
@@ -74,7 +74,7 @@ public class PopulationManager : MonoBehaviour
         newPop.SpeciesKey = speciesKey;
         newPop.PopKey = populationKey;
         newPop.OrganismList.Add(organisim);
-        populationList.Add(newPop);
+        PopulationList.Add(newPop);
         return newPop;
     }   
 

@@ -24,6 +24,8 @@ public class Organism : MonoBehaviour
     private bool _isMovingToMate = false;
     private int _timesMated;
 
+    private Vector2 _boundsX;
+    private Vector2 _boundsY;
     private float _speed;
 
     public void OnStart()
@@ -31,6 +33,9 @@ public class Organism : MonoBehaviour
         FirstGenAttributes = transform.GetComponent<FirstGenCreator>();
         Phenotype = GetComponent<Phenotype>();
         SpeciesAttributes = GetComponent<SpeciesAttributes>();
+        Collider2D colliderBOunds = FindObjectOfType<BoundsSprite>().GetComponent<Collider2D>();
+        _boundsX = new Vector2(colliderBOunds.bounds.min.x, colliderBOunds.bounds.max.x);
+        _boundsY = new Vector2(colliderBOunds.bounds.min.y, colliderBOunds.bounds.max.y);
 
         _manager = FindObjectOfType<IdentitiesManager>().gameObject;
         _identityManager = _manager.GetComponent<IdentitiesManager>();
@@ -114,7 +119,22 @@ public class Organism : MonoBehaviour
         float angleInRadians = angle * Mathf.Deg2Rad;
         float x = Mathf.Cos(angleInRadians);
         float y = Mathf.Sin(angleInRadians);
-        _targetPosition = new Vector2(transform.position.x + x * distance, transform.position.y + y * distance);
+
+        float distanceX = x * distance;
+        float distanceY = y * distance;
+
+        
+        
+        if ((transform.position.x + distanceX) <= _boundsX[0] || (transform.position.x + distanceX) >= _boundsX[1])
+        {
+            distanceX = distanceX * -1;
+        }
+        if ((transform.position.y + distanceY) <= _boundsY[0] || (transform.position.y + distanceY) >= _boundsY[1])
+        {
+            distanceY = distanceY * -1;
+        }
+        
+        _targetPosition = new Vector2(transform.position.x + distanceX, transform.position.y + distanceY);
     }
 
     void LookForAMate()
@@ -123,6 +143,10 @@ public class Organism : MonoBehaviour
         {
             case TypeOfMating.Random:
                 LookForAMateRandom();
+                break;
+
+            case TypeOfMating.RandomInRange:
+                LookForAMateRandomInRange();
                 break;
 
             case TypeOfMating.Closest:
@@ -141,24 +165,56 @@ public class Organism : MonoBehaviour
 
     void LookForAMateRandom()
     {
-        _mate = _population.OrganismList[Random.Range(0, _population.OrganismList.Count)];
+        List<Organism> possibleMates = new List<Organism>();
+        possibleMates.AddRange(_population.OrganismList);
+        if (SpeciesAttributes.CanReproduceWithOtherPops) 
+        {
+            foreach (Population pop in FindObjectOfType<PopulationManager>().PopulationList)
+            {
+                if (pop.SpeciesKey ==  SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop.OrganismList);
+            }
+        }
+        _mate = possibleMates[Random.Range(0, possibleMates.Count)];
         _isMovingToMate = true;
     }
 
     void LookForAMateClosest()
     {
+        List<Organism> possibleMates = new List<Organism>();
+        possibleMates.AddRange(_population.OrganismList);
+        if (SpeciesAttributes.CanReproduceWithOtherPops)
+        {
+            foreach (Population pop in FindObjectOfType<PopulationManager>().PopulationList)
+            {
+                if (pop.SpeciesKey == SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop.OrganismList);
+            }
+        }
+        int closest = 0;
+        float closestDistance = SpeciesAttributes.LookForMateViewDistance;
+        for (int i = 0; i < possibleMates.Count; i++)
+        {
+            float distance = Vector3.Distance(transform.position, possibleMates[i].transform.position);
+            if (possibleMates[i].ThisIdentity.ID == ThisIdentity.ID) continue;
+            else if (distance < closestDistance)
+            {
+                closest = i;
+                closestDistance = distance;
+            }
+        }
+        _mate = possibleMates[closest];
+        _isMovingToMate = true;
+    }
+
+    void LookForAMateRandomInRange()
+    {
         List<int> possibleMates = new List<int>();
 
         for (int i = 0; i < _population.OrganismList.Count; i++)
         {
-            //bool shouldIgnore = false;
-            //foreach (int i in ignore) if (i == j) shouldIgnore = true;
-
             float distance = Vector3.Distance(transform.position, _population.OrganismList[i].transform.position);
             if (_population.OrganismList[i].ThisIdentity.ID == ThisIdentity.ID) continue;
             else if (distance < SpeciesAttributes.LookForMateViewDistance)
             {
-                //Debug.Log("new closest: " + males[j].transform.gameObject.name);
                 possibleMates.Add(i);
             }
         }

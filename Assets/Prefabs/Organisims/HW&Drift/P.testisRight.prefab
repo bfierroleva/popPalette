@@ -17,6 +17,10 @@ PrefabInstance:
       value: Primus testis right
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: HaploidNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: MaxPopulation
       value: 200
       objectReference: {fileID: 0}
@@ -25,12 +29,24 @@ PrefabInstance:
       value: right
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: StartingSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: DistanceRange.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: DistanceRange.y
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: InitialPopulation
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: InitialPosition.x
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5047537679095467100, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: m_RootOrder

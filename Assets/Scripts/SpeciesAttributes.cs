@@ -24,6 +24,7 @@ public class SpeciesAttributes : MonoBehaviour
     public string PopulationKey;
     public int MaxPopulation;
     public int InitialPopulation;
+    public bool CanReproduceWithOtherPops;
     public Vector2 InitialPosition;
 }
 public enum TypeOfReproduction
@@ -36,6 +37,7 @@ public enum TypeOfReproduction
 public enum TypeOfMating
 {
     Random,
+    RandomInRange,
     Closest,
     Affinity
 }

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: dc60067cf2309074cb9a4cf5991b2920, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 5058373451776
+    m_Localized: "Explora una selecci\xF3n de simulaciones listas para usar que abarcan
+      diversos temas en gen\xE9tica de poblaciones."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4996650074112
+    m_Localized: Simulaciones Preconfiguradas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13862909607936
+    m_Localized: "Simulaci\xF3n Personalizada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14033575837696
+    m_Localized: Manual de Usuario
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13890625568768
+    m_Localized: "Dise\xF1a tus propias simulaciones y experimenta con poblaciones
+      gen\xE9ticas de acuerdo a tus preferencias."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14139209383936
+    m_Localized: "Accede al detallado manual de usuario para comprender a fondo las
+      caracter\xEDsticas del programa, su uso y mucho m\xE1s."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

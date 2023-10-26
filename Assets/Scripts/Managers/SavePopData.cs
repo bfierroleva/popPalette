@@ -2,11 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms;
 
 
 //refactorizar para varias poblaciones:
@@ -18,7 +14,7 @@ public class SavePopData : MonoBehaviour
     {
         List<List<List<string>>> popDataMatrix = new List<List<List<string>>>();
         int i = 0;
-        foreach (Population population in GetComponent<PopulationManager>().populationList)
+        foreach (Population population in GetComponent<PopulationManager>().PopulationList)
         {
             if (_speciesToSave != population.SpeciesKey) continue;
             popDataMatrix.Add(new List<List<string>>());

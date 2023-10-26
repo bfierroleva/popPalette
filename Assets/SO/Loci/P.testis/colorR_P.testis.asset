@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6bc4fe56e05d9949929367d6f5d5be8, type: 3}
   m_Name: colorR_P.testis
   m_EditorClassIdentifier: 
-  ChromosomeIndex: 2
+  ChromosomeIndex: 0
   Key: colorR
   IsFunctional: 1
+  MutationChance: 0
   MutationMaxRange: 10
-  AlleleValues: {x: 190, y: 190}
   AlleleValuesRange: {x: 1, y: 256}

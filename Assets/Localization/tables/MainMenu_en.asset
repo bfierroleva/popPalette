@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: MainMenu_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: dc60067cf2309074cb9a4cf5991b2920, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 4996650074112
+    m_Localized: Pre-Made Simulations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5058373451776
+    m_Localized: Explore a selection of ready-to-use simulations covering diverse
+      topics in population genetics.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14139209383936
+    m_Localized: Access the in-depth user manual for a thorough grasp of program
+      features, usage, and more.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14033575837696
+    m_Localized: User Manual
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13890625568768
+    m_Localized: Design your own simulations and experiment with genetic populations
+      according to your preferences.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13862909607936
+    m_Localized: Custom Simulaton
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

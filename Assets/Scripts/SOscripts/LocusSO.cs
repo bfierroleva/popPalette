@@ -8,7 +8,7 @@ public class LocusSO : ScriptableObject
     public int ChromosomeIndex;
     public string Key;
     public bool IsFunctional;
-    public int MutationChance;
+    public float MutationChance;
     public int MutationMaxRange;
     public Vector2Int AlleleValuesRange;
 }
