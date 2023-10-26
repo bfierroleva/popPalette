@@ -9,7 +9,8 @@ public class SpeciesAttributes : MonoBehaviour
     [Range(0, 1)] public float MutationChance;
     public float PopulationPressure;
     public GameObject Prefab;
-    public int OffspringAmount;
+    public int ChildrenPerMating;
+    public int MatingsPerLife;
     public float LookForMateViewDistance;
     public float LifespanInSeconds;
     public TypeOfReproduction TypeOfReproduction;

@@ -93,15 +93,21 @@ public class Organism : MonoBehaviour
 
     IEnumerator LifeCycle()
     {
-        float randomFractionUntilMating = Random.Range(0.1f, 0.9f);
+        float randomFractionUntilMating = Random.Range(0.1f, 0.3f);
+        float randomFractionOfLastMating = Random.Range(0.5f, 0.8f);
         yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds * randomFractionUntilMating);
-        LookForAMate();
-        yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds * (1 - randomFractionUntilMating));
+        for (int i = 0; i < SpeciesAttributes.MatingsPerLife; i++)
+        {
+            LookForAMate();
+            yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds * (randomFractionOfLastMating - randomFractionUntilMating) / SpeciesAttributes.MatingsPerLife);
+        }
+        yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds * (1 - randomFractionOfLastMating));
         OnDeath();
     }
 
     bool CanSurviveBirth()
     {
+
         float survivalChance = 0;
         float fitness = _manager.GetComponent<SelectivePreassure>().CalculateFitness(Phenotype.PhenotypeColor);
         //survivalChance = fitness * (1 - (_generationManager.GenerationPopCount[ThisIdentity.Generation - 1] / (float)SpeciesAttributes.MaxPopulation));
@@ -253,10 +259,12 @@ public class Organism : MonoBehaviour
 
         if (Vector3.Distance(transform.position, _mate.transform.position) < (transform.GetComponent<Renderer>().bounds.size.x / 2)) 
         {
-            for (int i = 0; i < SpeciesAttributes.OffspringAmount; i++)
+
+            for (int i = 0; i < SpeciesAttributes.ChildrenPerMating; i++)
             {
                 CreateChild();
-            }          
+            }        
+                     
             _isMovingToMate = false;
             StartCoroutine(LifeCycle());
             _speed = SpeciesAttributes.StartingSpeed;
@@ -293,7 +301,7 @@ public class Organism : MonoBehaviour
                 break;
         }
         childO.ThisIdentity = childIdentity;
-        Debug.Log("ID: " + ThisIdentity.ID + "   " + _mate.ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues + "  y  " + ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues + "  =  " + childO.ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues);
+        //Debug.Log("ID: " + ThisIdentity.ID + "   " + _mate.ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues + "  y  " + ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues + "  =  " + childO.ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues);
         
         childO._isFirstGen = false;
         childO.OnStart();
