@@ -189,7 +189,7 @@ MonoBehaviour:
   MutationChance: 0
   PopulationPressure: 1
   Prefab: {fileID: 6511733004687586805}
-  NumberOfMatingsForLifetime: 5
+  OffspringAmount: 5
   LookForMateViewDistance: 100
   LifespanInSeconds: 50
   TypeOfReproduction: 1
@@ -202,6 +202,7 @@ MonoBehaviour:
   PopulationKey: 
   MaxPopulation: 1500
   InitialPopulation: 750
+  CanReproduceWithOtherPops: 0
   InitialPosition: {x: 0, y: 0}
 --- !u!114 &2318971965981112419
 MonoBehaviour:

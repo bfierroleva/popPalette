@@ -195,6 +195,22 @@ PrefabInstance:
       propertyPath: _populationPrefabList.Array.data[2]
       value: 
       objectReference: {fileID: 3204442255516255474, guid: f54d52f5f9005104785ccc7435e2d40e, type: 3}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectedColorR
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: IsColorSelected
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -235,8 +251,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 528.06, y: 243.0918}
-  m_SizeDelta: {x: 1056, y: 486.1836}
+  m_AnchoredPosition: {x: 575.9, y: 215.76129}
+  m_SizeDelta: {x: 1151.7, y: 431.5226}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &736105266
 MonoBehaviour:
@@ -465,8 +481,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -432.03467, y: 0}
-  m_SizeDelta: {x: 863.7613, y: 1080}
+  m_AnchoredPosition: {x: -384.2063, y: 0}
+  m_SizeDelta: {x: 768.1044, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1390981437
 MonoBehaviour:
@@ -647,6 +663,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1156843915515942790, guid: 6d486ac8a37ee544189db59f42932b60, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156843915515942790, guid: 6d486ac8a37ee544189db59f42932b60, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156843915515942790, guid: 6d486ac8a37ee544189db59f42932b60, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156843915515942790, guid: 6d486ac8a37ee544189db59f42932b60, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2634794830326198962, guid: 6d486ac8a37ee544189db59f42932b60, type: 3}
       propertyPath: m_RootOrder
       value: 0

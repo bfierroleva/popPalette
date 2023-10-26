@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: MaxSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: SpeciesKey
       value: P.testis
       objectReference: {fileID: 0}
@@ -30,15 +34,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: StartingSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
-      propertyPath: DistanceRange.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: DistanceRange.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: DistanceRange.y
-      value: 7.5
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: OffspringAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: IncreaseSpeedRate
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: InitialPopulation
@@ -46,6 +58,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: InitialPosition.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: LifespanInSeconds
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5047537679095467100, guid: 5629afe0f93967542abc643c3cd48212, type: 3}

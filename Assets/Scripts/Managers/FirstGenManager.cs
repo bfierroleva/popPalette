@@ -109,7 +109,6 @@ public class FirstGenManager : MonoBehaviour
 
                 float frequency = alleleList[i].y * alleleList[j].y;
                 if (i != j) frequency = frequency * 2;
-                Debug.Log("frequecy of " + alleleList[i].z + " " + alleleList[j].z + " is " + frequency);
                 genotypicFrequencies.Add(new Vector3(allele1, allele2, frequency));
             }
         }

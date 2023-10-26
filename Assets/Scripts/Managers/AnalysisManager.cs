@@ -11,7 +11,7 @@ public class AnalysisManager : MonoBehaviour
     void Start()
     {
         _populationManager = GetComponent<PopulationManager>();
-        StartCoroutine(AnalyzeFrequencies());
+        //StartCoroutine(AnalyzeFrequencies());
 
     }
 

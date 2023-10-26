@@ -89,6 +89,7 @@ public class Identity
     public int ID;
     public int Parent1ID;
     public int Parent2ID;
+    public int Generation;
     public Genotype ThisGenotype;
 }
 

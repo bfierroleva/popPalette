@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8108326091823722418}
   - component: {fileID: 7057518180751161848}
   - component: {fileID: 7025737392517552893}
+  - component: {fileID: 8783861403093057736}
   m_Layer: 0
   m_Name: SimManager
   m_TagString: Untagged
@@ -156,5 +157,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66335732082b2484f901e99149a3802a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8783861403093057736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131827054244213809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863d3815516a9b8488b3f75192bf7955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
