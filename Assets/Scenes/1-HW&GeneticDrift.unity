@@ -186,11 +186,11 @@ PrefabInstance:
     - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: _populationPrefabList.Array.data[0]
       value: 
-      objectReference: {fileID: 3204442255516255474, guid: a0c385cf439e6c64da6f501063adb1df, type: 3}
+      objectReference: {fileID: 3204442255516255474, guid: f54d52f5f9005104785ccc7435e2d40e, type: 3}
     - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: _populationPrefabList.Array.data[1]
       value: 
-      objectReference: {fileID: 3204442255516255474, guid: f54d52f5f9005104785ccc7435e2d40e, type: 3}
+      objectReference: {fileID: 3204442255516255474, guid: a0c385cf439e6c64da6f501063adb1df, type: 3}
     - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: _populationPrefabList.Array.data[2]
       value: 
@@ -251,7 +251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 575.9, y: 215.76129}
+  m_AnchoredPosition: {x: 575.9, y: 216}
   m_SizeDelta: {x: 1151.7, y: 431.5226}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &736105266
@@ -327,7 +327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 528.15814, y: -296.82062}
+  m_AnchoredPosition: {x: 528.15814, y: 0}
   m_SizeDelta: {x: 1056.3164, y: 593.6412}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &872766622

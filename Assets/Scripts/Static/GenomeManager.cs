@@ -55,6 +55,7 @@ public class GenomeManager
 
     public Genotype SexualBasicReproduction(Genotype child, Genotype p1, Genotype p2) // No Recombination
     {
+        
         int i = 0;
         int j = 0;
         foreach (ChromosomePair chromosomePair in child.Karyotype)

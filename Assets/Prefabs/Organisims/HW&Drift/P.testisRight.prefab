@@ -38,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: MatingsPerLife
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: DistanceRange.x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: ChildrenPerMating
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: IncreaseSpeedRate

@@ -20,7 +20,7 @@ public class Phenotype : MonoBehaviour
                 if (!locus.IsFunctional) continue;
                 
                 if (locus.Key == "colorR")
-                {                  
+                {
                     renderer.color = new Color((((float)locus.AlleleValues.x + (float)locus.AlleleValues.y) / 2) / (float)locus.AlleleValuesRange.y, renderer.color.g, renderer.color.b, renderer.color.a);
                 }
                 if (locus.Key == "colorG")
