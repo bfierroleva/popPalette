@@ -6,13 +6,13 @@ using UnityEngine.SocialPlatforms;
 
 public class FirstGenManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _populationPrefabList;
+    public List<GameObject> PopulationPrefabList;
 
 
     private void Start()
     {
         int i = 0;
-        foreach (GameObject pop in _populationPrefabList)
+        foreach (GameObject pop in PopulationPrefabList)
         {
             Organism o = pop.GetComponent<Organism>();
             FirstGenCreator FCG = pop.GetComponent<FirstGenCreator>();
@@ -72,7 +72,7 @@ public class FirstGenManager : MonoBehaviour
                     foreach (Vector3 genotype in genotypeList[t])
                     {
                         l++;
-                        if ((genotype.z * speciesAttributes.InitialPopulation) < organismsWithGenotype[t][l]) continue;
+                        if ((genotype.z * speciesAttributes.InitialPopulation) <= organismsWithGenotype[t][l]) continue;
 
                         newAlleleValues.x = (int)genotype.x;
                         newAlleleValues.y = (int)genotype.y;

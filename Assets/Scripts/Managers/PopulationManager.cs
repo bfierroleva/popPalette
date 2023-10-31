@@ -7,87 +7,56 @@ using UnityEngine.UI;
 
 public class PopulationManager : MonoBehaviour
 {
-    public Image Image;
-    public TMP_Text AveragePhenotype;
-    public TMP_Text PopText;
-    public TMP_Text SurvChanceText;
-    public TMP_Text HighRed, MedRed, LowRed;
-    public float highRedFrequency, medRedFrequency, lowRedFrequency; 
-
-    private void Start()
+    public List<List<PopulationGen>> PopulationGenList = new List<List<PopulationGen>>(); 
+    public List<PopulationGen> AddOrganism(Organism organisim, SpeciesAttributes speciesAttributes)
     {
-        //StartCoroutine(UpdateColor());
-    }
-
-    IEnumerator UpdateColor()
-    {
-        float numOfOrganisms = 0;
-        float red = 0, green = 0, blue = 0;
-        int highReds = 0, medReds = 0, lowReds = 0;
-        foreach (Population pop in PopulationList)
-        {
-            foreach (Organism o in pop.OrganismList)
-            {
-                red += o.Phenotype.PhenotypeColor.r;
-                //Debug.Log(o.Phenotype.PhenotypeColor.r + " > " + (150 / 255));
-                if (o.Phenotype.PhenotypeColor.r > (150.0f / 255.0f)) highReds++;
-                else if (o.Phenotype.PhenotypeColor.r < (150.0f / 255.0f) && o.Phenotype.PhenotypeColor.r > (100.0f / 255.0f)) medReds++;
-                else if (o.Phenotype.PhenotypeColor.r < (100.0f / 255.0f)) lowReds++;
-
-                green += o.Phenotype.PhenotypeColor.g;
-                blue += o.Phenotype.PhenotypeColor.b;
-            }
-            numOfOrganisms += pop.OrganismList.Count; 
-        }
-
-        Image.color = new Color(red / numOfOrganisms, green / numOfOrganisms, blue / numOfOrganisms, 1);
-        highRedFrequency = (highReds / numOfOrganisms);
-        HighRed.text = highRedFrequency.ToString();
-        medRedFrequency = (medReds / numOfOrganisms);
-        MedRed.text = medRedFrequency.ToString();
-        lowRedFrequency = (lowReds / numOfOrganisms);
-        LowRed.text = lowRedFrequency.ToString();
-
-        AveragePhenotype.text = (red / numOfOrganisms).ToString();
-
-        PopText.text = PopulationList[0].OrganismList.Count.ToString();
-
-        SurvChanceText.text = ((red / numOfOrganisms) * Mathf.Pow(1 - (numOfOrganisms / PopulationList[0].OrganismList[0].SpeciesAttributes.MaxPopulation), PopulationList[0].OrganismList[0].SpeciesAttributes.PopulationPressure)).ToString();
-
-        yield return new WaitForSeconds(1f);
-
-        StartCoroutine(UpdateColor());
-    }
-
-    public List<Population> PopulationList = new List<Population>();
-    public Population AddOrganism(Organism organisim, string speciesKey, string populationKey)
-    {
-        foreach (Population population in PopulationList) 
+        foreach (List<PopulationGen> population in PopulationGenList) 
         { 
-            if (population.PopKey == populationKey) 
-            { 
-                population.OrganismList.Add(organisim); 
+            if (population[0].PopKey == speciesAttributes.PopulationKey) 
+            {
+                if (population.Count - 1 < organisim.ThisIdentity.Generation) population.Add(new PopulationGen());
+                population[organisim.ThisIdentity.Generation].OrganismList.Add(organisim); 
                 return population; 
             } 
         }
-        Population newPop = new Population();
-        newPop.SpeciesKey = speciesKey;
-        newPop.PopKey = populationKey;
-        newPop.OrganismList.Add(organisim);
-        PopulationList.Add(newPop);
+        List<PopulationGen> newPop = new List<PopulationGen>();
+        PopulationGen firstGen = new PopulationGen();
+        firstGen.SpeciesKey = speciesAttributes.SpeciesKey;
+        firstGen.PopKey = speciesAttributes.PopulationKey;
+        firstGen.PopPosition = speciesAttributes.InitialPosition;
+        firstGen.OrganismList.Add(organisim);
+        firstGen.PopID = PopulationGenList.Count;
+        newPop.Add(firstGen);
+        PopulationGenList.Add(newPop);
         return newPop;
-    }   
+    }
+
+    public List<PopulationGen> MigrateOrganism(Organism organisim, string popKey)
+    {
+        foreach (List<PopulationGen> population in PopulationGenList)
+        {
+            if (population[0].PopKey == popKey)
+            {
+                if (population.Count - 1 < organisim.ThisIdentity.Generation) population.Add(new PopulationGen());
+                population[organisim.ThisIdentity.Generation].OrganismList.Add(organisim);
+                return population;
+            }
+        }
+        return null;
+    }
 
 }
 
-public class Population
+public class PopulationGen
 {
     public void RemoveOrganism(Organism organisim)
     {
         OrganismList.Remove(organisim);
     }
-
+    public int PopID;
+    public int Gen;
     public string PopKey;
     public string SpeciesKey;
+    public Vector2 PopPosition;
     public List<Organism> OrganismList = new List<Organism>();
 }

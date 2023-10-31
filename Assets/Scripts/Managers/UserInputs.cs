@@ -15,7 +15,7 @@ public class UserInputs : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            GUIUtility.systemCopyBuffer = GetComponent<SavePopData>().CollectPopData();
+            GUIUtility.systemCopyBuffer = GetComponent<SavePopData>().CollectPopDataFormated();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {

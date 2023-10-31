@@ -15,7 +15,14 @@ public class GenerationManager : MonoBehaviour
     private void Start()
     {
         GenerationPopCount.Add(0);
-        StartCoroutine(GenerationCycle(1)); 
+        StartCoroutine(OnStart());
+    }
+
+    IEnumerator OnStart()
+    {
+        yield return new WaitForSeconds(2f);
+        newGenerationCycle?.Invoke();
+        StartCoroutine(GenerationCycle(1));
     }
 
     IEnumerator GenerationCycle(float i)

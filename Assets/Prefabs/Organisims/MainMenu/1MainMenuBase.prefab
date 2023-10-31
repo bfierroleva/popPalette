@@ -33,6 +33,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: MatingsPerLife
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: MutationChance
       value: 0.1
       objectReference: {fileID: 0}
@@ -45,12 +49,16 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
+      propertyPath: ChildrenPerMating
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: IncreaseSpeedRate
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: InitialPopulation
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: LifespanInSeconds

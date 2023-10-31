@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
@@ -19,7 +20,7 @@ public class Organism : MonoBehaviour
     public Phenotype Phenotype;
     public SpeciesAttributes SpeciesAttributes;
     public Identity ThisIdentity;
-    private Population _population;
+    private List<PopulationGen> _population = new List<PopulationGen>();
     private Organism _mate;
 
     private Vector3 _targetPosition;
@@ -28,6 +29,8 @@ public class Organism : MonoBehaviour
     private bool _isTryingToDie = false;
     private bool _isDying = false;
     private bool _isGrowing = false;
+    public bool IsMigrating = false;
+    private List<PopulationGen> _popToMigrateTo = new List<PopulationGen>();
 
     private Vector2 _boundsX;
     private Vector2 _boundsY;
@@ -82,8 +85,30 @@ public class Organism : MonoBehaviour
     public void OnBirth()
     {       
         Phenotype.SetPhenotype(ThisIdentity);
-        _population = _manager.GetComponent<PopulationManager>().AddOrganism(this, SpeciesAttributes.SpeciesKey, SpeciesAttributes.PopulationKey);
-        if (!_isFirstGen) if (!CanSurviveBirth()) { OnDeath(true); return; }
+        _population = _manager.GetComponent<PopulationManager>().AddOrganism(this, SpeciesAttributes);
+        if (!_isFirstGen)
+        {
+            if (!CanSurviveBirth()) { OnDeath(true); return; }
+
+            _popToMigrateTo = _population;
+            if (SpeciesAttributes.PopsToMigrateTo.Count > 0) TryToMigrate();
+        }
+        else
+        {
+            _popToMigrateTo = _population;
+        }
+
+        AnalysisManager analysisManager = _manager.GetComponent<AnalysisManager>();
+
+        foreach (ChromosomePair chromosomePair in ThisIdentity.ThisGenotype.Karyotype)
+        {
+            foreach (Locus locus in chromosomePair.LocusList)
+            {
+                analysisManager.AnalyzeGenotype(locus.AlleleValues,locus.Key, _popToMigrateTo[0].PopKey, ThisIdentity.Generation);
+            }
+        }
+
+        
 
         _isGrowing = true;
 
@@ -93,7 +118,35 @@ public class Organism : MonoBehaviour
         _speed = SpeciesAttributes.StartingSpeed;
         SetNewRandomDestination();
         if (_isFirstGen) StartLifeCycle();
+        
         _generationManager.newGenerationCycle += StartLifeCycle;       
+    }
+
+    void TryToMigrate()
+    {
+        float randomValue = UnityEngine.Random.value;
+        int newPop = 0;
+        float accumulatedChance = 0;
+        bool willMigrate = false;
+
+        foreach (float chance in SpeciesAttributes.MigrationChancePerIndividual)
+        {
+            
+            accumulatedChance += chance;
+            if (randomValue <= accumulatedChance) { willMigrate = true; break; }
+            newPop++;
+        }
+
+        if (willMigrate)
+        {
+           
+            foreach (List<PopulationGen> pop in _manager.GetComponent<PopulationManager>().PopulationGenList)
+            {
+                if (pop[0].PopKey == SpeciesAttributes.PopsToMigrateTo[newPop]) _popToMigrateTo = pop;
+                IsMigrating = true;
+            }
+            
+        }
     }
 
     void StartLifeCycle()
@@ -107,7 +160,7 @@ public class Organism : MonoBehaviour
     {
         if (_timesMated == 0)
         {
-            randomFractionUntilMating = Random.Range(0.2f, 0.5f);
+            randomFractionUntilMating = UnityEngine.Random.Range(0.2f, 0.5f);
             yield return new WaitForSeconds(SpeciesAttributes.LifespanInSeconds * randomFractionUntilMating);
         }    
         if (_timesMated < SpeciesAttributes.MatingsPerLife)
@@ -129,42 +182,64 @@ public class Organism : MonoBehaviour
         float survivalChance = 0;
         float fitness = _manager.GetComponent<SelectivePreassure>().CalculateFitness(Phenotype.PhenotypeColor);
         //survivalChance = fitness * (1 - (_generationManager.GenerationPopCount[ThisIdentity.Generation - 1] / (float)SpeciesAttributes.MaxPopulation));
-        survivalChance = fitness * (1 - _population.OrganismList.Count / (float)SpeciesAttributes.MaxPopulation);
-        return Random.value <= survivalChance;
+        survivalChance = fitness * (1 - _population[ThisIdentity.Generation].OrganismList.Count / (float)SpeciesAttributes.MaxPopulation);
+        return UnityEngine.Random.value <= survivalChance;
     }
 
     void OnDeath(bool _isNewBorn)
     {
         if (!_isNewBorn) _isDying = true;
         _generationManager.newGenerationCycle -= StartLifeCycle;
-        _population.RemoveOrganism(this);
+        _population[ThisIdentity.Generation].RemoveOrganism(this);
         Destroy(gameObject, _shrinkingDuration);
     }
 
     void Update()
     {
-        if (_isDying)
-        {
-            float scaleChange = Time.deltaTime / _shrinkingDuration;
-            transform.localScale -= new Vector3(scaleChange, scaleChange, scaleChange);
-        }
-        if (_isGrowing)
-        {
-            if (transform.localScale.x < 1)
-            {
-                float scaleChange = Time.deltaTime / _shrinkingDuration;
-                transform.localScale += new Vector3(scaleChange, scaleChange, scaleChange);
-            }
-            else
-            {
-                transform.localScale = Vector3.one;
-                _isGrowing = false;
-            }
-            
-        }
+        if (_isDying) Shrink();
+        if (_isGrowing) Grow();
+        if (IsMigrating) Migrate();
         if (_isMovingToMate) MoveToMate();
         else RandomMove();
         if (_isTryingToDie && _timesMated >= SpeciesAttributes.MatingsPerLife) OnDeath(false);
+    }
+
+    void Migrate()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, _popToMigrateTo[0].PopPosition, SpeciesAttributes.MaxSpeed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, _popToMigrateTo[0].PopPosition) < 0.5f)
+        {
+            _population[ThisIdentity.Generation].RemoveOrganism(this);
+            _population = _manager.GetComponent<PopulationManager>().MigrateOrganism(this, _popToMigrateTo[0].PopKey);
+            IsMigrating = false;
+            
+            foreach (GameObject populationPrefab in _manager.GetComponent<FirstGenManager>().PopulationPrefabList)
+            {
+                SpeciesAttributes.Prefab = populationPrefab;
+            }
+            SetNewRandomDestination();
+        }
+        
+    }
+
+    void Shrink()
+    {
+        float scaleChange = Time.deltaTime / _shrinkingDuration;
+        transform.localScale -= new Vector3(scaleChange, scaleChange, scaleChange);
+    }
+
+    void Grow()
+    {
+        if (transform.localScale.x < 1)
+        {
+            float scaleChange = Time.deltaTime / _shrinkingDuration;
+            transform.localScale += new Vector3(scaleChange, scaleChange, scaleChange);
+        }
+        else
+        {
+            transform.localScale = Vector3.one;
+            _isGrowing = false;
+        }
     }
 
     void RandomMove()
@@ -174,8 +249,8 @@ public class Organism : MonoBehaviour
     }
     void SetNewRandomDestination()
     {
-        float distance = Random.Range(SpeciesAttributes.DistanceRange.x, SpeciesAttributes.DistanceRange.y);
-        float angle = Random.Range(0, 360);
+        float distance = UnityEngine.Random.Range(SpeciesAttributes.DistanceRange.x, SpeciesAttributes.DistanceRange.y);
+        float angle = UnityEngine.Random.Range(0, 360);
         float angleInRadians = angle * Mathf.Deg2Rad;
         float x = Mathf.Cos(angleInRadians);
         float y = Mathf.Sin(angleInRadians);
@@ -217,6 +292,10 @@ public class Organism : MonoBehaviour
                 LookForAMateAffinity();
                 break;
 
+            case TypeOfMating.Endogamy:
+                LookForAMateEndogamy();
+                break;
+
             default:
                 LookForAMateRandom();
                 break;
@@ -226,25 +305,29 @@ public class Organism : MonoBehaviour
     void LookForAMateRandom()
     {
         List<Organism> possibleMates = new List<Organism>();
-        possibleMates.AddRange(_population.OrganismList);
+        possibleMates.AddRange(_population[ThisIdentity.Generation].OrganismList);
         if (SpeciesAttributes.CanReproduceWithOtherPops) 
         {
-            foreach (Population pop in FindObjectOfType<PopulationManager>().PopulationList)
+            foreach (PopulationGen pop in FindObjectOfType<PopulationManager>().PopulationGenList[ThisIdentity.Generation])
             {
                 if (pop.SpeciesKey ==  SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop.OrganismList);
             }
         }
-        _mate = possibleMates[Random.Range(0, possibleMates.Count)];
+        _mate = possibleMates[UnityEngine.Random.Range(0, possibleMates.Count)];
+        while (_mate.IsMigrating)
+        {
+            _mate = possibleMates[UnityEngine.Random.Range(0, possibleMates.Count)];
+        }
         _isMovingToMate = true;
     }
 
     void LookForAMateClosest()
     {
         List<Organism> possibleMates = new List<Organism>();
-        possibleMates.AddRange(_population.OrganismList);
+        possibleMates.AddRange(_population[ThisIdentity.Generation].OrganismList);
         if (SpeciesAttributes.CanReproduceWithOtherPops)
         {
-            foreach (Population pop in FindObjectOfType<PopulationManager>().PopulationList)
+            foreach (PopulationGen pop in FindObjectOfType<PopulationManager>().PopulationGenList[ThisIdentity.Generation])
             {
                 if (pop.SpeciesKey == SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop.OrganismList);
             }
@@ -253,9 +336,11 @@ public class Organism : MonoBehaviour
         float closestDistance = SpeciesAttributes.LookForMateViewDistance;
         for (int i = 0; i < possibleMates.Count; i++)
         {
-            float distance = Vector3.Distance(transform.position, possibleMates[i].transform.position);
             if (possibleMates[i].ThisIdentity.ID == ThisIdentity.ID) continue;
-            else if (distance < closestDistance)
+            if (possibleMates[i].IsMigrating) continue;
+            float distance = Vector3.Distance(transform.position, possibleMates[i].transform.position);
+            
+            if (distance < closestDistance)
             {
                 closest = i;
                 closestDistance = distance;
@@ -269,24 +354,115 @@ public class Organism : MonoBehaviour
     {
         List<int> possibleMates = new List<int>();
 
-        for (int i = 0; i < _population.OrganismList.Count; i++)
+        for (int i = 0; i < _population[ThisIdentity.Generation].OrganismList.Count; i++)
         {
-            float distance = Vector3.Distance(transform.position, _population.OrganismList[i].transform.position);
-            if (_population.OrganismList[i].ThisIdentity.ID == ThisIdentity.ID) continue;
-            else if (distance < SpeciesAttributes.LookForMateViewDistance)
+            if (_population[ThisIdentity.Generation].OrganismList[i].ThisIdentity.ID == ThisIdentity.ID) continue;
+            if (_population[ThisIdentity.Generation].OrganismList[i].IsMigrating) continue;
+            float distance = Vector3.Distance(transform.position, _population[ThisIdentity.Generation].OrganismList[i].transform.position);
+            if (distance < SpeciesAttributes.LookForMateViewDistance)
             {
                 possibleMates.Add(i);
             }
         }
         if (possibleMates.Count > 0)
         {
-            _mate = _population.OrganismList[Random.Range(0, possibleMates.Count)];
+            _mate = _population[ThisIdentity.Generation].OrganismList[UnityEngine.Random.Range(0, possibleMates.Count)];
+            while (_mate.IsMigrating)
+            {
+                _mate = _population[ThisIdentity.Generation].OrganismList[UnityEngine.Random.Range(0, possibleMates.Count)];
+            }
             _isMovingToMate = true;
         }
     }
     void LookForAMateAffinity()
     {
 
+    }
+
+    
+    void LookForAMateEndogamy()
+    {
+        /*
+        List<Organism> possibleMates = new List<Organism>();
+        possibleMates.AddRange(_population.OrganismList);
+        if (SpeciesAttributes.CanReproduceWithOtherPops)
+        {
+            foreach (Population pop in FindObjectOfType<PopulationManager>().PopulationList)
+            {
+                if (pop.SpeciesKey == SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop.OrganismList);
+            }
+        }
+
+        if (_isFirstGen)
+        {
+            _mate = possibleMates[UnityEngine.Random.Range(0, possibleMates.Count)];
+            _isMovingToMate = true;
+            return;
+        }
+
+        int mostRelated = -1;
+        float maxRelatedness = 0;
+        for (int i = 0; i < possibleMates.Count; i++)
+        {
+            if (possibleMates[i].ThisIdentity.ID == ThisIdentity.ID) continue;
+            if (possibleMates[i].IsMigrating) continue;
+            int generationsApart = 100;
+
+            List<int> parentIDs = new List<int> { ThisIdentity.Parent1ID, ThisIdentity.Parent2ID };
+            List<int> parentIDsMate = new List<int> { possibleMates[i].ThisIdentity.Parent1ID, possibleMates[i].ThisIdentity.Parent2ID };
+
+            foreach (int parentID in parentIDs)
+            {
+                foreach (var parentIDmate in parentIDsMate)
+                {
+                    if (parentIDmate == parentID) generationsApart = 1;
+                }
+            }
+
+            /*
+            if (generationsApart == 100)
+            {
+                List<int> grandparentIDs = new List<int>();
+                List<int> grandparentIDsMate = new List<int>();
+
+                foreach (Identity identity in _identityManager.AllIdentities)
+                {
+                    foreach(int parentID in parentIDs)
+                    {
+                        if (parentID == identity.ID) { grandparentIDs.Add(identity.ID); continue; }
+                    }
+                    foreach (int grandparentID in parentIDsMate)
+                    {
+                        if (grandparentID == identity.ID) { grandparentIDsMate.Add(identity.ID); continue; }
+                    }
+                }
+
+                foreach (int grandparentID in parentIDs)
+                {
+                    foreach (var grandparentIDmate in parentIDsMate)
+                    {
+                        if (grandparentIDmate == grandparentID) generationsApart = 2;
+                    }
+                }
+            }
+            
+            Debug.Log(generationsApart);
+            float Relatedness = (1/2) * (float)generationsApart;
+            
+            if (Relatedness < maxRelatedness)
+            {
+                mostRelated = i;
+                maxRelatedness = Relatedness;
+                if (generationsApart == 1) break;
+            }
+        }
+        if(mostRelated != -1)
+        {
+            _mate = possibleMates[mostRelated];
+            _isMovingToMate = true;
+        }
+        
+    */
     }
 
     void MoveToMate()

@@ -22,8 +22,8 @@ public class IdentitiesManager : MonoBehaviour
     public Identity CreateNewIdentity()
     {
         Identity newIdentity = new Identity();
-        AllIdentities.Add(new Identity());
         newIdentity.ID = AllIdentities.Count;
+        AllIdentities.Add(new Identity());       
         return newIdentity;
     }
 }

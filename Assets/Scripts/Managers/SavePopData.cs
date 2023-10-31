@@ -5,30 +5,33 @@ using System.Text;
 using UnityEngine;
 
 
-//refactorizar para varias poblaciones:
 public class SavePopData : MonoBehaviour
 {
-    [SerializeField] private string _speciesToSave;
-
-    public string CollectPopData()
+    public string CollectPopDataFormated()
     {
-        List<List<List<string>>> popDataMatrix = new List<List<List<string>>>();
-        int i = 0;
-        foreach (Population population in GetComponent<PopulationManager>().PopulationList)
+        string newPopDataFormated = FormatGenepopData(CollectPopData());
+        return newPopDataFormated;
+    }
+
+    public List<List<List<string>>> CollectPopData()
+    {
+        List<List<List<string>>> newPopDataMatrix = new List<List<List<string>>>();
+        int popIndex = 0;
+        int currentGen = GetComponent<GenerationManager>().CurrentGen;
+        foreach (List<PopulationGen> population in GetComponent<PopulationManager>().PopulationGenList)
         {
-            if (_speciesToSave != population.SpeciesKey) continue;
-            popDataMatrix.Add(new List<List<string>>());
+            newPopDataMatrix.Add(new List<List<string>>());
             bool createdHeaders = false;
-            int j = 0;
-            foreach (Organism o in population.OrganismList)
+            int organismIndex = 0;
+            foreach (Organism o in population[currentGen].OrganismList)
             {
                 List<string> locusValueList = new List<string>();
-                if (!createdHeaders) popDataMatrix[i].Add(new List<string> { o.SpeciesAttributes.SpeciesKey });
+                if (!createdHeaders) newPopDataMatrix[popIndex].Add(new List<string> { o.SpeciesAttributes.PopulationKey });
                 foreach (ChromosomePair chromosome in o.ThisIdentity.ThisGenotype.Karyotype)
                 {
                     foreach (Locus locus in chromosome.LocusList)
                     {
-                        if (!createdHeaders) popDataMatrix[i][0].Add(locus.Key);
+                        if (!createdHeaders) newPopDataMatrix[popIndex][0].Add(locus.Key);
                         String newAllele1 = locus.AlleleValues.x.ToString();
                         String newAllele2 = locus.AlleleValues.y.ToString();
                         newAllele1 = CorrectDigits(newAllele1, locus.AlleleValuesRange.y.ToString());
@@ -38,27 +41,42 @@ public class SavePopData : MonoBehaviour
 
                 }
 
-                popDataMatrix[i].Add(new List<string> { o.SpeciesAttributes.PopulationKey + "_" + (j + 1).ToString() });
-                popDataMatrix[i][j + 1].AddRange(locusValueList);
+                newPopDataMatrix[popIndex].Add(new List<string> { o.SpeciesAttributes.PopulationKey + "_" + (organismIndex + 1).ToString() });
+                newPopDataMatrix[popIndex][organismIndex + 1].AddRange(locusValueList);
                 createdHeaders = true;
-                j++;
+                organismIndex++;
             }
-            i++;
+            popIndex++;
         }
 
-        
-        return FormatGenepopData(popDataMatrix);
+
+        return newPopDataMatrix;
+
     }
+
+    string CorrectDigits(string allele, string maxRange)
+    {
+        if (allele.Length < maxRange.Length)
+        {
+            int zeroesToAdd = maxRange.Length - allele.Length;
+            for (int i = 0; i < zeroesToAdd; i++)
+            {
+                allele = new string("0" + allele);
+            }
+        }
+        return allele;
+    }
+
     string FormatGenepopData(List<List<List<string>>> populationData)
     {
         StringBuilder genepopText = new StringBuilder();
 
         // Extract species name and loci names
-        string speciesKey = populationData[0][0][0];
+        //string speciesKey = populationData[0][0][0];
         List<string> lociNames = populationData[0][0].GetRange(1, populationData[0][0].Count - 1);
 
         // Append species name
-        genepopText.AppendLine(speciesKey);
+        genepopText.AppendLine("Data extracted from PopPalette");
 
         // Append loci names
         foreach (string locusName in lociNames)
@@ -91,16 +109,5 @@ public class SavePopData : MonoBehaviour
         return genepopText.ToString();
     }
 
-    string CorrectDigits(string allele, string maxRange)
-    {
-        if (allele.Length < maxRange.Length)
-        {
-            int zeroesToAdd = maxRange.Length - allele.Length;
-            for (int i = 0; i < zeroesToAdd; i++)
-            {
-                allele = new string("0" + allele);
-            }          
-        }
-        return allele;
-    }
+    
 }

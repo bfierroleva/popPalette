@@ -25,6 +25,8 @@ public class SpeciesAttributes : MonoBehaviour
     public string PopulationKey;
     public int MaxPopulation;
     public int InitialPopulation;
+    public List<string> PopsToMigrateTo;
+    [Range(0, 1)]public List<float> MigrationChancePerIndividual;
     public bool CanReproduceWithOtherPops;
     public Vector2 InitialPosition;
 }
@@ -40,5 +42,6 @@ public enum TypeOfMating
     Random,
     RandomInRange,
     Closest,
-    Affinity
+    Affinity,
+    Endogamy
 }

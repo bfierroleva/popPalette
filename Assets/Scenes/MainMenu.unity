@@ -2426,9 +2426,29 @@ PrefabInstance:
       value: SimManager
       objectReference: {fileID: 0}
     - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationPrefabList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: _populationPrefabList.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationPrefabList.Array.data[0]
+      value: 
+      objectReference: {fileID: 2639009681753861351, guid: 08a65fb8e7a4cbb4eb984efbf8cd712e, type: 3}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationPrefabList.Array.data[1]
+      value: 
+      objectReference: {fileID: 2639009681753861351, guid: 2367103cf1d79694d8a1b3d4bd14057c, type: 3}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationPrefabList.Array.data[2]
+      value: 
+      objectReference: {fileID: 2639009681753861351, guid: 66b4f7c265a21c7458adcf8cef0b733c, type: 3}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationPrefabList.Array.data[3]
+      value: 
+      objectReference: {fileID: 2639009681753861351, guid: 6102059e0e475884b8b2a6f5de8cca92, type: 3}
     - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: _populationPrefabList.Array.data[0]
       value: 
