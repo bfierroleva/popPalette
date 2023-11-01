@@ -22,7 +22,7 @@ public class AnalysisManager : MonoBehaviour
     void Start()
     {
         _populationManager = GetComponent<PopulationManager>();
-        _populationManager.GetComponent<GenerationManager>().newGenerationCycle += AnalyzeGeneration;
+        _populationManager.GetComponent<GenerationManager>().NewGenerationCycle += AnalyzeGeneration;
         _currentGeneration = -1;
     }
 

@@ -11,6 +11,11 @@ public class FirstGenManager : MonoBehaviour
 
     private void Start()
     {
+        GetComponent<UserInputs>().OnStart += OnStart;
+    }
+
+    void OnStart()
+    {
         int i = 0;
         foreach (GameObject pop in PopulationPrefabList)
         {
@@ -91,8 +96,8 @@ public class FirstGenManager : MonoBehaviour
             i++;
 
         }
-
     }
+
 
     List<Vector3> CalculateGenotipicFreqRel(List<Vector3> alleleList)
     {

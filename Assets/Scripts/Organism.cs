@@ -119,7 +119,7 @@ public class Organism : MonoBehaviour
         SetNewRandomDestination();
         if (_isFirstGen) StartLifeCycle();
         
-        _generationManager.newGenerationCycle += StartLifeCycle;       
+        _generationManager.NewGenerationCycle += StartLifeCycle;       
     }
 
     void TryToMigrate()
@@ -189,7 +189,7 @@ public class Organism : MonoBehaviour
     void OnDeath(bool _isNewBorn)
     {
         if (!_isNewBorn) _isDying = true;
-        _generationManager.newGenerationCycle -= StartLifeCycle;
+        _generationManager.NewGenerationCycle -= StartLifeCycle;
         _population[ThisIdentity.Generation].RemoveOrganism(this);
         Destroy(gameObject, _shrinkingDuration);
     }

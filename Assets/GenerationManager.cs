@@ -10,18 +10,17 @@ public class GenerationManager : MonoBehaviour
     public float LifeTime = 0;
     public List<int> GenerationPopCount = new List<int>();
     public int CurrentGen = 0;
-    public event Action newGenerationCycle;
+    public event Action NewGenerationCycle;
 
     private void Start()
     {
         GenerationPopCount.Add(0);
-        StartCoroutine(OnStart());
+        GetComponent<UserInputs>().OnStart += OnStart;
     }
 
-    IEnumerator OnStart()
+    void OnStart()
     {
-        yield return new WaitForSeconds(2f);
-        newGenerationCycle?.Invoke();
+        NewGenerationCycle?.Invoke();
         StartCoroutine(GenerationCycle(1));
     }
 
@@ -31,7 +30,7 @@ public class GenerationManager : MonoBehaviour
         yield return new WaitForSeconds(LifeTime);
         CurrentGen++;
         Debug.Log("Gen: " + CurrentGen);
-        newGenerationCycle?.Invoke();
+        NewGenerationCycle?.Invoke();
         StartCoroutine(GenerationCycle(0));
     }
 }

@@ -7,13 +7,26 @@ using UnityEngine;
 
 public class SavePopData : MonoBehaviour
 {
-    public string CollectPopDataFormated()
+
+    public List<string> SimPopData = new List<string>(); // index = generation
+
+    private void Start()
     {
-        string newPopDataFormated = FormatGenepopData(CollectPopData());
-        return newPopDataFormated;
+        GetComponent<GenerationManager>().NewGenerationCycle += SaveGenData;
     }
 
-    public List<List<List<string>>> CollectPopData()
+    public string GetGenData(int generation)
+    {
+        return SimPopData[generation];
+    }
+
+    void SaveGenData()
+    {
+        string newPopDataFormated = FormatGenepopData(CollectPopData());
+        SimPopData.Add(newPopDataFormated);
+    }
+
+    private List<List<List<string>>> CollectPopData()
     {
         List<List<List<string>>> newPopDataMatrix = new List<List<List<string>>>();
         int popIndex = 0;
