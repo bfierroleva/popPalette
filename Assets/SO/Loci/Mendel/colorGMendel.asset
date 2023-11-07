@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6bc4fe56e05d9949929367d6f5d5be8, type: 3}
-  m_Name: colorB_P.testis
+  m_Name: colorGMendel
   m_EditorClassIdentifier: 
-  ChromosomeIndex: 1
-  Key: colorB
+  ChromosomeIndex: 0
+  Key: colorG
   IsFunctional: 1
-  MutationMaxRange: 6
-  AlleleValues: {x: 100, y: 150}
-  AlleleValuesRange: {x: 1, y: 256}
+  MutationChance: 0
+  MutationMaxRange: 10
+  AlleleValuesRange: {x: 1, y: 255}

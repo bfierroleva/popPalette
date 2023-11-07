@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PopulationManager : MonoBehaviour
 {
-    public List<List<PopulationGen>> PopulationGenList = new List<List<PopulationGen>>(); 
+    public List<List<PopulationGen>> PopulationGenList = new List<List<PopulationGen>>(); // each list is a different population, and each populationGen is a generation
     public List<PopulationGen> AddOrganism(Organism organisim, SpeciesAttributes speciesAttributes)
     {
         foreach (List<PopulationGen> population in PopulationGenList) 

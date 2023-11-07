@@ -9,46 +9,60 @@ public class AnalysisManager : MonoBehaviour
 {
     //private int _timesAnalyzed;
     private PopulationManager _populationManager;
-    private int _currentGeneration;
+    public int CurrentGeneration;
 
     public event Action AnalysisCompleted;
 
     public bool DoAnalyzeAlleleFreq;
     public bool DoAnalyzeGenotypeFreq;
 
-    private List<List<AnalyzedGenotype>> _analysedGenotypeFreqData = new List<List<AnalyzedGenotype>>(); //each list a generation
-    private List<List<AnalyzedAllele>> _analysedAlleleFreqData = new List<List<AnalyzedAllele>>(); //each list a generation
+    public List<List<AnalyzedGenotype>> AnalysedGenotypeFreqData = new List<List<AnalyzedGenotype>>(); //each list a generation
+    public List<List<AnalyzedAllele>> AnalysedAlleleFreqData = new List<List<AnalyzedAllele>>(); //each list a generation
 
     void Start()
     {
         _populationManager = GetComponent<PopulationManager>();
         _populationManager.GetComponent<GenerationManager>().NewGenerationCycle += AnalyzeGeneration;
-        _currentGeneration = -1;
     }
 
     void AnalyzeGeneration()
     {
-        _currentGeneration++;
+        CurrentGeneration = _populationManager.GetComponent<GenerationManager>().CurrentGen;
 
-        foreach (AnalyzedGenotype genotype in _analysedGenotypeFreqData[_currentGeneration])
+        foreach (AnalyzedGenotype genotype in AnalysedGenotypeFreqData[CurrentGeneration])
         {
-            Debug.Log(" POP : " + genotype.PopKey + " locus : " + genotype.LocusKey + " : " + genotype.AlleleValues + " = " + genotype.FrequencyAbs);
+            //Debug.Log(genotype.FrequencyAbs);
+            int pop = 0;
+
+            foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
+            {
+                if (population[0].PopKey == genotype.PopKey) pop = population[genotype.Generation].OrganismList.Count;
+            }
+            genotype.FrequencyRel = (float)genotype.FrequencyAbs / (float)pop;
         }
-        foreach (AnalyzedAllele allele in _analysedAlleleFreqData[_currentGeneration])
+        foreach (AnalyzedAllele allele in AnalysedAlleleFreqData[CurrentGeneration])
         {
-            Debug.Log(" POP : " + allele.PopKey + " locus : " + allele.LocusKey + " : " + allele.AlleleValue + " = " + allele.FrequencyAbs);
+            //Debug.Log(allele.FrequencyAbs);
+            int pop = 0;
+
+            foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
+            {
+                if (population[0].PopKey == allele.PopKey) pop = population[allele.Generation].OrganismList.Count;
+            }
+            allele.FrequencyRel = (float)allele.FrequencyAbs / ((float)pop * 2); //times two because every organism has 2 alleles
         }
+        AnalysisCompleted?.Invoke();
     }
 
     void AnalyzeAlleleFrequencies(AnalyzedGenotype genotype, int generation)
     {
-        if (_analysedAlleleFreqData.Count - 1 < generation) _analysedAlleleFreqData.Add(new List<AnalyzedAllele>());
+        if (AnalysedAlleleFreqData.Count - 1 < generation) AnalysedAlleleFreqData.Add(new List<AnalyzedAllele>());
 
         bool foundX = false;
         bool foundY = false;
         bool XequalsY = false;
 
-        foreach (AnalyzedAllele allele in _analysedAlleleFreqData[generation])
+        foreach (AnalyzedAllele allele in AnalysedAlleleFreqData[generation])
         {
             if (allele.LocusKey != genotype.LocusKey) continue;
             if (allele.PopKey != genotype.PopKey) continue;
@@ -75,7 +89,7 @@ public class AnalysisManager : MonoBehaviour
             newAlleleEntry.AlleleValue = genotype.AlleleValues.x;
             newAlleleEntry.FrequencyAbs = 1;
             if (XequalsY) newAlleleEntry.FrequencyAbs++;
-            _analysedAlleleFreqData[genotype.Generation].Add(newAlleleEntry);
+            AnalysedAlleleFreqData[genotype.Generation].Add(newAlleleEntry);
         }
         if (!foundY && !XequalsY)
         {
@@ -85,7 +99,7 @@ public class AnalysisManager : MonoBehaviour
             newAlleleEntry.PopKey = genotype.PopKey;
             newAlleleEntry.AlleleValue = genotype.AlleleValues.y;
             newAlleleEntry.FrequencyAbs = 1;
-            _analysedAlleleFreqData[genotype.Generation].Add(newAlleleEntry);
+            AnalysedAlleleFreqData[genotype.Generation].Add(newAlleleEntry);
         }
     }
 
@@ -93,9 +107,9 @@ public class AnalysisManager : MonoBehaviour
     {
         if (!DoAnalyzeGenotypeFreq) { return; }
 
-        if (_analysedGenotypeFreqData.Count - 1 < generation) _analysedGenotypeFreqData.Add(new List<AnalyzedGenotype>());
+        if (AnalysedGenotypeFreqData.Count - 1 < generation) AnalysedGenotypeFreqData.Add(new List<AnalyzedGenotype>());
         bool hasFoundGenotype = false;
-        foreach (AnalyzedGenotype genotype in _analysedGenotypeFreqData[generation])
+        foreach (AnalyzedGenotype genotype in AnalysedGenotypeFreqData[generation])
         {
             if (genotype.LocusKey == locusKey && genotype.PopKey == popKey && genotype.AlleleValues == alleleValues) hasFoundGenotype = true;
             else continue;
@@ -114,7 +128,7 @@ public class AnalysisManager : MonoBehaviour
             newGenotypeEntry.AlleleValues = alleleValues;
             newGenotypeEntry.FrequencyAbs = 1;
             if (DoAnalyzeAlleleFreq) AnalyzeAlleleFrequencies(newGenotypeEntry, generation);
-            _analysedGenotypeFreqData[generation].Add(newGenotypeEntry);
+            AnalysedGenotypeFreqData[generation].Add(newGenotypeEntry);
         }
     }
 }
@@ -126,6 +140,7 @@ public class AnalyzedGenotype
     public string PopKey;
     public Vector2Int AlleleValues;
     public int FrequencyAbs;
+    public float FrequencyRel;
 }
 public class AnalyzedAllele
 {
@@ -134,4 +149,5 @@ public class AnalyzedAllele
     public string PopKey;
     public int AlleleValue;
     public float FrequencyAbs;
+    public float FrequencyRel;
 }

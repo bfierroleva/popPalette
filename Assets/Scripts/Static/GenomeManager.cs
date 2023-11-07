@@ -50,7 +50,35 @@ public class GenomeManager
 
     public Genotype MergeReproduction(Genotype child, Genotype p1, Genotype p2) // No Atomic reproduction
     {
-        return child;
+        int i = 0;
+        int j = 0;
+        foreach (ChromosomePair chromosomePair in child.Karyotype)
+        {
+            j = 0;
+            foreach (Locus locus in chromosomePair.LocusList)
+            {
+                child.Karyotype[i].LocusList[j].AlleleValues.x = p1.Karyotype[i].LocusList[j].AlleleValues[0];
+                child.Karyotype[i].LocusList[j].AlleleValues.y = p2.Karyotype[i].LocusList[j].AlleleValues[0];
+
+                Locus mutatedLocus = MutateAlleles(child.Karyotype[i].LocusList[j], child.Karyotype[i].LocusList[j].MutationChance);
+                child.Karyotype[i].LocusList[j].AlleleValues.x = mutatedLocus.AlleleValues.x;
+                child.Karyotype[i].LocusList[j].AlleleValues.y = mutatedLocus.AlleleValues.y;
+
+
+                if (child.Karyotype[i].LocusList[j].AlleleValues.x != child.Karyotype[i].LocusList[j].AlleleValues.y)
+                {
+                    int meanAllele = Mathf.RoundToInt(((float)child.Karyotype[i].LocusList[j].AlleleValues.x + (float)child.Karyotype[i].LocusList[j].AlleleValues.y) / 2f);
+                    child.Karyotype[i].LocusList[j].AlleleValues.x = meanAllele;
+                    child.Karyotype[i].LocusList[j].AlleleValues.y = meanAllele;
+                }
+
+
+                j++;
+            }
+
+            i++;
+        }
+            return child;
     }
 
     public Genotype SexualBasicReproduction(Genotype child, Genotype p1, Genotype p2) // No Recombination
@@ -69,7 +97,16 @@ public class GenomeManager
                 Locus mutatedLocus = MutateAlleles(child.Karyotype[i].LocusList[j], child.Karyotype[i].LocusList[j].MutationChance);
                 child.Karyotype[i].LocusList[j].AlleleValues.x = mutatedLocus.AlleleValues.x;
                 child.Karyotype[i].LocusList[j].AlleleValues.y = mutatedLocus.AlleleValues.y;
+
                 
+                if (child.Karyotype[i].LocusList[j].AlleleValues.x < child.Karyotype[i].LocusList[j].AlleleValues.y)
+                {
+                    int xAllele = child.Karyotype[i].LocusList[j].AlleleValues.x;
+                    child.Karyotype[i].LocusList[j].AlleleValues.x = child.Karyotype[i].LocusList[j].AlleleValues.y;
+                    child.Karyotype[i].LocusList[j].AlleleValues.y = xAllele;
+                }
+                
+
                 j++;
             }
             

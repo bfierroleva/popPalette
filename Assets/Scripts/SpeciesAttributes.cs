@@ -6,8 +6,6 @@ public class SpeciesAttributes : MonoBehaviour
 {
     [Header("Species Config:")]
     public string SpeciesKey;
-    [Range(0, 1)] public float MutationChance;
-    public float PopulationPressure;
     public GameObject Prefab;
     public int ChildrenPerMating;
     public int MatingsPerLife;

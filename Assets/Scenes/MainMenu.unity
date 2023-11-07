@@ -2425,6 +2425,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7025737392517552893, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: _startOnSceneStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationBounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationBounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 1576338036}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationBounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 1576338036}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationBounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 1576338036}
+    - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: PopulationBounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 1576338036}
     - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: PopulationPrefabList.Array.size
       value: 4
@@ -2465,6 +2489,10 @@ PrefabInstance:
       propertyPath: _populationPrefabList.Array.data[3]
       value: 
       objectReference: {fileID: 2639009681753861351, guid: 08a65fb8e7a4cbb4eb984efbf8cd712e, type: 3}
+    - target: {fileID: 8100356854028001275, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8108326091823722418, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: m_Enabled
       value: 0

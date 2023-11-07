@@ -17,4 +17,4 @@ MonoBehaviour:
   IsFunctional: 1
   MutationChance: 0.15
   MutationMaxRange: 15
-  AlleleValuesRange: {x: 1, y: 256}
+  AlleleValuesRange: {x: 1, y: 255}

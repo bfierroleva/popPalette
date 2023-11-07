@@ -32,8 +32,8 @@ public class Organism : MonoBehaviour
     public bool IsMigrating = false;
     private List<PopulationGen> _popToMigrateTo = new List<PopulationGen>();
 
-    private Vector2 _boundsX;
-    private Vector2 _boundsY;
+    public Vector2 BoundsX;
+    public Vector2 BoundsY;
     private float _speed;
 
     public void OnStart()
@@ -41,9 +41,7 @@ public class Organism : MonoBehaviour
         FirstGenAttributes = transform.GetComponent<FirstGenCreator>();
         Phenotype = GetComponent<Phenotype>();
         SpeciesAttributes = GetComponent<SpeciesAttributes>();
-        Collider2D colliderBOunds = FindObjectOfType<BoundsSprite>().GetComponent<Collider2D>();
-        _boundsX = new Vector2(colliderBOunds.bounds.min.x, colliderBOunds.bounds.max.x);
-        _boundsY = new Vector2(colliderBOunds.bounds.min.y, colliderBOunds.bounds.max.y);
+        
 
         _manager = FindObjectOfType<IdentitiesManager>().gameObject;
         _identityManager = _manager.GetComponent<IdentitiesManager>();
@@ -212,10 +210,18 @@ public class Organism : MonoBehaviour
             _population[ThisIdentity.Generation].RemoveOrganism(this);
             _population = _manager.GetComponent<PopulationManager>().MigrateOrganism(this, _popToMigrateTo[0].PopKey);
             IsMigrating = false;
-            
+
+            int i = 0;
             foreach (GameObject populationPrefab in _manager.GetComponent<FirstGenManager>().PopulationPrefabList)
             {
-                SpeciesAttributes.Prefab = populationPrefab;
+                if (_popToMigrateTo[0].PopKey == populationPrefab.GetComponent<SpeciesAttributes>().PopulationKey)
+                {
+
+                    SpeciesAttributes.Prefab = populationPrefab;
+
+                    BoundsX = new Vector2(_manager.GetComponent<FirstGenManager>().PopulationBounds[i].bounds.min.x, _manager.GetComponent<FirstGenManager>().PopulationBounds[i].bounds.max.x);
+                    BoundsY = new Vector2(_manager.GetComponent<FirstGenManager>().PopulationBounds[i].bounds.min.y, _manager.GetComponent<FirstGenManager>().PopulationBounds[i].bounds.max.y);
+                }
             }
             SetNewRandomDestination();
         }
@@ -260,11 +266,11 @@ public class Organism : MonoBehaviour
 
         
         
-        if ((transform.position.x + distanceX) <= _boundsX[0] || (transform.position.x + distanceX) >= _boundsX[1])
+        if ((transform.position.x + distanceX) <= BoundsX[0] || (transform.position.x + distanceX) >= BoundsX[1])
         {
             distanceX = distanceX * -1;
         }
-        if ((transform.position.y + distanceY) <= _boundsY[0] || (transform.position.y + distanceY) >= _boundsY[1])
+        if ((transform.position.y + distanceY) <= BoundsY[0] || (transform.position.y + distanceY) >= BoundsY[1])
         {
             distanceY = distanceY * -1;
         }
@@ -308,9 +314,9 @@ public class Organism : MonoBehaviour
         possibleMates.AddRange(_population[ThisIdentity.Generation].OrganismList);
         if (SpeciesAttributes.CanReproduceWithOtherPops) 
         {
-            foreach (PopulationGen pop in FindObjectOfType<PopulationManager>().PopulationGenList[ThisIdentity.Generation])
+            foreach (List<PopulationGen> pop in FindObjectOfType<PopulationManager>().PopulationGenList)
             {
-                if (pop.SpeciesKey ==  SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop.OrganismList);
+                if (pop[0].SpeciesKey ==  SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop[ThisIdentity.Generation].OrganismList);
             }
         }
         _mate = possibleMates[UnityEngine.Random.Range(0, possibleMates.Count)];
@@ -327,9 +333,9 @@ public class Organism : MonoBehaviour
         possibleMates.AddRange(_population[ThisIdentity.Generation].OrganismList);
         if (SpeciesAttributes.CanReproduceWithOtherPops)
         {
-            foreach (PopulationGen pop in FindObjectOfType<PopulationManager>().PopulationGenList[ThisIdentity.Generation])
+            foreach (List<PopulationGen> pop in FindObjectOfType<PopulationManager>().PopulationGenList)
             {
-                if (pop.SpeciesKey == SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop.OrganismList);
+                if (pop[0].SpeciesKey == SpeciesAttributes.SpeciesKey) possibleMates.AddRange(pop[ThisIdentity.Generation].OrganismList);
             }
         }
         int closest = 0;
@@ -489,6 +495,7 @@ public class Organism : MonoBehaviour
 
     void CreateChild()
     {
+        //Debug.Log(ThisIdentity.ID + " : nuevo hijo con " + _mate.ThisIdentity.ID);
         GameObject child = Instantiate(SpeciesAttributes.Prefab, transform.position, Quaternion.identity, _identityManager.gameObject.transform);
         Organism childO = child.GetComponent<Organism>();
         Identity childIdentity = _identityManager.CreateNewIdentity();
@@ -542,7 +549,10 @@ public class Organism : MonoBehaviour
         }
         childO.ThisIdentity = childIdentity;
         //Debug.Log(gameObject.name + "   " + ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues + "  y  " + _mate.gameObject.name + "  " + _mate.ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues + "  =  " + childO.ThisIdentity.ThisGenotype.Karyotype[0].LocusList[0].AlleleValues);
-        
+
+
+        childO.BoundsX = BoundsX;
+        childO.BoundsY = BoundsY;
         childO._isFirstGen = false;
         childO.OnStart();
     }

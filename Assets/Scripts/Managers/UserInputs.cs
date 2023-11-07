@@ -7,13 +7,22 @@ using System;
 public class UserInputs : MonoBehaviour
 {
     private float _lastTimeScale;
-    private bool _hasStarted;
+    private bool _hasStarted = false;
     public event Action OnStart;
+
+    [SerializeField] private bool _startOnSceneStart;
 
     private void Start()
     {
         Time.timeScale = 2;
         GenomeManager.Instance.OnStart();
+        if (_startOnSceneStart) StartCoroutine(LateStart());
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartSim();
     }
 
     public void StartSim()
@@ -30,6 +39,7 @@ public class UserInputs : MonoBehaviour
 
     public void Pause()
     {
+        if (!_hasStarted) return;
         if (Time.timeScale != 0)
         {
             _lastTimeScale = Time.timeScale;
@@ -45,7 +55,8 @@ public class UserInputs : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
         float newTime = Time.timeScale + 1;
-        if (!pos) newTime = newTime * -1;
+        if (!pos) newTime = Time.timeScale - 1;
+        else newTime = Time.timeScale + 1;
         if (newTime > 10) newTime = 1;
         else if (newTime < 1) newTime = 10;
 

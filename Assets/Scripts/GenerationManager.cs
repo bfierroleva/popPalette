@@ -15,22 +15,22 @@ public class GenerationManager : MonoBehaviour
     private void Start()
     {
         GenerationPopCount.Add(0);
-        GetComponent<UserInputs>().OnStart += OnStart;
+        GetComponent<FirstGenManager>().OnFirstGenCreated += OnFirstGen;
     }
 
-    void OnStart()
+    void OnFirstGen()
     {
-        NewGenerationCycle?.Invoke();
-        StartCoroutine(GenerationCycle(1));
+        StartCoroutine(GenerationCycle());
     }
 
-    IEnumerator GenerationCycle(float i)
+    IEnumerator GenerationCycle()
     {
-        yield return new WaitForSeconds(i);
-        yield return new WaitForSeconds(LifeTime);
-        CurrentGen++;
         Debug.Log("Gen: " + CurrentGen);
         NewGenerationCycle?.Invoke();
-        StartCoroutine(GenerationCycle(0));
+
+        yield return new WaitForSeconds(LifeTime);
+
+        CurrentGen++;      
+        StartCoroutine(GenerationCycle());
     }
 }

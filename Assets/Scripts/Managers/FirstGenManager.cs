@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,7 +8,8 @@ using UnityEngine.SocialPlatforms;
 public class FirstGenManager : MonoBehaviour
 {
     public List<GameObject> PopulationPrefabList;
-
+    public List<Collider2D> PopulationBounds;
+    public event Action OnFirstGenCreated;
 
     private void Start()
     {
@@ -16,6 +18,7 @@ public class FirstGenManager : MonoBehaviour
 
     void OnStart()
     {
+        Debug.Log("hey");
         int i = 0;
         foreach (GameObject pop in PopulationPrefabList)
         {
@@ -58,6 +61,8 @@ public class FirstGenManager : MonoBehaviour
                 Organism newOrganisim = newOrganisimObject.GetComponent<Organism>();
                 FirstGenCreator newFCG = newOrganisimObject.GetComponent<FirstGenCreator>();
 
+                newOrganisim.BoundsX = new Vector2(PopulationBounds[i].bounds.min.x, PopulationBounds[i].bounds.max.x);
+                newOrganisim.BoundsY = new Vector2(PopulationBounds[i].bounds.min.y, PopulationBounds[i].bounds.max.y);
                 newOrganisim._isFirstGen = true;
                 newOrganisim.FirstGenAttributes = newFCG;
 
@@ -96,6 +101,7 @@ public class FirstGenManager : MonoBehaviour
             i++;
 
         }
+        OnFirstGenCreated?.Invoke();
     }
 
 
