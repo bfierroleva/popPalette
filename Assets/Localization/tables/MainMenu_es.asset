@@ -45,6 +45,26 @@ MonoBehaviour:
       caracter\xEDsticas del programa, su uso y mucho m\xE1s."
     m_Metadata:
       m_Items: []
+  - m_Id: 307545445593587712
+    m_Localized: "1 - Deriva Gen\xE9tica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545518134075392
+    m_Localized: "2 - Mutaci\xF3n y Selecci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545565512933376
+    m_Localized: 3 - Herencia Mendeliana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545617648132096
+    m_Localized: "4 - Migraci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545646144233472
+    m_Localized: "Atr\xE1s"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

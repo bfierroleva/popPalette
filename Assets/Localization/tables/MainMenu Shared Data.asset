@@ -39,6 +39,26 @@ MonoBehaviour:
     m_Key: documentationDescription
     m_Metadata:
       m_Items: []
+  - m_Id: 307545445593587712
+    m_Key: geneticTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545518134075392
+    m_Key: mutationTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545565512933376
+    m_Key: mendelTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545617648132096
+    m_Key: migrationTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545646144233472
+    m_Key: back
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

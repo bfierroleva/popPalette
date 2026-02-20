@@ -186,8 +186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpeciesKey: Right sexual
-  MutationChance: 0
-  PopulationPressure: 1
   Prefab: {fileID: 6511733004687586805}
   ChildrenPerMating: 1
   MatingsPerLife: 4
@@ -198,15 +196,15 @@ MonoBehaviour:
   HaploidNumber: 1
   DistanceRange: {x: 3, y: 10}
   StartingSpeed: 3
-  MaxSpeed: 10
+  MaxSpeed: 8
   IncreaseSpeedRate: 2
   PopulationKey: right
-  MaxPopulation: 200
-  InitialPopulation: 200
+  MaxPopulation: 150
+  InitialPopulation: 150
   PopsToMigrateTo: []
   MigrationChancePerIndividual: []
   CanReproduceWithOtherPops: 0
-  InitialPosition: {x: 45, y: -15}
+  InitialPosition: {x: 30, y: -15}
 --- !u!114 &2318971965981112419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +223,7 @@ MonoBehaviour:
   Phenotype: {fileID: 0}
   SpeciesAttributes: {fileID: 0}
   IsMigrating: 0
+  Bounds: {fileID: 0}
   BoundsX: {x: 0, y: 0}
   BoundsY: {x: 0, y: 0}
 --- !u!114 &-911869723147086461

@@ -537,7 +537,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: IsColorSelected
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: IsColorRedSelected
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: isColorBlueSelected
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: SelectivePreassureStrenght

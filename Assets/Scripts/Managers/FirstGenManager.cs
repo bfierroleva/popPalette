@@ -63,6 +63,7 @@ public class FirstGenManager : MonoBehaviour
 
                 newOrganisim.BoundsX = new Vector2(PopulationBounds[i].bounds.min.x, PopulationBounds[i].bounds.max.x);
                 newOrganisim.BoundsY = new Vector2(PopulationBounds[i].bounds.min.y, PopulationBounds[i].bounds.max.y);
+                newOrganisim.Bounds = PopulationBounds[i];
                 newOrganisim._isFirstGen = true;
                 newOrganisim.FirstGenAttributes = newFCG;
 

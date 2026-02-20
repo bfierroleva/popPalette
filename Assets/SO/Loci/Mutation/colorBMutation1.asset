@@ -15,6 +15,6 @@ MonoBehaviour:
   ChromosomeIndex: 0
   Key: colorB
   IsFunctional: 1
-  MutationChance: 0.05
-  MutationMaxRange: 25
+  MutationChance: 0.35
+  MutationMaxRange: 50
   AlleleValuesRange: {x: 1, y: 255}

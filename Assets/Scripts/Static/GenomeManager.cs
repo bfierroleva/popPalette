@@ -31,8 +31,8 @@ public class GenomeManager
 
     public Locus MutateAlleles(Locus locus, float MutationChance)
     {
-        
-        if(Random.value <= MutationChance)
+        float random = Random.value;
+        if (random <= MutationChance/2)
         {
             int i = locus.AlleleValues.x;
             locus.AlleleValues.x = Mathf.Clamp(locus.AlleleValues.x + Random.Range(-locus.MutationMaxRange, locus.MutationMaxRange + 1), locus.AlleleValuesRange.x, locus.AlleleValuesRange.y + 1);
@@ -40,7 +40,7 @@ public class GenomeManager
             _numOfMutations++;
             Debug.LogWarning(_sumOfMutations / _numOfMutations);
         }
-        if (Random.value <= MutationChance)
+        else if (random <= MutationChance)
         {
             locus.AlleleValues.y = Mathf.Clamp(locus.AlleleValues.y + Random.Range(-locus.MutationMaxRange, locus.MutationMaxRange + 1), locus.AlleleValuesRange.x, locus.AlleleValuesRange.y + 1);
         }
