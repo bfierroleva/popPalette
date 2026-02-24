@@ -31,7 +31,7 @@ public class AnalysisManager : MonoBehaviour
 
         foreach (AnalyzedGenotype genotype in AnalysedGenotypeFreqData[CurrentGeneration])
         {
-            //Debug.Log(genotype.FrequencyAbs);
+            Debug.Log(genotype.FrequencyAbs);
             int pop = 0;
 
             foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
@@ -42,7 +42,7 @@ public class AnalysisManager : MonoBehaviour
         }
         foreach (AnalyzedAllele allele in AnalysedAlleleFreqData[CurrentGeneration])
         {
-            //Debug.Log(allele.FrequencyAbs);
+            Debug.Log(allele.FrequencyAbs);
             int pop = 0;
 
             foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
