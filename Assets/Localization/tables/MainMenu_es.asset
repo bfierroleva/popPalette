@@ -45,6 +45,62 @@ MonoBehaviour:
       caracter\xEDsticas del programa, su uso y mucho m\xE1s."
     m_Metadata:
       m_Items: []
+  - m_Id: 307545445593587712
+    m_Localized: "1 - Deriva Gen\xE9tica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545518134075392
+    m_Localized: "2 - Mutaci\xF3n y Selecci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545565512933376
+    m_Localized: 3 - Herencia Mendeliana
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545617648132096
+    m_Localized: "4 - Migraci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545646144233472
+    m_Localized: "Atr\xE1s"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 308999668936024064
+    m_Localized: Alternar pantalla complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000017180696576
+    m_Localized: "Resoluci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000112089407488
+    m_Localized: "Resoluci\xF3n: 2560"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000113842626560
+    m_Localized: "Resoluci\xF3n: 1920"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000125368573952
+    m_Localized: "Resoluci\xF3n: 1600"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000127037906944
+    m_Localized: "Resoluci\xF3n: 1280"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000812882108416
+    m_Localized: Cambiar idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000916863098880
+    m_Localized: Ajustes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309013226000293888
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

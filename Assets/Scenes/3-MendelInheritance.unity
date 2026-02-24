@@ -226,8 +226,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240604505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: -15, z: 0}
-  m_LocalScale: {x: 50, y: 45, z: 37.585888}
+  m_LocalPosition: {x: 37, y: -17, z: 0}
+  m_LocalScale: {x: 55, y: 40, z: 37.585888}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1107613583}
@@ -522,7 +522,7 @@ PrefabInstance:
     - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: PopulationPrefabList.Array.data[3]
       value: 
-      objectReference: {fileID: 6511733004687586805, guid: f3ebcedbe7efb194faa7557e12da84b4, type: 3}
+      objectReference: {fileID: 6511733004687586805, guid: fd6935ef0c5835d48b5a29fc35318118, type: 3}
     - target: {fileID: 7057518180751161848, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: _populationPrefabList.Array.data[0]
       value: 
@@ -702,8 +702,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367390240}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 45, y: 22.5, z: 0}
-  m_LocalScale: {x: 30, y: 20, z: 37.585888}
+  m_LocalPosition: {x: 30, y: 25, z: 0}
+  m_LocalScale: {x: 40, y: 20, z: 37.585888}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1107613583}
@@ -1083,8 +1083,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970697162}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40, y: -15, z: 0}
-  m_LocalScale: {x: 50, y: 45, z: 37.585888}
+  m_LocalPosition: {x: -37, y: -17, z: 0}
+  m_LocalScale: {x: 55, y: 40, z: 37.585888}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1107613583}
@@ -1226,8 +1226,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996727515}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -45, y: 22.5, z: 0}
-  m_LocalScale: {x: 30, y: 20, z: 37.585888}
+  m_LocalPosition: {x: -30, y: 25, z: 0}
+  m_LocalScale: {x: 40, y: 20, z: 37.585888}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1107613583}
@@ -1389,6 +1389,14 @@ PrefabInstance:
     - target: {fileID: 2551555013613916204, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _doShowGenotypeFreq
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257497353241105611, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3415930339552406758, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4129979491813895944, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _genotypeToColorIndex.Array.size

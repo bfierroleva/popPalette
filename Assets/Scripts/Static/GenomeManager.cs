@@ -35,16 +35,16 @@ public class GenomeManager
 
     public Locus MutateMicrosatellite(Locus locus)
     {
-        
-        if(Random.value <= locus.MutationChance)
+        float random = Random.value;
+        if (random <= MutationChance/2)
         {
             int i = locus.AlleleValues.x;
             locus.AlleleValues.x = Mathf.Clamp(locus.AlleleValues.x + Random.Range(-locus.MutationMaxRange, locus.MutationMaxRange + 1), locus.AlleleValuesRange.x, locus.AlleleValuesRange.y + 1);
             _sumOfMutations += -1 * (i - locus.AlleleValues.x);
             _numOfMutations++;
-            Debug.LogWarning(_sumOfMutations / _numOfMutations);
+            //Debug.LogWarning(_sumOfMutations / _numOfMutations);
         }
-        if (Random.value <= locus.MutationChance)
+        else if (random <= MutationChance)
         {
             locus.AlleleValues.y = Mathf.Clamp(locus.AlleleValues.y + Random.Range(-locus.MutationMaxRange, locus.MutationMaxRange + 1), locus.AlleleValuesRange.x, locus.AlleleValuesRange.y + 1);
         }
@@ -299,7 +299,7 @@ public class Locus
 
     public List<char> Codons;       // si es codificante
 
-    public Vector2Int AlleleValues; // solo si es microsatélite
+    public Vector2Int AlleleValues; // solo si es microsatï¿½lite
     public bool IsFunctional;
     public float MutationChance;
     public int MutationMaxRange;

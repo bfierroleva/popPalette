@@ -25,7 +25,7 @@ public class GenerationManager : MonoBehaviour
 
     IEnumerator GenerationCycle()
     {
-        Debug.Log("Gen: " + CurrentGen);
+        //Debug.Log("Gen: " + CurrentGen);
         NewGenerationCycle?.Invoke();
 
         yield return new WaitForSeconds(LifeTime);

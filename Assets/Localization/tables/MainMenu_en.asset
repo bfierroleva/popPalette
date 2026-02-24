@@ -28,7 +28,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14139209383936
-    m_Localized: Access the in-depth user manual for a thorough grasp of program
+    m_Localized: Access the in-depth user manual for an understanding of program
       features, usage, and more.
     m_Metadata:
       m_Items: []
@@ -43,6 +43,62 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 13862909607936
     m_Localized: Custom Simulaton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545445593587712
+    m_Localized: 1 - Genetic Drift
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545518134075392
+    m_Localized: 2 - Mutation and Selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545565512933376
+    m_Localized: 3 - Mendelian Inheritance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545617648132096
+    m_Localized: 4 - Migration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307545646144233472
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 308999668936024064
+    m_Localized: Toggle fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000017180696576
+    m_Localized: "Resolution\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000112089407488
+    m_Localized: 'Resolution: 2560'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000113842626560
+    m_Localized: 'Resolution: 1920'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000125368573952
+    m_Localized: 'Resolution: 1600'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000127037906944
+    m_Localized: 'Resolution: 1200'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000812882108416
+    m_Localized: Change language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000916863098880
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309013226000293888
+    m_Localized: Quit
     m_Metadata:
       m_Items: []
   references:

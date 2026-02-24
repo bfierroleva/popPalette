@@ -5,6 +5,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using System.Linq;
 
 public class Organism : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Organism : MonoBehaviour
     public bool IsMigrating = false;
     private List<PopulationGen> _popToMigrateTo = new List<PopulationGen>();
 
+    public Collider2D Bounds;
     public Vector2 BoundsX;
     public Vector2 BoundsY;
     private float _speed;
@@ -127,6 +129,9 @@ public class Organism : MonoBehaviour
         float accumulatedChance = 0;
         bool willMigrate = false;
 
+        if (SpeciesAttributes.MigrationChancePerIndividual.Sum() > 1) { Debug.LogError("Sum of probabilities greater than 1"); return; }
+        if (SpeciesAttributes.MigrationChancePerIndividual.Sum() > 1) { Debug.LogError("Return not working"); }
+
         foreach (float chance in SpeciesAttributes.MigrationChancePerIndividual)
         {
             
@@ -221,6 +226,11 @@ public class Organism : MonoBehaviour
 
                     BoundsX = new Vector2(_manager.GetComponent<FirstGenManager>().PopulationBounds[i].bounds.min.x, _manager.GetComponent<FirstGenManager>().PopulationBounds[i].bounds.max.x);
                     BoundsY = new Vector2(_manager.GetComponent<FirstGenManager>().PopulationBounds[i].bounds.min.y, _manager.GetComponent<FirstGenManager>().PopulationBounds[i].bounds.max.y);
+                    Bounds  = _manager.GetComponent<FirstGenManager>().PopulationBounds[i];
+                }
+                else
+                {
+                    i++;
                 }
             }
             SetNewRandomDestination();
@@ -264,9 +274,14 @@ public class Organism : MonoBehaviour
         float distanceX = x * distance;
         float distanceY = y * distance;
 
-        
-        
-        if ((transform.position.x + distanceX) <= BoundsX[0] || (transform.position.x + distanceX) >= BoundsX[1])
+        Bounds bounds = Bounds.bounds;
+
+        float targetX = Mathf.Clamp(transform.position.x + distanceX, bounds.min.x, bounds.max.x);
+        float targetY = Mathf.Clamp(transform.position.y + distanceY, bounds.min.y, bounds.max.y);
+
+        _targetPosition = new Vector2(targetX, targetY);
+
+        /*if ((transform.position.x + distanceX) <= BoundsX[0] || (transform.position.x + distanceX) >= BoundsX[1])
         {
             distanceX = distanceX * -1;
         }
@@ -276,6 +291,8 @@ public class Organism : MonoBehaviour
         }
         
         _targetPosition = new Vector2(transform.position.x + distanceX, transform.position.y + distanceY);
+        */
+        
     }
 
     void LookForAMate()
@@ -386,7 +403,7 @@ public class Organism : MonoBehaviour
     }
 
     
-    void LookForAMateEndogamy()
+    void LookForAMateEndogamy() // MUY INEFICIENTE: rehacer
     {
         /*
         List<Organism> possibleMates = new List<Organism>();
@@ -553,6 +570,7 @@ public class Organism : MonoBehaviour
 
         childO.BoundsX = BoundsX;
         childO.BoundsY = BoundsY;
+        childO.Bounds = Bounds;
         childO._isFirstGen = false;
         childO.OnStart();
     }

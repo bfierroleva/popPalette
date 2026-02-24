@@ -18,7 +18,7 @@ public class FirstGenManager : MonoBehaviour
 
     void OnStart()
     {
-        Debug.Log("hey");
+        //Debug.Log("hey");
         int i = 0;
         foreach (GameObject pop in PopulationPrefabList)
         {
@@ -63,6 +63,7 @@ public class FirstGenManager : MonoBehaviour
 
                 newOrganisim.BoundsX = new Vector2(PopulationBounds[i].bounds.min.x, PopulationBounds[i].bounds.max.x);
                 newOrganisim.BoundsY = new Vector2(PopulationBounds[i].bounds.min.y, PopulationBounds[i].bounds.max.y);
+                newOrganisim.Bounds = PopulationBounds[i];
                 newOrganisim._isFirstGen = true;
                 newOrganisim.FirstGenAttributes = newFCG;
 

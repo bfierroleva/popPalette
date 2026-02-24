@@ -11,6 +11,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/1-HW&GeneticDrift.unity
     guid: 2a92de9f9f97900429a3d2bf0d13d1b7
+  - enabled: 1
+    path: Assets/Scenes/1.5-HW&GeneticDrift.unity
+    guid: fcff4675067ce7444a1a882b2f7fd613
+  - enabled: 1
+    path: Assets/Scenes/2-Mutation.unity
+    guid: c627021becda19041be2daae80382be4
+  - enabled: 1
+    path: Assets/Scenes/3-MendelInheritance.unity
+    guid: f3f12d20b0602d14c8f8d51e78db057a
+  - enabled: 1
+    path: Assets/Scenes/4-Migration.unity
+    guid: 8132de15ee0af35438376df2b94cf56a
   - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
