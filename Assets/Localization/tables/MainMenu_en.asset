@@ -65,6 +65,42 @@ MonoBehaviour:
     m_Localized: Back
     m_Metadata:
       m_Items: []
+  - m_Id: 308999668936024064
+    m_Localized: Toggle fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000017180696576
+    m_Localized: "Resolution\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000112089407488
+    m_Localized: 'Resolution: 2560'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000113842626560
+    m_Localized: 'Resolution: 1920'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000125368573952
+    m_Localized: 'Resolution: 1600'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000127037906944
+    m_Localized: 'Resolution: 1200'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000812882108416
+    m_Localized: Change language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000916863098880
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309013226000293888
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

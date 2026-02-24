@@ -65,6 +65,42 @@ MonoBehaviour:
     m_Localized: "Atr\xE1s"
     m_Metadata:
       m_Items: []
+  - m_Id: 308999668936024064
+    m_Localized: Alternar pantalla complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000017180696576
+    m_Localized: "Resoluci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000112089407488
+    m_Localized: "Resoluci\xF3n: 2560"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000113842626560
+    m_Localized: "Resoluci\xF3n: 1920"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000125368573952
+    m_Localized: "Resoluci\xF3n: 1600"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000127037906944
+    m_Localized: "Resoluci\xF3n: 1280"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000812882108416
+    m_Localized: Cambiar idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309000916863098880
+    m_Localized: Ajustes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309013226000293888
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

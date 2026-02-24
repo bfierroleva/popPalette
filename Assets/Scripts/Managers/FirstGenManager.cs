@@ -18,7 +18,7 @@ public class FirstGenManager : MonoBehaviour
 
     void OnStart()
     {
-        Debug.Log("hey");
+        //Debug.Log("hey");
         int i = 0;
         foreach (GameObject pop in PopulationPrefabList)
         {
