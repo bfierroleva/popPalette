@@ -183,7 +183,7 @@ public class Organism : MonoBehaviour
     {
 
         float survivalChance = 0;
-        float fitness = _manager.GetComponent<SelectivePreassure>().CalculateFitness(Phenotype.PhenotypeColor);
+        float fitness = _manager.GetComponent<SelectivePreassure>().CalculateFitness(Phenotype.PhenotypeColor, SpeciesAttributes.PopulationKey);
         //survivalChance = fitness * (1 - (_generationManager.GenerationPopCount[ThisIdentity.Generation - 1] / (float)SpeciesAttributes.MaxPopulation));
         survivalChance = fitness * (1 - _population[ThisIdentity.Generation].OrganismList.Count / (float)SpeciesAttributes.MaxPopulation);
         return UnityEngine.Random.value <= survivalChance;

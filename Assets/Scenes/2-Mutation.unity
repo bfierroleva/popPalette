@@ -548,7 +548,39 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: SelectivePreassureStrenght
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[0].key
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[1].key
+      value: right
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[1].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[0].key
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[1].key
+      value: right
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[1].value
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
