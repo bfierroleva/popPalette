@@ -73,7 +73,7 @@ public class SelectivePreassure : MonoBehaviour
         fitness = fitness / (IsColorRedSelected + isColorGreenSelected + isColorBlueSelected);
 
         //fitness = fitness / Mathf.Clamp((Mathf.Pow((color.r + color.g + color.b + 0.0001f), CostOfColor)),1 , Mathf.Infinity); rehacer
-        Debug.Log("Fitness: " + fitness);
+        //Debug.Log("Fitness: " + fitness);
         return fitness;
     }
 

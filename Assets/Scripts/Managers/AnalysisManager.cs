@@ -15,9 +15,11 @@ public class AnalysisManager : MonoBehaviour
 
     public bool DoAnalyzeAlleleFreq;
     public bool DoAnalyzeGenotypeFreq;
+    public bool DoAnalyzePhenotypeMean;
 
     public List<List<AnalyzedGenotype>> AnalysedGenotypeFreqData = new List<List<AnalyzedGenotype>>(); //each list a generation
     public List<List<AnalyzedAllele>> AnalysedAlleleFreqData = new List<List<AnalyzedAllele>>(); //each list a generation
+    public List<List<AnalyzedPhenotype>> AnalysedPhenotypeData = new List<List<AnalyzedPhenotype>>(); // list of generations, which are list of the values for each population
 
     void Start()
     {
@@ -29,33 +31,60 @@ public class AnalysisManager : MonoBehaviour
     {
         CurrentGeneration = _populationManager.GetComponent<GenerationManager>().CurrentGen;
 
-        foreach (AnalyzedGenotype genotype in AnalysedGenotypeFreqData[CurrentGeneration])
+        if (DoAnalyzeGenotypeFreq)
         {
-            Debug.Log(genotype.FrequencyAbs);
-            int pop = 0;
-
-            foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
+            foreach (AnalyzedGenotype genotype in AnalysedGenotypeFreqData[CurrentGeneration])
             {
-                if (population[0].PopKey == genotype.PopKey) pop = population[genotype.Generation].OrganismList.Count;
+                //Debug.Log(genotype.FrequencyAbs);
+                int pop1 = 0; //pop = numer of organisims in the population
+
+                foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
+                {
+                    if (population[0].PopKey == genotype.PopKey) pop1 = population[genotype.Generation].OrganismList.Count;
+                }
+                genotype.FrequencyRel = (float)genotype.FrequencyAbs / (float)pop1;
             }
-            genotype.FrequencyRel = (float)genotype.FrequencyAbs / (float)pop;
         }
-        foreach (AnalyzedAllele allele in AnalysedAlleleFreqData[CurrentGeneration])
+        
+        if (DoAnalyzeAlleleFreq)
         {
-            Debug.Log(allele.FrequencyAbs);
-            int pop = 0;
-
-            foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
+            foreach (AnalyzedAllele allele in AnalysedAlleleFreqData[CurrentGeneration])
             {
-                if (population[0].PopKey == allele.PopKey) pop = population[allele.Generation].OrganismList.Count;
+                //Debug.Log(allele.FrequencyAbs);
+                int pop2 = 0;
+
+                foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
+                {
+                    if (population[0].PopKey == allele.PopKey) pop2 = population[allele.Generation].OrganismList.Count;
+                }
+                allele.FrequencyRel = (float)allele.FrequencyAbs / ((float)pop2 * 2); //times two because every organism has 2 alleles
             }
-            allele.FrequencyRel = (float)allele.FrequencyAbs / ((float)pop * 2); //times two because every organism has 2 alleles
         }
+        if (DoAnalyzePhenotypeMean)
+        {
+            foreach (AnalyzedPhenotype _population in AnalysedPhenotypeData[CurrentGeneration])
+            {
+                //Debug.Log(allele.FrequencyAbs);
+                int pop3 = 0;
+
+                foreach (List<PopulationGen> population in _populationManager.PopulationGenList)
+                {
+                    if (population[0].PopKey == _population.PopKey) pop3 = population[_population.Generation].OrganismList.Count;
+                }
+                _population.PhenotypeNormalizedValue.x = (float)_population.SummedValue.x / ((float)pop3);
+                _population.PhenotypeNormalizedValue.y = (float)_population.SummedValue.y / ((float)pop3);
+                _population.PhenotypeNormalizedValue.z = (float)_population.SummedValue.z / ((float)pop3);
+            }
+        }
+        
+
         AnalysisCompleted?.Invoke();
     }
 
     void AnalyzeAlleleFrequencies(AnalyzedGenotype genotype, int generation)
     {
+        if (!DoAnalyzeAlleleFreq) { return; }
+
         if (AnalysedAlleleFreqData.Count - 1 < generation) AnalysedAlleleFreqData.Add(new List<AnalyzedAllele>());
 
         bool foundX = false;
@@ -115,6 +144,7 @@ public class AnalysisManager : MonoBehaviour
             else continue;
 
             genotype.FrequencyAbs++;
+
             if (DoAnalyzeAlleleFreq) AnalyzeAlleleFrequencies(genotype, generation);
             break;
         }
@@ -129,6 +159,36 @@ public class AnalysisManager : MonoBehaviour
             newGenotypeEntry.FrequencyAbs = 1;
             if (DoAnalyzeAlleleFreq) AnalyzeAlleleFrequencies(newGenotypeEntry, generation);
             AnalysedGenotypeFreqData[generation].Add(newGenotypeEntry);
+        }
+    }
+
+    public void AnalyzePhenotype(Phenotype phenotype, string popKey, int generation)
+    {
+        if (!DoAnalyzePhenotypeMean) { return; }
+
+        if (AnalysedPhenotypeData.Count - 1 < generation) AnalysedPhenotypeData.Add(new List<AnalyzedPhenotype>());
+
+        bool hasFoundPopulation = false;
+        foreach (AnalyzedPhenotype population in AnalysedPhenotypeData[generation])
+        {
+            if (population.PopKey == popKey) hasFoundPopulation = true;
+            else continue;
+
+            population.SummedValue.x += phenotype.PhenotypeColor.r;
+            population.SummedValue.y += phenotype.PhenotypeColor.g;
+            population.SummedValue.z += phenotype.PhenotypeColor.b;
+
+            break;
+        }
+
+        if (!hasFoundPopulation)
+        {
+            AnalyzedPhenotype newPhenotypeEntry = new AnalyzedPhenotype();
+            newPhenotypeEntry.Generation = generation;
+            newPhenotypeEntry.PopKey = popKey;
+            newPhenotypeEntry.SummedValue = new Vector3(phenotype.PhenotypeColor.r, phenotype.PhenotypeColor.g, phenotype.PhenotypeColor.b);
+
+            AnalysedPhenotypeData[generation].Add(newPhenotypeEntry);
         }
     }
 }
@@ -150,4 +210,12 @@ public class AnalyzedAllele
     public int AlleleValue;
     public float FrequencyAbs;
     public float FrequencyRel;
+}
+
+public class AnalyzedPhenotype
+{
+    public int Generation;
+    public string PopKey;
+    public Vector3 SummedValue;
+    public Vector3 PhenotypeNormalizedValue;
 }

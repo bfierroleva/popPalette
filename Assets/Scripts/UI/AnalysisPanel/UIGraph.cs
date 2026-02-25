@@ -10,7 +10,7 @@ public class UIGraph : MonoBehaviour
     [SerializeField] private float _xMaxValue;
     [SerializeField] private RectTransform _graphContainer;
     [SerializeField] private Sprite _circleSprite;
-    [SerializeField] private List<Color> _colorList;
+    public List<Color> _colorList;
 
     private List<List<Vector3>> _dotList = new List<List<Vector3>>();//each list is a genertion, x = x value, y = y value, z = color index
 
@@ -22,6 +22,8 @@ public class UIGraph : MonoBehaviour
 
         CreateDot(new Vector2(xPos, yPos), colorIndex, (int)values.x);
     }
+
+ 
 
     public void DrawMissingDots()
     {

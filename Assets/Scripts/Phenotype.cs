@@ -7,7 +7,7 @@ public class Phenotype : MonoBehaviour
     private new SpriteRenderer renderer;
 
     public Color PhenotypeColor;
-
+    //public Vector3 PhenotypeValue; // x=R y=G z=B
     public void SetPhenotype(Identity identity)
     {
         renderer = GetComponent<SpriteRenderer>();

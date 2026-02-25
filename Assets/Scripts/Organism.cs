@@ -104,11 +104,11 @@ public class Organism : MonoBehaviour
         {
             foreach (Locus locus in chromosomePair.LocusList)
             {
-                analysisManager.AnalyzeGenotype(locus.AlleleValues,locus.Key, _popToMigrateTo[0].PopKey, ThisIdentity.Generation);
+                analysisManager.AnalyzeGenotype(locus.AlleleValues,locus.Key, _popToMigrateTo[0].PopKey, ThisIdentity.Generation); //revisar porque no entiendo porque aqui pongo _popToMigrateTo[0].PopKey
             }
         }
 
-        
+        analysisManager.AnalyzePhenotype(Phenotype, _popToMigrateTo[0].PopKey, ThisIdentity.Generation); //revisar porque no entiendo porque aqui pongo _popToMigrateTo[0].PopKey 
 
         _isGrowing = true;
 

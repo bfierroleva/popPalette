@@ -7,11 +7,13 @@ public class UIAnalysis : MonoBehaviour
     private AnalysisManager _anaAnalysisManager;
     private PopulationManager _populationManager;
 
-    [SerializeField] private bool _doShowGenotypeFreq;
-    [SerializeField] private bool _doShowAlleleFreq;
+    //[SerializeField] private bool _doShowGenotypeFreq;
+    //[SerializeField] private bool _doShowAlleleFreq;
+    //[SerializeField] private bool _doShowPhenotypeMean;
 
     [SerializeField] private List<UIGenotypeFreqOutput> GenotypeFreqOutputPanel;
     [SerializeField] private List<UIAlleleFreqOutput> AlleleFreqOutputPanel;
+    [SerializeField] private List<UIPhenotypeOutput> PhenotypeOutputPanel;
 
     private void Start()
     {
@@ -23,8 +25,9 @@ public class UIAnalysis : MonoBehaviour
 
     void OnAnalysisCompleted()
     {
-        if (_doShowGenotypeFreq) ShowGenotypeFreq();
-        if (_doShowAlleleFreq) ShowAlleleFreq();
+        if (_anaAnalysisManager.DoAnalyzeGenotypeFreq) ShowGenotypeFreq();
+        if (_anaAnalysisManager.DoAnalyzeAlleleFreq) ShowAlleleFreq();
+        if (_anaAnalysisManager.DoAnalyzePhenotypeMean) ShowPhenotype();
     }
 
     void ShowGenotypeFreq()
@@ -34,6 +37,15 @@ public class UIAnalysis : MonoBehaviour
             item.ShowData(_anaAnalysisManager.AnalysedGenotypeFreqData[_anaAnalysisManager.CurrentGeneration]);
         }
         
+    }
+
+    void ShowPhenotype()
+    {
+        foreach (UIPhenotypeOutput item in PhenotypeOutputPanel)
+        {
+            item.ShowData(_anaAnalysisManager.AnalysedPhenotypeData[_anaAnalysisManager.CurrentGeneration]);
+        }
+
     }
 
     void ShowAlleleFreq()
