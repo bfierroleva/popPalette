@@ -9,13 +9,26 @@ public class MainMenu : MonoBehaviour
 {
     public string SpanishUserManualLink = "";
     public string EnglishUserManualLink = "";
+    public bool isManager;
+    public bool isToggleScreen;
+
     int CurrentRes;
     bool isFullScreen;
 
+
     private void Start()
     {
-        SetResolution(1920);
-        SetFullscreen();
+        if(!isManager && !isToggleScreen) { return; }
+
+        if (isManager)
+        {
+            SetResolution(1920);
+            isFullScreen = false;
+            ToggleFullscreen();
+        }else if ( isToggleScreen)
+        {
+            isFullScreen = true;
+        }
 
     }
 
@@ -47,24 +60,28 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetFullscreen()
+    public void ToggleFullscreen()
     {
-        Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-        isFullScreen = true;
-        Debug.Log("Modo de pantalla cambiado a: " + Screen.fullScreenMode);
-    }
-
-    public void SetWindowed()
-    {
-        Screen.fullScreenMode = FullScreenMode.Windowed;
-        isFullScreen = false;
-        Debug.Log("Modo de pantalla cambiado a: " + Screen.fullScreenMode);
+        if (isFullScreen)
+        {
+            Debug.Log("isFullscreen: " + isFullScreen);
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+            isFullScreen = false;
+            Debug.Log("set windowed");
+        }
+        else if (!isFullScreen)
+        {
+            Debug.Log("isFullscreen: " + isFullScreen);
+            Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+            isFullScreen = true;
+            Debug.Log("set fullscreen");
+        }
+        Debug.Log("isFullscreen set to: " + isFullScreen);
     }
 
     public void SetResolution(int x)
     {
         Screen.SetResolution(x, Mathf.RoundToInt(x * (9f / 16f)), Screen.fullScreenMode);
         CurrentRes = x;
-        Debug.Log("Res cambiada a: " + Screen.currentResolution);
     }
 }

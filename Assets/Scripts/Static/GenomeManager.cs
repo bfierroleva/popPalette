@@ -4,7 +4,6 @@ using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
-using static UnityEditor.PlayerSettings;
 
 public class GenomeManager
 {
@@ -36,7 +35,7 @@ public class GenomeManager
     public Locus MutateMicrosatellite(Locus locus)
     {
         float random = Random.value;
-        if (random <= MutationChance/2)
+        if (random <= locus.MutationChance /2)
         {
             int i = locus.AlleleValues.x;
             locus.AlleleValues.x = Mathf.Clamp(locus.AlleleValues.x + Random.Range(-locus.MutationMaxRange, locus.MutationMaxRange + 1), locus.AlleleValuesRange.x, locus.AlleleValuesRange.y + 1);
@@ -44,7 +43,7 @@ public class GenomeManager
             _numOfMutations++;
             //Debug.LogWarning(_sumOfMutations / _numOfMutations);
         }
-        else if (random <= MutationChance)
+        else if (random <= locus.MutationChance)
         {
             locus.AlleleValues.y = Mathf.Clamp(locus.AlleleValues.y + Random.Range(-locus.MutationMaxRange, locus.MutationMaxRange + 1), locus.AlleleValuesRange.x, locus.AlleleValuesRange.y + 1);
         }
