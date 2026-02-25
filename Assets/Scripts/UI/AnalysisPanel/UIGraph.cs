@@ -17,6 +17,7 @@ public class UIGraph : MonoBehaviour
     public void Draw(Vector2 values, int colorIndex)
     {
         if (values.x > _xMaxValue) return;
+        Debug.Log("valor: " + values.y);
         float xPos = 1 + (values.x / _xMaxValue) * _graphContainer.sizeDelta.x;
         float yPos = (values.y / _yMaxValue) * _graphContainer.sizeDelta.y;
 
@@ -63,19 +64,23 @@ public class UIGraph : MonoBehaviour
         _dotList[gen].Add(new Vector3(achoredPosition.x, achoredPosition.y, colorIndex));
 
         if (achoredPosition.x <= 1) return;
+        Debug.Log("pasa del return");
         bool foundPreviousPoint = false;
         foreach (Vector3 point in _dotList[gen - 1])
         {
+            
             if (point.z == colorIndex) { CreateDotConnection(new Vector2(point.x, point.y), achoredPosition, colorIndex); foundPreviousPoint = true; }
         }
-        /*
+        
         if (!foundPreviousPoint)
         {
-            Vector2 previousDot = new Vector2(1 + (gen - 1 / _xMaxValue) * _graphContainer.sizeDelta.x, (0 / _yMaxValue) * _graphContainer.sizeDelta.y);
-            CreateDot(previousDot, colorIndex, (int)(gen - 1));
-            CreateDotConnection(previousDot, achoredPosition, colorIndex);
+            foreach (Vector3 point in _dotList[gen - 1])
+            {
+
+                if (point.z == colorIndex - 1) { CreateDotConnection(new Vector2(point.x, point.y), achoredPosition, colorIndex); }
+            }
         }
-        */
+        
     }
 
     void CreateDotConnection(Vector2 dotA, Vector2 dotB, int colorIndex)

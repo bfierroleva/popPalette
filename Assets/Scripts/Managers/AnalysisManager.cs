@@ -29,6 +29,7 @@ public class AnalysisManager : MonoBehaviour
 
     void AnalyzeGeneration()
     {
+        
         CurrentGeneration = _populationManager.GetComponent<GenerationManager>().CurrentGen;
 
         if (DoAnalyzeGenotypeFreq)

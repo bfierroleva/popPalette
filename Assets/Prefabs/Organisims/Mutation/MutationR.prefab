@@ -195,9 +195,9 @@ MonoBehaviour:
   TypeOfMating: 0
   HaploidNumber: 3
   DistanceRange: {x: 3, y: 10}
-  StartingSpeed: 3
-  MaxSpeed: 10
-  IncreaseSpeedRate: 2
+  StartingSpeed: 1.5
+  MaxSpeed: 15
+  IncreaseSpeedRate: 0.5
   PopulationKey: right
   MaxPopulation: 250
   InitialPopulation: 120

@@ -16,6 +16,7 @@ public class UIPhenotypeOutput : MonoBehaviour
 
     public void ShowData(List<AnalyzedPhenotype> populations)
     {
+
         foreach (AnalyzedPhenotype populationMean in populations)
         {
             if (populationMean.PopKey != _popKey) continue;
@@ -43,12 +44,14 @@ public class UIPhenotypeOutput : MonoBehaviour
             if(!foundColor)
             {
                 _graph._colorList.Add(colorToDisplay);
+                _graph.Draw(new Vector2(x, y), i);
+
             }
 
 
             
         }
-        _graph.DrawMissingDots();
+        //_graph.DrawMissingDots();
     }
 }
 
