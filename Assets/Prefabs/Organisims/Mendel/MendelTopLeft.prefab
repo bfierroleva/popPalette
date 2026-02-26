@@ -204,7 +204,7 @@ MonoBehaviour:
   PopsToMigrateTo:
   - left
   MigrationChancePerIndividual:
-  - 0.05
+  - 0.025
   CanReproduceWithOtherPops: 0
   InitialPosition: {x: -30, y: 22.5}
 --- !u!114 &2318971965981112419

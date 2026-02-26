@@ -199,6 +199,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42319756}
   m_CullTransparentMesh: 1
+--- !u!114 &176308546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 932153787695035787, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+  m_PrefabInstance: {fileID: 2376679796353953489}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847b17d80992cfc4fa7a498d945c645d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &240604505
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,10 +548,14 @@ PrefabInstance:
       objectReference: {fileID: 3204442255516255474, guid: f54d52f5f9005104785ccc7435e2d40e, type: 3}
     - target: {fileID: 8108326091823722418, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: DoAnalyzeAlleleFreq
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8108326091823722418, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: DoAnalyzeGenotypeFreq
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8108326091823722418, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: DoAnalyzePhenotypeMean
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
@@ -572,8 +587,80 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
       propertyPath: SelectivePreassureStrenght
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[0].key
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[1].key
+      value: right
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[2].key
+      value: topleft
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[3].key
+      value: topright
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[0].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[1].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[2].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectiveCurve.Array.data[3].value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[0].key
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[1].key
+      value: right
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[2].key
+      value: topleft
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[3].key
+      value: topright
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[0].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[1].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[2].value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470173380312791202, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
+      propertyPath: SelectivePreassureStrenght.Array.data[3].value
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -607,6 +694,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 913344319486209967, guid: db0b86e6b43500e46a0213d1e0bae60e, type: 3}
   m_PrefabInstance: {fileID: 636095128}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1219124098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5291581341021948260, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+  m_PrefabInstance: {fileID: 2376679796353953489}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847b17d80992cfc4fa7a498d945c645d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1281919861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1448,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 32153553450204096, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: SceneName
+      value: 3.5-MendelInheritance
+      objectReference: {fileID: 0}
     - target: {fileID: 211105787289755677, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _colorList.Array.size
       value: 2
@@ -1370,6 +1472,10 @@ PrefabInstance:
       propertyPath: _colorList.Array.data[1].r
       value: 0.25490198
       objectReference: {fileID: 0}
+    - target: {fileID: 932153787695035787, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: _colorToPlot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1104411007992123833, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _alleleToColorIndex.Array.size
       value: 2
@@ -1382,6 +1488,10 @@ PrefabInstance:
       propertyPath: _alleleToColorIndex.Array.data[1]
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 1560909453408821210, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2551555013613916204, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _doShowAlleleFreq
       value: 0
@@ -1390,6 +1500,26 @@ PrefabInstance:
       propertyPath: _doShowGenotypeFreq
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2551555013613916204, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: PhenotypeOutputPanel.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2551555013613916204, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: AlleleFreqOutputPanel.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2551555013613916204, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: GenotypeFreqOutputPanel.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2551555013613916204, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: PhenotypeOutputPanel.Array.data[0]
+      value: 
+      objectReference: {fileID: 1219124098}
+    - target: {fileID: 2551555013613916204, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: PhenotypeOutputPanel.Array.data[1]
+      value: 
+      objectReference: {fileID: 176308546}
     - target: {fileID: 3257497353241105611, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1506,6 +1636,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5291581341021948260, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: _colorToPlot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5523625642641763208, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _colorList.Array.size
       value: 3
@@ -1529,6 +1663,10 @@ PrefabInstance:
     - target: {fileID: 5523625642641763208, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _colorList.Array.data[2].r
       value: 0.25490198
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003963874616153250, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6219431177894265998, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _colorList.Array.size
@@ -1606,6 +1744,10 @@ PrefabInstance:
       propertyPath: _genotypeToColorIndex.Array.data[2].x
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 7858269130915967965, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8446622635379989707, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -1625,6 +1767,10 @@ PrefabInstance:
     - target: {fileID: 8939843052833740766, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_Color.r
       value: 0.735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047003112036695565, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

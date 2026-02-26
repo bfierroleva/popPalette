@@ -21,8 +21,17 @@ EditorBuildSettings:
     path: Assets/Scenes/3-MendelInheritance.unity
     guid: f3f12d20b0602d14c8f8d51e78db057a
   - enabled: 1
+    path: Assets/Scenes/3.5-MendelInheritance.unity
+    guid: b7fa75eccd688be4d98ceda7bb29177a
+  - enabled: 1
     path: Assets/Scenes/4-Migration.unity
     guid: 8132de15ee0af35438376df2b94cf56a
+  - enabled: 1
+    path: Assets/Scenes/4.1-Migration.unity
+    guid: 3b794279fb6eb7347a7087baf520a67c
+  - enabled: 1
+    path: Assets/Scenes/4.2-Migration.unity
+    guid: be5cedc1a6372e647ae0b98f6c99ed38
   - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02

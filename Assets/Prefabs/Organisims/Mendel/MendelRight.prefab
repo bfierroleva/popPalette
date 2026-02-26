@@ -195,12 +195,12 @@ MonoBehaviour:
   TypeOfMating: 0
   HaploidNumber: 1
   DistanceRange: {x: 3, y: 10}
-  StartingSpeed: 3
+  StartingSpeed: 1.5
   MaxSpeed: 8
-  IncreaseSpeedRate: 2
+  IncreaseSpeedRate: 0.6
   PopulationKey: right
-  MaxPopulation: 150
-  InitialPopulation: 150
+  MaxPopulation: 100
+  InitialPopulation: 100
   PopsToMigrateTo: []
   MigrationChancePerIndividual: []
   CanReproduceWithOtherPops: 0
@@ -254,4 +254,4 @@ MonoBehaviour:
   LocusSOList:
   - {fileID: 11400000, guid: ea13414bea19a334ea9cebfa887f89e9, type: 2}
   AlleleList:
-  - {x: 0, y: 1, z: 0}
+  - {x: 0, y: 1, z: 64}

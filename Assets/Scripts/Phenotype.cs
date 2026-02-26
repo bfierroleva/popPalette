@@ -15,12 +15,14 @@ public class Phenotype : MonoBehaviour
         PhenotypeColor = Color.black;
         foreach (ChromosomePair ChromosomePair in identity.ThisGenotype.Karyotype)
         {
+            Debug.Log("Numero de alelos: " + ChromosomePair.LocusList.Count);
             foreach (Locus locus in ChromosomePair.LocusList)
             {
                 if (!locus.IsFunctional) continue;
                 
                 if (locus.Key == "colorR")
                 {
+                    
                     renderer.color = new Color((((float)locus.AlleleValues.x + (float)locus.AlleleValues.y) / 2) / (float)locus.AlleleValuesRange.y, renderer.color.g, renderer.color.b, renderer.color.a);
                 }
                 if (locus.Key == "colorG")
@@ -29,6 +31,7 @@ public class Phenotype : MonoBehaviour
                 }
                 if (locus.Key == "colorB")
                 {
+                    
                     renderer.color = new Color(renderer.color.r, renderer.color.g, (((float)locus.AlleleValues.x + (float)locus.AlleleValues.y) / 2) / (float)locus.AlleleValuesRange.y, renderer.color.a);
                 }
             }
