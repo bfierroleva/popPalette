@@ -1153,6 +1153,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2469634459848916015, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_Name
+      value: NextSim
+      objectReference: {fileID: 0}
     - target: {fileID: 2551555013613916204, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _doShowAlleleFreq
       value: 0
