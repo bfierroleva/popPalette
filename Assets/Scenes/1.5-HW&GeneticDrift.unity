@@ -621,6 +621,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2688445532619164556, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4369282735223542975, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -709,9 +713,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5195746209184420869, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1294651064418304
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195746209184420869, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:99a80a90d5fbacd47a07de054c834149
+      objectReference: {fileID: 0}
     - target: {fileID: 6031268240913609042, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361995810622640304, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1289088297435136
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361995810622640304, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:99a80a90d5fbacd47a07de054c834149
       objectReference: {fileID: 0}
     - target: {fileID: 9099834521086194809, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_IsActive

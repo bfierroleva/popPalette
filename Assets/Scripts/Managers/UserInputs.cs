@@ -63,11 +63,16 @@ public class UserInputs : MonoBehaviour
         Time.timeScale = newTime;
     }
 
+    public void SavePopDataToClipBoard()
+    {
+        GUIUtility.systemCopyBuffer = GetComponent<SavePopData>().GetGenData(GetComponent<GenerationManager>().CurrentGen);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            GUIUtility.systemCopyBuffer = GetComponent<SavePopData>().GetGenData(GetComponent<GenerationManager>().CurrentGen);
+            SavePopDataToClipBoard();
         }
         if (Input.GetKeyDown(KeyCode.W))
         {

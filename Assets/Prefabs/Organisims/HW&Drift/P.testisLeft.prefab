@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: MaxPopulation
-      value: 200
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: PopulationKey
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: InitialPopulation
-      value: 200
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1877749431302453215, guid: 5629afe0f93967542abc643c3cd48212, type: 3}
       propertyPath: InitialPosition.x

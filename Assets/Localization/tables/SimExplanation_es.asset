@@ -19,25 +19,97 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 20270153728
-    m_Localized: "En esta primera imulaci\xF3n vamos a visualizar uno los conceptos
-      m\xE1s b\xE1sicos de la gen\xE9tica de poblaciones: El equilibrio de Hardy-Weinberg.\n\nBla
-      Bla\n\nDe todas esas fuerzas evolutivas hay una que siempre va a estar actuando,
-      en mayor o en menor medida en funci\xF3n del tama\xF1o poblacional: La deriva
-      gen\xE9tica. Esta es el cambio aleatorio en las frecuencias al\xE9licas con
-      motivos estoc\xE1sticos como la variabilidad natural de la descendencia de
-      los individuos, independiete de como de adaptados esten al ambiente, o, arguably
-      el motivo m\xE1s importante, el hecho de que los alelos que recibe la descendencia
-      de cada pariente es aleatorio, es decir, para un locus (en especies diploides)
-      el hijo va a hederar del padre uno de sus dos alelos, de manera aleatoria.
-      De esta manera la generaci\xF3n filial va a hederar lo esperado por hardy-weinberg
-      pero con una modificacion debido a la estocasticidad. Estos factores dependen
-      del tama\xF1o poblacional, ya que cuantos m\xE1s individuos estas diferencias
-      se acaban contrarrestando entre todos y con tama\xF1os poblaiconales muy altos
-      el efecto de la deriva gen\xE9tica es casi inapreciable.\n\n"
+    m_Localized: "En esta primera simulaci\xF3n vamos a explorar uno de los principios
+      fundamentales de la gen\xE9tica de poblaciones: el equilibrio de Hardy-Weinberg.
+      Este concepto describe una situaci\xF3n te\xF3rica en la que las frecuencias
+      al\xE9licas y genot\xEDpicas de una poblaci\xF3n permanecen constantes generaci\xF3n
+      tras generaci\xF3n.\r\n\nEn nuestro caso trabajamos con un locus con dos alelos
+      (A y a), ambos con una frecuencia inicial de 0.5. Bajo apareamiento aleatorio,
+      las frecuencias genot\xEDpicas esperadas tras una generaci\xF3n ser\xEDan:\r\n\n
+      AA (rojo claro) = 0.25\r\n Aa (rojo intermedio) = 0.5\r\n aa (rojo oscuro)
+      = 0.25\r\n\nEl equilibrio de Hardy-Weinberg solo se cumple si se dan ciertas
+      condiciones:\r\n\n- Apareamiento aleatorio (esta simulaci\xF3n lo cumple).\r\n\r-
+      Ausencia de fuerzas evolutivas: selecci\xF3n, mutaci\xF3n, migraci\xF3n y deriva
+      gen\xE9tica.\r\n\r\nDe estas fuerzas, hay una que nunca desaparece por completo
+      en poblaciones reales: la deriva gen\xE9tica.\r\n"
     m_Metadata:
       m_Items: []
   - m_Id: 2760845164544
-    m_Localized: "La poblaci\xF3n de la derecha "
+    m_Localized: "La deriva gen\xE9tica es el cambio aleatorio en las frecuencias
+      al\xE9licas debido al azar. No depende de que un alelo sea ventajoso o desventajoso,
+      ocurre simplemente por procesos estoc\xE1sticos.\r\n\nExisten dos fuentes principales
+      de este azar:\r\n\n- Muestreo gam\xE9tico: cada descendiente recibe uno de
+      los dos alelos de cada progenitor en cada locus, y esa transmisi\xF3n es aleatoria.
+      Por ejemplo, un individuo Aa (rojo intermedio) tiene un 50% de probabilidad
+      de transmitir el alelo A y un 50% de transmitir el alelo a.\r\n\r\n- Variaci\xF3n
+      en el \xE9xito reproductivo: no todos los individuos dejan exactamente el mismo
+      n\xFAmero de descendientes. Incluso si todos tienen la misma probabilidad de
+      reproducirse, el n\xFAmero final de hijos puede variar simplemente por azar.\r\n\r\n\r\nEstas
+      dos fuentes de aleatoriedad tienen un efecto mucho mayor cuando la poblaci\xF3n
+      es peque\xF1a. Imagina una poblaci\xF3n formada por solo dos individuos, ambos
+      Aa. Si producen dos descendientes y, por azar, ambos reciben \xFAnicamente
+      el alelo A de sus progenitores, en una sola generaci\xF3n las frecuencias al\xE9licas
+      pasar\xEDan de 0.5 / 0.5 a 1 / 0. Esa poblaci\xF3n habr\xEDa perdido completamente
+      el alelo a solo por azar.\r\n\nEn poblaciones grandes, en cambio, las fluctuaciones
+      individuales tienden a compensarse entre s\xED. Aunque el azar sigue actuando,
+      su efecto relativo es mucho menor. En el caso te\xF3rico de una poblaci\xF3n
+      infinita, la deriva gen\xE9tica desaparecer\xEDa.\r\n\nEn esta simulaci\xF3n
+      modelamos expl\xEDcitamente a cada individuo y cada evento de reproducci\xF3n.
+      Esto significa que en ambas poblaciones el azar act\xFAa en cada generaci\xF3n.
+      Sin embargo, la poblaci\xF3n de la izquierda es mucho m\xE1s grande que la
+      de la derecha, por lo que las fluctuaciones en sus frecuencias al\xE9licas
+      y genot\xEDpicas ser\xE1n mucho menores y m\xE1s estables a lo largo del tiempo.
+      Todos los cambios que se ven en estas frecuencias son debidas \xFAnicamente
+      al tama\xF1o poblacional, ya que el resto de condiciones del equilibrio se
+      cumplen.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1289088297435136
+    m_Localized: "En esta segunda simulaci\xF3n partimos de las mismas condiciones
+      iniciales: dos poblaciones, una grande y una peque\xF1a, ambas con frecuencias
+      al\xE9licas iniciales de 0.5 para A y 0.5 para a. Como en el caso anterior,
+      hay apareamiento aleatorio y no hay selecci\xF3n ni mutaci\xF3n.\n\nLa diferencia
+      clave ahora es que se introduce migraci\xF3n. En cada generaci\xF3n, individuos
+      de la poblaci\xF3n grande migran hacia la poblaci\xF3n peque\xF1a.\n\nLa migraci\xF3n
+      es otra fuerza evolutiva. Implica el movimiento de individuos entre poblaciones
+      y su posterior reproducci\xF3n en la nueva poblaci\xF3n. Cuando los migrantes
+      se reproducen, introducen sus alelos en ese acervo g\xE9nico. Este proceso
+      tambi\xE9n se conoce como flujo g\xE9nico.\n\nEn esta simulaci\xF3n, la poblaci\xF3n
+      grande act\xFAa como un reservorio de diversidad gen\xE9tica. Debido a su tama\xF1o,
+      la deriva gen\xE9tica tiene un efecto d\xE9bil sobre ella, y sus frecuencias
+      al\xE9licas tienden a mantenerse cerca de la proporci\xF3n inicial 0.5 / 0.5.
+      Cuando los migrantes llegan a la poblaci\xF3n peque\xF1a, reintroducen continuamente
+      ambos alelos.\n\nEn ausencia de migraci\xF3n, como viste en el ejemplo anterior,
+      la poblaci\xF3n peque\xF1a estar\xEDa fuertemente afectada por la deriva gen\xE9tica,
+      y uno de los alelos podr\xEDa fijarse f\xE1cilmente (frecuencia = 1) mientras
+      el otro se perder\xEDa (frecuencia = 0). Sin embargo, con migraci\xF3n continua,
+      los alelos perdidos pueden reintroducirse y las fluctuaciones extremas se reducen.\n\nComo
+      resultado, el flujo g\xE9nico contrarresta los efectos de la deriva gen\xE9tica
+      en la poblaci\xF3n peque\xF1a. Esta mantiene una mayor diversidad gen\xE9tica
+      y tiende a permanecer m\xE1s cercana a las expectativas del equilibrio de Hardy-Weinberg
+      a lo largo del tiempo, aunque la deriva nunca se elimina por completo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1294533296750592
+    m_Localized: "En la esquina inferior derecha de la ventana encontrar\xE1s un
+      bot\xF3n que permite descargar o copiar al portapapeles los datos de la poblaci\xF3n
+      en ese instante en formato Genepop. Puedes utilizar ese archivo para acceder
+      a Genepop On The Web y analizar la poblaci\xF3n all\xED, aplicando tests estad\xEDsticos
+      para evaluar posibles desviaciones del equilibrio de Hardy-Weinberg. Esto te
+      permitir\xE1 cuantificar c\xF3mo de lejos est\xE1 cada poblaci\xF3n del equilibrio
+      en distintos momentos de la simulaci\xF3n. Esta opci\xF3n est\xE1 disponible
+      en todas las simulaciones de la aplicaci\xF3n.\n\nUPDATE: No se desde hace
+      cuanto pero Genepop On The Web est\xE1 caida :("
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1294651064418304
+    m_Localized: "En esta simulaci\xF3n, usando los datos en formato Genepop, compara
+      qu\xE9 tan cerca del equilibrio de Hardy-Weinberg se encuentra ahora la poblaci\xF3n
+      peque\xF1a (la de la derecha) en comparaci\xF3n con la simulaci\xF3n anterior.
+      Observa si la migraci\xF3n reduce las desviaciones causadas por la deriva gen\xE9tica
+      y c\xF3mo influye en el mantenimiento de la diversidad al\xE9lica a lo largo
+      del tiempo.\n\nUPDATE: No se desde hace cuanto pero Genepop On The Web est\xE1
+      caida :("
     m_Metadata:
       m_Items: []
   references:

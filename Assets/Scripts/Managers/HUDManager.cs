@@ -32,4 +32,9 @@ public class HUDManager : MonoBehaviour
     {
         _userInputs.ChangeSpeed(pos);
     }
+
+    public void PressSavePopData()
+    {
+        _userInputs.SavePopDataToClipBoard();
+    }
 }

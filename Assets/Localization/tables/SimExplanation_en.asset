@@ -17,7 +17,157 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 99a80a90d5fbacd47a07de054c834149, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 20270153728
+    m_Localized: 'In this first simulation we will explore one of the fundamental
+      principles of population genetics: the Hardy-Weinberg equilibrium. This concept
+      describes a theoretical situation in which allele and genotype frequencies
+      in a population remain constant from generation to generation.
+
+
+      In our
+      case, we are working with a single locus with two alleles (A and a), both with
+      an initial frequency of 0.5. Under random mating, the expected genotype frequencies
+      after one generation would be:
+
+
+      AA (light red) = 0.25
+
+      Aa (medium
+      red) = 0.5
+
+      aa (dark red) = 0.25
+
+
+      Hardy-Weinberg equilibrium is
+      only maintained if certain conditions are met:
+
+
+      - Random mating (this
+      simulation fulfills this condition).
+
+      - Absence of evolutionary forces:
+      selection, mutation, migration, and genetic drift.
+
+
+      Among these forces,
+      there is one that never completely disappears in real populations: genetic
+      drift.
+
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2760845164544
+    m_Localized: 'Genetic drift is the random change in allele frequencies due to
+      chance. It does not depend on whether an allele is advantageous or disadvantageous,
+      it occurs simply because of stochastic processes.
+
+
+      There are two main
+      sources of this drift:
+
+
+      - Gametic sampling: each offspring receives
+      one of the two alleles from each parent at a given locus, and this transmission
+      is random. For example, an Aa individual (medium red) has a 50% probability
+      of passing on allele A and a 50% probability of passing on allele a.
+
+
+      -
+      Variation in reproductive success: not all individuals leave exactly the same
+      number of offspring. Even if all individuals have the same probability of reproducing,
+      the final number of offspring can vary simply by chance.
+
+
+      These two
+      sources of randomness have a much stronger effect when the population is small.
+      Imagine a population consisting of only two individuals, both Aa. If they produce
+      two offspring and, by chance, both offspring inherit only allele A from their
+      parents, in a single generation the allele frequencies would shift from 0.5
+      / 0.5 to 1 / 0. That population would have completely lost allele a purely
+      by chance.
+
+
+      In large populations, by contrast, individual fluctuations
+      tend to balance each other out. Although randomness is still acting, its relative
+      effect is much smaller. In the theoretical case of an infinite population,
+      genetic drift would disappear.
+
+
+      In this simulation, we explicitly model
+      each individual and each reproductive event. This means that in both populations,
+      chance operates in every generation. However, the population on the left is
+      much larger than the one on the right, so fluctuations in allele and genotype
+      frequencies will be smaller and more stable over time. All the changes observed
+      in these frequencies are due solely to population size, since the other conditions
+      required for equilibrium are fulfilled.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1289088297435136
+    m_Localized: 'In this second simulation we start from the same initial conditions:
+      two populations, one large and one small, both with initial allele frequencies
+      of 0.5 for A and 0.5 for a. As in the previous case, random mating occurs and
+      there is no selection or mutation.
+
+
+      The key difference now is that
+      migration is introduced. In each generation, individuals from the large population
+      migrate into the small population.
+
+
+      Migration is another evolutionary
+      force. It involves the movement of individuals between populations and their
+      subsequent reproduction there. When migrants reproduce in their new population,
+      they introduce their alleles into that gene pool. This process is also known
+      as gene flow.
+
+
+      In this simulation, the large population acts as a reservoir
+      of genetic diversity. Because it is large, genetic drift has only a weak effect
+      on it, and its allele frequencies tend to remain close to the initial 0.5 /
+      0.5 ratio. When migrants move into the small population, they continuously
+      reintroduce both alleles.
+
+
+      In the absence of migration, as you saw
+      in the previous example, the small population would be strongly affected by
+      genetic drift, and one allele could easily become fixed (frequency = 1) while
+      the other is lost (frequency = 0). However, with ongoing migration, lost alleles
+      can be reintroduced and extreme fluctuations are reduced.
+
+
+      As a result,
+      gene flow counteracts the effects of genetic drift in the small population.
+      The small population maintains higher genetic diversity and tends to remain
+      closer to Hardy-Weinberg expectations over time, although drift is never completely
+      eliminated.
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1294533296750592
+    m_Localized: "En la esquina inferior derecha de la ventana encontrar\xE1s un
+      bot\xF3n que permite descargar o copiar al portapapeles los datos de la poblaci\xF3n
+      en ese instante en formato Genepop. Puedes utilizar ese archivo para acceder
+      a Genepop On The Web y analizar la poblaci\xF3n all\xED, aplicando tests estad\xEDsticos
+      para evaluar posibles desviaciones del equilibrio de Hardy-Weinberg. Esto te
+      permitir\xE1 cuantificar c\xF3mo de lejos est\xE1 cada poblaci\xF3n del equilibrio
+      en distintos momentos de la simulaci\xF3n. Esta opci\xF3n est\xE1 disponible
+      en todas las simulaciones de la aplicaci\xF3n.\n\nUPDATE: No se desde hace
+      cuanto pero Genepop On The Web est\xE1 caida :("
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1294651064418304
+    m_Localized: "En esta simulaci\xF3n, usando los datos en formato Genepop, compara
+      qu\xE9 tan cerca del equilibrio de Hardy-Weinberg se encuentra ahora la poblaci\xF3n
+      peque\xF1a (la de la derecha) en comparaci\xF3n con la simulaci\xF3n anterior.
+      Observa si la migraci\xF3n reduce las desviaciones causadas por la deriva gen\xE9tica
+      y c\xF3mo influye en el mantenimiento de la diversidad al\xE9lica a lo largo
+      del tiempo.\n\nUPDATE: No se desde hace cuanto pero Genepop On The Web est\xE1
+      caida :("
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
