@@ -254,6 +254,4 @@ MonoBehaviour:
   LocusSOList:
   - {fileID: 11400000, guid: ea7dc7977f68026438a495c155bfb9e7, type: 2}
   AlleleList:
-  - {x: 0, y: 0.4, z: 225}
-  - {x: 0, y: 0.3, z: 235}
-  - {x: 0, y: 0.3, z: 255}
+  - {x: 0, y: 1, z: 235}

@@ -1520,6 +1520,10 @@ PrefabInstance:
       propertyPath: PhenotypeOutputPanel.Array.data[1]
       value: 
       objectReference: {fileID: 176308546}
+    - target: {fileID: 2688445532619164556, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3257497353241105611, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1636,6 +1640,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5195746209184420869, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1628917138268160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195746209184420869, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:99a80a90d5fbacd47a07de054c834149
+      objectReference: {fileID: 0}
     - target: {fileID: 5291581341021948260, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _colorToPlot
       value: 1
@@ -1747,6 +1759,14 @@ PrefabInstance:
     - target: {fileID: 7858269130915967965, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361995810622640304, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1628786993209344
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361995810622640304, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:99a80a90d5fbacd47a07de054c834149
       objectReference: {fileID: 0}
     - target: {fileID: 8446622635379989707, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

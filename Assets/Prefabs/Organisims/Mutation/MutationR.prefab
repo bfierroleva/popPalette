@@ -199,8 +199,8 @@ MonoBehaviour:
   MaxSpeed: 15
   IncreaseSpeedRate: 0.5
   PopulationKey: right
-  MaxPopulation: 250
-  InitialPopulation: 120
+  MaxPopulation: 200
+  InitialPopulation: 200
   PopsToMigrateTo: []
   MigrationChancePerIndividual: []
   CanReproduceWithOtherPops: 0

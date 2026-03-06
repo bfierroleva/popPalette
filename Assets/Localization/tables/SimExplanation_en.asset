@@ -111,37 +111,36 @@ MonoBehaviour:
       there is no selection or mutation.
 
 
-      The key difference now is that
-      migration is introduced. In each generation, individuals from the large population
-      migrate into the small population.
+      The key difference now is that migration
+      is introduced. In each generation, individuals from the large population migrate
+      into the small population.
 
 
-      Migration is another evolutionary
-      force. It involves the movement of individuals between populations and their
-      subsequent reproduction there. When migrants reproduce in their new population,
-      they introduce their alleles into that gene pool. This process is also known
-      as gene flow.
+      Migration is another evolutionary force.
+      It involves the movement of individuals between populations and their subsequent
+      reproduction there. When migrants reproduce in their new population, they introduce
+      their alleles into that gene pool. This process is also known as gene flow.
 
 
-      In this simulation, the large population acts as a reservoir
-      of genetic diversity. Because it is large, genetic drift has only a weak effect
-      on it, and its allele frequencies tend to remain close to the initial 0.5 /
-      0.5 ratio. When migrants move into the small population, they continuously
-      reintroduce both alleles.
+      In
+      this simulation, the large population acts as a reservoir of genetic diversity.
+      Because it is large, genetic drift has only a weak effect on it, and its allele
+      frequencies tend to remain close to the initial 0.5 / 0.5 ratio. When migrants
+      move into the small population, they continuously reintroduce both alleles.
 
 
-      In the absence of migration, as you saw
-      in the previous example, the small population would be strongly affected by
-      genetic drift, and one allele could easily become fixed (frequency = 1) while
-      the other is lost (frequency = 0). However, with ongoing migration, lost alleles
-      can be reintroduced and extreme fluctuations are reduced.
+      In
+      the absence of migration, as you saw in the previous example, the small population
+      would be strongly affected by genetic drift, and one allele could easily become
+      fixed (frequency = 1) while the other is lost (frequency = 0). However, with
+      ongoing migration, lost alleles can be reintroduced and extreme fluctuations
+      are reduced.
 
 
-      As a result,
-      gene flow counteracts the effects of genetic drift in the small population.
-      The small population maintains higher genetic diversity and tends to remain
-      closer to Hardy-Weinberg expectations over time, although drift is never completely
-      eliminated.
+      As a result, gene flow counteracts the effects of genetic
+      drift in the small population. The small population maintains higher genetic
+      diversity and tends to remain closer to Hardy-Weinberg expectations over time,
+      although drift is never completely eliminated.
 
 '
     m_Metadata:
@@ -166,6 +165,94 @@ MonoBehaviour:
       y c\xF3mo influye en el mantenimiento de la diversidad al\xE9lica a lo largo
       del tiempo.\n\nUPDATE: No se desde hace cuanto pero Genepop On The Web est\xE1
       caida :("
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1617382470918144
+    m_Localized: 'In this simulation we move beyond simple discrete alleles and explore
+      a quantitative trait influenced by mutation and selection. Instead of having
+      just two alleles, this locus can take a range of values between 0 and 255.
+      Each value corresponds to a shade of blue:
+
+      0 represents RGB (0,0,0),
+      while 255 represents RGB (0,0,255). In total, there are 255 possible allelic
+      values.
+
+
+      The phenotype is determined by the average of the two allelic
+      values carried by an individual. This corresponds to incomplete dominance,
+      where heterozygotes show an intermediate phenotype between the two homozygotes.
+
+
+      We
+      have two large populations. In both cases, mutation occurs. However, only one
+      population is subject to natural selection. At the start of the simulation,
+      all individuals in both populations are homozygous for allele value 128. This
+      means there is initially no variation: every individual has the same genotype
+      and the same phenotype.
+
+
+      Mutations can either increase or decrease
+      the allelic value. Over time, this generates new genetic variation in both
+      populations.
+
+
+      In the population on the left, color has no effect on
+      survival or reproduction. It is a neutral trait, and changes in allele values
+      are driven only by mutation and genetic drift, both of which are random and
+      non-directional.
+
+
+      In contrast, in the population on the right, there
+      is directional selection favoring higher allele values. That is, individuals
+      with a more intense blue coloration have higher reproductive success. As a
+      result, higher allele values tend to become more frequent over generations.
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1628786993209344
+    m_Localized: "In this simulation we explore a fundamental question in evolutionary
+      biology:\r\nIs Mendelian (particulate) inheritance essential for natural selection
+      to produce long-term evolutionary change? \r\n\r\nWe begin with two large populations
+      under the same selective pressure. In both cases, lighter green individuals
+      have higher reproductive success. The initial allele frequencies are 0.2 for
+      light green and 0.8 for dark green.\r\n\r\nHowever, the two populations differ
+      in one crucial aspect: the mechanism of inheritance.\r\n\r\nIn the population
+      on the left, inheritance follows the historical model known as blending inheritance.
+      This was the commonly accepted view of heredity in Darwin\u2019s time. Under
+      this model, offspring phenotypes are simple intermediate mixtures of their
+      parents.\r\n\r\nIt is important not to confuse blending inheritance with incomplete
+      dominance. In incomplete dominance (which can occur under Mendelian genetics),
+      alleles remain intact and discrete, even though the heterozygote shows an intermediate
+      phenotype. The key point is that the underlying genetic variants are preserved
+      and can reappear unchanged in future generations.\r\n\r\nIn blending inheritance,
+      by contrast, the genetic variants themselves are averaged in each generation.
+      You can think of individuals as effectively carrying a single trait value per
+      locus, which is the result of mixing (in this simulation, the average) of the
+      parental values. Once mixed, the original variants cannot be recovered. As
+      a result over generations, differences between individuals tend to disappear.\r\n\r\nIn
+      the population on the right, inheritance is Mendelian, or particulate. Alleles
+      are transmitted intact from parents to offspring. They do not blend or disappear
+      when combined in heterozygotes. Each generation reshuffles existing alleles
+      through segregation, but the underlying genetic variants remain discrete. In
+      this population, phenotypes are produced through incomplete dominance.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1628917138268160
+    m_Localized: "Under blending inheritance, variation is progressively diluted
+      every generation. Even if selection favors lighter individuals, as variation
+      decreases, the raw material on which selection acts disappears.\r\n\r\nUnder
+      Mendelian inheritance, by contrast, variation is preserved. Even if individuals
+      with intermediate phenotypes are common, the underlying alleles remain intact
+      and can be passed on unchanged. This allows advantageous alleles to increase
+      steadily in frequency over generations. \r\n\r\nHistorically, Charles Darwin
+      proposed natural selection without knowing the mechanism of inheritance. If
+      inheritance had truly been blending, as he thought, natural selection could
+      not have been a driver of adaptation. The later integration of Mendelian genetics
+      with evolutionary theory showed that particulate inheritance provides exactly
+      what selection requires: stable, heritable variation.\r\n\r\nBy comparing these
+      two populations, you can observe how the same selective pressure produces very
+      different evolutionary outcomes depending solely on the mechanism of inheritance.\r\n"
     m_Metadata:
       m_Items: []
   references:

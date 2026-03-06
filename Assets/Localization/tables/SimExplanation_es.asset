@@ -112,6 +112,84 @@ MonoBehaviour:
       caida :("
     m_Metadata:
       m_Items: []
+  - m_Id: 1617382470918144
+    m_Localized: "En esta simulaci\xF3n vamos m\xE1s all\xE1 de los alelos discretos
+      simples y exploramos un rasgo cuantitativo influido por mutaci\xF3n y selecci\xF3n.
+      En lugar de tener solo dos alelos, este locus puede tomar un rango de valores
+      entre 0 y 255. Cada valor corresponde a una tonalidad de azul:\r \n0 representa
+      RGB (0,0,0), mientras que 255 representa RGB (0,0,255). En total, hay 255 valores
+      al\xE9licos posibles.\r\n\r\nEl fenotipo est\xE1 determinado por la media de
+      los dos valores al\xE9licos que porta un individuo. Esto corresponde a dominancia
+      incompleta, donde los heterocigotos muestran un fenotipo intermedio entre los
+      dos homocigotos.\r\n\r\nTenemos dos poblaciones grandes. En ambos casos ocurre
+      mutaci\xF3n. Sin embargo, solo una de las poblaciones est\xE1 sometida a selecci\xF3n
+      natural. Al inicio de la simulaci\xF3n, todos los individuos de ambas poblaciones
+      son homocigotos para el alelo con valor 128. Esto significa que inicialmente
+      no hay variaci\xF3n: todos los individuos tienen el mismo genotipo y el mismo
+      fenotipo.\r\n\r\nLas mutaciones pueden aumentar o disminuir el valor al\xE9lico.
+      Con el tiempo, esto genera nueva variaci\xF3n gen\xE9tica en ambas poblaciones.\r\n\r\nEn
+      la poblaci\xF3n de la izquierda, el color no tiene efecto sobre la supervivencia
+      ni la reproducci\xF3n. Es un car\xE1cter neutro, y los cambios en los valores
+      al\xE9licos est\xE1n impulsados \xFAnicamente por la mutaci\xF3n y la deriva
+      gen\xE9tica, ambas fuerzas aleatorias y no direccionales.\r\n\r\nEn cambio,
+      en la poblaci\xF3n de la derecha, existe selecci\xF3n direccional que favorece
+      valores al\xE9licos m\xE1s altos. Es decir, los individuos con una coloraci\xF3n
+      azul m\xE1s intensa tienen mayor \xE9xito reproductivo. Como resultado, los
+      valores al\xE9licos m\xE1s altos tienden a hacerse m\xE1s frecuentes a lo largo
+      de las generaciones.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1628917138268160
+    m_Localized: "Bajo la herencia mezclada, la variaci\xF3n se diluye progresivamente
+      en cada generaci\xF3n. Incluso si la selecci\xF3n favorece a los individuos
+      m\xE1s claros, a medida que la variaci\xF3n disminuye, desaparece la materia
+      prima sobre la que act\xFAa la selecci\xF3n.\r\n\r\nEn cambio, bajo herencia
+      mendeliana, la variaci\xF3n se conserva. Aunque los individuos con fenotipos
+      intermedios sean comunes, los alelos subyacentes permanecen intactos y pueden
+      transmitirse sin cambios. Esto permite que los alelos ventajosos aumenten de
+      manera sostenida su frecuencia a lo largo de las generaciones.\r\n\r\nHist\xF3ricamente,
+      Charles Darwin propuso la selecci\xF3n natural sin conocer el mecanismo de
+      la herencia. Si la herencia hubiera sido realmente de tipo mezclado, como \xE9l
+      pensaba, la selecci\xF3n natural no habr\xEDa podido actuar como motor de la
+      adaptaci\xF3n. La posterior integraci\xF3n de la gen\xE9tica mendeliana con
+      la teor\xEDa evolutiva demostr\xF3 que la herencia particulada proporciona
+      exactamente lo que la selecci\xF3n necesita: variaci\xF3n estable y heredable.\r\n\r\nAl
+      comparar estas dos poblaciones, puedes observar c\xF3mo la misma presi\xF3n
+      selectiva produce resultados evolutivos muy diferentes dependiendo \xFAnicamente
+      del mecanismo de herencia.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1628786993209344
+    m_Localized: "En esta simulaci\xF3n exploramos una pregunta fundamental en biolog\xEDa
+      evolutiva:\r\n\xBFEs la herencia mendeliana (particulada) esencial para que
+      la selecci\xF3n natural produzca cambio evolutivo a largo plazo?\r\n\r\nPartimos
+      de dos poblaciones grandes sometidas a la misma presi\xF3n selectiva. En ambos
+      casos, los individuos de color verde m\xE1s claro tienen mayor \xE9xito reproductivo.
+      Las frecuencias al\xE9licas iniciales son 0.2 para el verde claro y 0.8 para
+      el verde oscuro.\r\n\r\nSin embargo, las dos poblaciones difieren en un aspecto
+      crucial: el mecanismo de herencia.\r\n\r\nEn la poblaci\xF3n de la izquierda,
+      la herencia sigue el modelo hist\xF3rico conocido como herencia mezclada. Esta
+      era la visi\xF3n com\xFAnmente aceptada sobre la herencia en tiempos de Darwin.
+      Bajo este modelo, los fenotipos de la descendencia son simples mezclas intermedias
+      de los progenitores.\r\n\r\nEs importante no confundir la herencia mezclada
+      con la dominancia incompleta. En la dominancia incompleta (que puede darse
+      bajo gen\xE9tica mendeliana), los alelos permanecen intactos y discretos, aunque
+      el heterocigoto muestre un fenotipo intermedio. El punto clave es que las variantes
+      gen\xE9ticas subyacentes se conservan y pueden reaparecer sin cambios en generaciones
+      futuras.\r\n\r\nEn la herencia mezclada, por el contrario, las propias variantes
+      gen\xE9ticas se promedian en cada generaci\xF3n. Puede pensarse que los individuos
+      portan, en la pr\xE1ctica, un \xFAnico valor del rasgo por locus, resultado
+      de la mezcla (en esta simulaci\xF3n, la media) de los valores parentales. Una
+      vez mezcladas, las variantes originales no pueden recuperarse. Como resultado,
+      con el paso de las generaciones, las diferencias entre individuos tienden a
+      desaparecer.\r\n\r\nEn la poblaci\xF3n de la derecha, la herencia es mendeliana,
+      o particulada. Los alelos se transmiten intactos de padres a hijos. No se mezclan
+      ni desaparecen cuando se combinan en heterocigotos. En cada generaci\xF3n,
+      los alelos existentes se redistribuyen mediante la segregaci\xF3n, pero las
+      variantes gen\xE9ticas subyacentes permanecen discretas. En esta poblaci\xF3n,
+      los fenotipos se producen mediante dominancia incompleta.\r\n"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1352,6 +1352,10 @@ PrefabInstance:
       propertyPath: _alleleToColorIndex.Array.data[1]
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 7831210580096924698, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7838676875162756116, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: _genotypeToColorIndex.Array.size
       value: 3
@@ -1379,6 +1383,14 @@ PrefabInstance:
     - target: {fileID: 7858269130915967965, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361995810622640304, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 1617382470918144
+      objectReference: {fileID: 0}
+    - target: {fileID: 8361995810622640304, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
+      propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
+      value: GUID:99a80a90d5fbacd47a07de054c834149
       objectReference: {fileID: 0}
     - target: {fileID: 8446622635379989707, guid: c4f7febc7672ec444aa7437cf6b64f32, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
