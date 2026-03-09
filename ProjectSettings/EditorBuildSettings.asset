@@ -18,10 +18,10 @@ EditorBuildSettings:
     path: Assets/Scenes/2-Mutation.unity
     guid: c627021becda19041be2daae80382be4
   - enabled: 1
-    path: Assets/Scenes/3-MendelInheritance.unity
+    path: Assets/Scenes/3.5-MendelInheritance.unity
     guid: f3f12d20b0602d14c8f8d51e78db057a
   - enabled: 1
-    path: Assets/Scenes/3.5-MendelInheritance.unity
+    path: Assets/Scenes/3-MendelInheritance.unity
     guid: b7fa75eccd688be4d98ceda7bb29177a
   - enabled: 1
     path: Assets/Scenes/4-Migration.unity

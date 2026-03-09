@@ -190,6 +190,101 @@ MonoBehaviour:
       los fenotipos se producen mediante dominancia incompleta.\r\n"
     m_Metadata:
       m_Items: []
+  - m_Id: 3496160503603200
+    m_Localized: "Ya hemos visto los efectos de la deriva gen\xE9tica, la mutaci\xF3n,
+      la selecci\xF3n y, aunque en menor medida, tambi\xE9n de la migraci\xF3n. Estos
+      procesos evolutivos pueden provocar cambios importantes en las poblaciones.
+      Pero no siempre los cambios evolutivos son positivos: pueden reducir la diversidad
+      gen\xE9tica o incluso favorecer la fijaci\xF3n de alelos que no son adaptativos.\r\n\r\nEsto
+      puede ocurrir, como ya vimos, por deriva gen\xE9tica. Especialmente en poblaciones
+      peque\xF1as, los procesos estoc\xE1sticos pueden provocar la fijaci\xF3n de
+      alelos y la p\xE9rdida de diversidad gen\xE9tica, independientemente de si
+      esos alelos son beneficiosos o perjudiciales para los individuos.\r\n\r\nOtro
+      proceso que tambi\xE9n puede favorecer la fijaci\xF3n de alelos potencialmente
+      no adaptativos es el flujo g\xE9nico. En esta simulaci\xF3n veremos un primer
+      caso con dos poblaciones: una poblaci\xF3n muy grande en la que el alelo negro
+      est\xE1 fijado, y otra poblaci\xF3n mucho m\xE1s peque\xF1a en la que el alelo
+      azul est\xE1 fijado.\r\n\r\nCuando estas dos poblaciones entran en contacto
+      comienza a producirse flujo g\xE9nico desde la poblaci\xF3n de la izquierda,
+      que act\xFAa como poblaci\xF3n fuente, hacia la poblaci\xF3n de la derecha,
+      que funciona como poblaci\xF3n sumidero.\r\n\r\nA medida que individuos de
+      la poblaci\xF3n fuente migran hacia la poblaci\xF3n peque\xF1a, comienzan a
+      introducir el alelo negro y, en ausencia de selecci\xF3n natural que favorezca
+      el alelo azul en la poblaci\xF3n peque\xF1a, este flujo g\xE9nico modifica
+      progresivamente las frecuencias al\xE9licas. Con el tiempo, el alelo negro
+      se vuelve cada vez m\xE1s frecuente en la poblaci\xF3n peque\xF1a, mientras
+      que el alelo azul comienza a disminuir. Finalmente, el alelo azul llega a desaparecer
+      por completo, siendo reemplazado por el alelo negro procedente de la poblaci\xF3n
+      fuente.\r\n\r\nEsta primera simulaci\xF3n ilustra c\xF3mo el flujo g\xE9nico
+      puede acabar con la diversidad interpoblacional. Cuando la migraci\xF3n ocurre
+      de manera continua y no existe selecci\xF3n que mantenga diferencias, las poblaciones
+      tienden a volverse gen\xE9ticamente similares.\r\n\r\n\r\n\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3496316187779072
+    m_Localized: "Para esta segunda simulaci\xF3n, imagina que estas dos poblaciones
+      estuvieron separadas durante un largo periodo de tiempo. Durante ese tiempo,
+      la poblaci\xF3n de la derecha se adapt\xF3 a condiciones ambientales diferentes,
+      que favorec\xEDan el fenotipo azul. Como resultado, el alelo azul termin\xF3
+      fij\xE1ndose en esa poblaci\xF3n.\r\n\r\nAhora, las dos poblaciones vuelven
+      a entrar en contacto y comienza a producirse migraci\xF3n desde la poblaci\xF3n
+      grande de la izquierda (la poblaci\xF3n fuente), donde el alelo negro est\xE1
+      fijado, hacia la poblaci\xF3n peque\xF1a de la derecha (la poblaci\xF3n sumidero).\r\n\r\nSin
+      embargo, a diferencia de la simulaci\xF3n anterior, el fenotipo azul tiene
+      ahora una ventaja selectiva en la poblaci\xF3n peque\xF1a. Los individuos con
+      una coloraci\xF3n azul m\xE1s intensa tienen mayor \xE9xito reproductivo en
+      este ambiente.\r\n\r\nEsto genera dos fuerzas evolutivas opuestas. La migraci\xF3n
+      introduce continuamente el alelo negro en la poblaci\xF3n peque\xF1a, mientras
+      que la selecci\xF3n natural favorece el alelo azul que ya estaba presente en
+      ella.\r\n\r\nComo resultado, ninguno de los dos alelos reemplaza completamente
+      al otro. En su lugar, la poblaci\xF3n alcanza un equilibrio en el que ambas
+      fuerzas se compensan entre s\xED. La distribuci\xF3n de fenotipos se estabiliza
+      en un punto intermedio entre negro y azul.\r\n\r\nEsta situaci\xF3n ilustra
+      un principio importante de la gen\xE9tica de poblaciones: cuando las fuerzas
+      evolutivas act\xFAan en direcciones opuestas, las poblaciones pueden alcanzar
+      equilibrios estables en los que la diversidad gen\xE9tica se mantiene a lo
+      largo del tiempo.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3499390650359808
+    m_Localized: "En esta tercera simulaci\xF3n partimos de la misma situaci\xF3n
+      que en la anterior: la poblaci\xF3n de la derecha est\xE1 adaptada a su ambiente
+      y el fenotipo azul tiene una ventaja selectiva. Sin embargo, ahora la tasa
+      de migraci\xF3n desde la poblaci\xF3n fuente es mucho mayor.\r\n\r\nEsto significa
+      que en cada generaci\xF3n llegan muchos m\xE1s individuos portadores del alelo
+      negro desde la poblaci\xF3n grande de la izquierda hacia la poblaci\xF3n peque\xF1a
+      de la derecha.\r\n\r\nAunque la selecci\xF3n sigue favoreciendo el fenotipo
+      azul en la poblaci\xF3n peque\xF1a, la fuerza del flujo g\xE9nico es mucho
+      mayor que la de la selecci\xF3n natural.\r\n\r\nComo resultado, el alelo negro
+      termina aumentando progresivamente su frecuencia hasta fijarse tambi\xE9n en
+      la poblaci\xF3n peque\xF1a, a pesar de que en ese ambiente el fenotipo azul
+      era el m\xE1s favorable.\r\n\r\nEsta \xFAltima simulaci\xF3n ilustra algo importante:
+      la evoluci\xF3n no siempre es adaptativa, es decir no siempre conduce a la
+      adaptaci\xF3n \xF3ptima al ambiente. En este caso, el flujo g\xE9nico es lo
+      suficientemente fuerte como para contrarrestar la selecci\xF3n local y acabar
+      imponiendo un alelo que no es el m\xE1s adaptativo para esa poblaci\xF3n.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3502944333144064
+    m_Localized: "En esta segunda simulaci\xF3n volvemos a comparar dos poblaciones
+      que difieren \xFAnicamente en su mecanismo de herencia: herencia mezclada (no
+      mendeliana) a la izquierda y herencia mendeliana (particulada) a la derecha.\r\n\r\nA
+      diferencia de la simulaci\xF3n anterior, ahora introducimos una fuente constante
+      de alelos favorables. En cada generaci\xF3n, se incorporan continuamente individuos
+      portadores del alelo verde en ambas poblaciones. Esto proporciona la materia
+      prima para la evoluci\xF3n: ambas poblaciones tienen el potencial de evolucionar
+      hacia un fenotipo completamente verde.\r\n\r\nSin embargo, la forma en que
+      funciona la herencia marca una diferencia dram\xE1tica. En la poblaci\xF3n
+      de la derecha, con herencia mendeliana, los alelos permanecen discretos y se
+      transmiten intactos de padres a hijos. Esto permite que la poblaci\xF3n responda
+      r\xE1pidamente a la llegada de alelos favorables, y el fenotipo se desplaza
+      r\xE1pidamente hacia el verde total.\r\n\r\nEn la poblaci\xF3n de la izquierda,
+      con herencia mezclada, el efecto de los nuevos alelos favorables se diluye
+      en cada generaci\xF3n. Como los rasgos se promedian en la descendencia, se
+      tarda mucho m\xE1s en que la poblaci\xF3n acumule el fenotipo verde. La evoluci\xF3n
+      hacia el verde completo ocurre, pero a un ritmo dr\xE1sticamente m\xE1s lento.\r\n"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

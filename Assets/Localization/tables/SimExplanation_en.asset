@@ -191,21 +191,21 @@ MonoBehaviour:
       and the same phenotype.
 
 
-      Mutations can either increase or decrease
-      the allelic value. Over time, this generates new genetic variation in both
-      populations.
+      Mutations can either increase or decrease the
+      allelic value. Over time, this generates new genetic variation in both populations.
 
 
-      In the population on the left, color has no effect on
-      survival or reproduction. It is a neutral trait, and changes in allele values
-      are driven only by mutation and genetic drift, both of which are random and
-      non-directional.
+      In
+      the population on the left, color has no effect on survival or reproduction.
+      It is a neutral trait, and changes in allele values are driven only by mutation
+      and genetic drift, both of which are random and non-directional.
 
 
-      In contrast, in the population on the right, there
-      is directional selection favoring higher allele values. That is, individuals
-      with a more intense blue coloration have higher reproductive success. As a
-      result, higher allele values tend to become more frequent over generations.
+      In
+      contrast, in the population on the right, there is directional selection favoring
+      higher allele values. That is, individuals with a more intense blue coloration
+      have higher reproductive success. As a result, higher allele values tend to
+      become more frequent over generations.
 
 '
     m_Metadata:
@@ -253,6 +253,169 @@ MonoBehaviour:
       what selection requires: stable, heritable variation.\r\n\r\nBy comparing these
       two populations, you can observe how the same selective pressure produces very
       different evolutionary outcomes depending solely on the mechanism of inheritance.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3496160503603200
+    m_Localized: 'We have already seen the effects of genetic drift, mutation, selection,
+      and, to a lesser extent, migration. These evolutionary processes can produce
+      important changes in populations. However, evolutionary change is not always
+      beneficial: it can reduce genetic diversity or even favor the fixation of alleles
+      that are not adaptive.
+
+
+
+      As we have already seen, this can occur through
+      genetic drift. Especially in small populations, stochastic processes can lead
+      to the fixation of alleles and the loss of genetic diversity, regardless of
+      whether those alleles are beneficial or harmful to individuals.
+
+
+
+      Another
+      process that can also promote the fixation of potentially non-adaptive alleles
+      is gene flow. In this simulation we will examine a first case involving two
+      populations: a very large population in which the black allele is fixed, and
+      a much smaller population in which the blue allele is fixed.
+
+
+
+      When
+      these two populations come into contact, gene flow begins to occur from the
+      population on the left, which acts as the **source population**, toward the
+      population on the right, which functions as the **sink population**.
+
+
+
+      As
+      individuals from the source population migrate into the smaller population,
+      they begin to introduce the black allele. In the absence of natural selection
+      favoring the blue allele in the small population, this gene flow progressively
+      modifies allele frequencies. Over time, the black allele becomes increasingly
+      common in the small population, while the blue allele begins to decline. Eventually,
+      the blue allele disappears completely, being replaced by the black allele coming
+      from the source population.
+
+
+
+      This first simulation illustrates how
+      gene flow can eliminate genetic differences between populations. When migration
+      occurs continuously and there is no selection maintaining those differences,
+      populations tend to become genetically similar.
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3496316187779072
+    m_Localized: 'For this second simulation imagine that these two populations were
+      once separated for a long period of time. During that time, the population
+      on the right adapted to different environmental conditions, which favored the
+      blue phenotype. As a result, the blue allele became fixed in that population.
+
+
+
+      Now,
+      the two populations come back into contact and migration begins to occur again
+      from the large population on the left (the source population), where the black
+      allele is fixed, toward the small population on the right (the sink population).
+
+
+
+      However,
+      unlike the previous simulation, the blue phenotype now has a selective advantage
+      in the small population. Individuals with a more intense blue coloration have
+      higher reproductive success in this environment.
+
+
+
+      This creates two
+      opposing evolutionary forces. Migration continuously introduces the black allele
+      into the small population, while natural selection favors the blue allele already
+      present there.
+
+
+
+      As a result, neither allele completely replaces the
+      other. Instead, the population reaches an equilibrium where both forces balance
+      each other. The phenotype distribution stabilizes at an intermediate point
+      between black and blue.
+
+
+
+      This situation illustrates an important principle
+      in population genetics: when evolutionary forces act in opposite directions,
+      populations can reach stable equilibria where genetic diversity is maintained
+      over time.
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3499390650359808
+    m_Localized: 'In this third simulation we start from the same situation as in
+      the previous one: the population on the right is adapted to its environment
+      and the blue phenotype has a selective advantage. However, the migration rate
+      from the source population is now much higher.
+
+
+
+      This means that in
+      each generation many more individuals carrying the black allele arrive from
+      the large population on the left into the small population on the right.
+
+
+
+      Although
+      selection still favors the blue phenotype in the small population, the force
+      of gene flow is now much stronger than that of natural selection.
+
+
+
+      As
+      a result, the black allele progressively increases in frequency until it eventually
+      becomes fixed in the small population as well, even though the blue phenotype
+      was the most favorable in that environment.
+
+
+
+      This final simulation
+      illustrates an important point: evolution is not always adaptive, meaning that
+      it does not always lead to the optimal adaptation to the environment. In this
+      case, gene flow is strong enough to counteract local selection and ultimately
+      impose an allele that is not the most adaptive for that population.
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3502944333144064
+    m_Localized: 'In this second simulation we again compare two populations that
+      differ only in their mechanism of inheritance: blending (non-Mendelian) on
+      the left and Mendelian (particulate) on the right.
+
+      
+
+      Unlike
+      the previous simulation, we now introduce a constant source of favorable alleles.
+      In every generation, individuals carrying the green allele are continuously
+      added to both populations. This provides the raw material for evolution: both
+      populations have the potential to evolve toward a fully green phenotype.
+
+      
+
+      However,
+      the way inheritance works makes a dramatic difference. In the population on
+      the right, with Mendelian inheritance, alleles remain discrete and are transmitted
+      intact from parents to offspring. This allows the population to respond rapidly
+      to the input of favorable alleles, and the phenotype quickly shifts toward
+      full green.
+
+      
+
+      In the population on the left, with blending inheritance,
+      the effect of new favorable alleles is diluted each generation. Because traits
+      are averaged in the offspring, it takes much longer for the population to accumulate
+      the green phenotype. Evolution toward full green occurs, but at a drastically
+      slower pace.
+
+'
     m_Metadata:
       m_Items: []
   references:
