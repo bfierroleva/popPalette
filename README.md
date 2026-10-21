@@ -1,4 +1,4 @@
-# popsim #
+# popPalette #
 
 An agent-based population genetics simulator, designed as a teaching tool.
 popsim simulates evolving populations individual by individual, so that the effects of the main evolutionary forces can be seen as they happen rather than only through equations. It was built in Unity (C#) as a personal project during the third year of my BSc in Biology at Universidad Rey Juan Carlos.
@@ -17,4 +17,4 @@ Running from source
 Clone this repository and open the folder in Unity Hub.
 
 Author
-Borja Fierro-Leva · [ORCID](https://orcid.org/0009-0002-3108-5265)
+Borja Fierro-Leva · https://orcid.org/0009-0002-3108-5265
