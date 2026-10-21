@@ -1,7 +1,7 @@
 # popPalette #
 
 An agent-based population genetics simulator, designed as a teaching tool.
-popsim simulates evolving populations individual by individual, so that the effects of the main evolutionary forces can be seen as they happen rather than only through equations. It was built in Unity (C#) as a personal project during the third year of my BSc in Biology at Universidad Rey Juan Carlos.
+popPalette simulates evolving populations individual by individual, so that the effects of the main evolutionary forces can be seen as they happen rather than only through equations. It was built in Unity (C#) as a personal project during the third year of my BSc in Biology at Universidad Rey Juan Carlos.
 
 Features:
 Evolutionary forces: mutation, genetic drift, natural selection and migration.
